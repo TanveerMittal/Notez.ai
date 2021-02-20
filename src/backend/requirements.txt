@@ -1,0 +1,2 @@
+pyrebase==3.0.27
+waitress=1.4.4
