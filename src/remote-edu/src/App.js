@@ -6,8 +6,9 @@ class App extends Component {
   constructor(props) {
     super(props);
     this.state = {
-      stage: '',
+      stage: '1',
     };
+    this.handleClick = this.handleClick.bind(this);
   }
   
   componentDidMount() {
@@ -18,23 +19,56 @@ class App extends Component {
     console.log('unmount');
   }
 
-  nextClicked() {
-    this.setState({
-      stage: 'y'
-    });
+  handleClick() {
+    console.log('Click happened');
+    if (this.state.stage == '1') {
+      this.setState({stage: '2'});
+    } else {
+      this.setState({stage: '1'});
+    }
   }
+
+  showFile = async (e) => {
+    e.preventDefault()
+    const reader = new FileReader()
+    reader.onload = async (e) => { 
+      const text = (e.target.result)
+      console.log(text)
+    };
+    reader.readAsText(e.target.files[0])
+  }
+
   render() {
+    const curStage = this.state.stage;
+    let stageComp;
+    if (curStage == '1') {
+      stageComp = <div>
+        <InputField
+          id={1}
+          label="Zoom Transcript"
+          predicted=""
+          locked={false}
+          active={false}
+        />
+        <div><input type="file" onChange={(e) => this.showFile(e)} /></div>
+        <button onClick={this.handleClick}>Process Text</button>
+      </div>;
+    } else if (curStage == '2') {
+      stageComp = <div> 
+        <div>Rudy Gillespie</div>
+        <button onClick={this.handleClick}>Go Back</button>
+      </div>;
+    } else if (curStage == '3') {
+      // TODO
+    } else {
+      // TODO
+    }
+    
     return (
       <div className="App">
         <header className="App-header">
           <p>Zoom Tutor</p>
-          <InputField
-            id={1}
-            label="Zoom Transcript"
-            predicted=""
-            locked={false}
-            active={false}
-          />
+          {stageComp}
         </header>
       </div>
     );
