@@ -1,25 +1,44 @@
-import logo from './logo.svg';
 import './App.css';
+import React, { Component } from "react";
+import InputField from './components/InputField.js';
 
-function App() {
-  return (
-    <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.js</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
-    </div>
-  );
+class App extends Component {
+  constructor(props) {
+    super(props);
+    this.state = {
+      stage: '',
+    };
+  }
+  
+  componentDidMount() {
+    console.log('mount');
+  }
+  
+  componentWillUnmount() {
+    console.log('unmount');
+  }
+
+  nextClicked() {
+    this.setState({
+      stage: 'y'
+    });
+  }
+  render() {
+    return (
+      <div className="App">
+        <header className="App-header">
+          <p>Zoom Tutor</p>
+          <InputField
+            id={1}
+            label="Zoom Transcript"
+            predicted=""
+            locked={false}
+            active={false}
+          />
+        </header>
+      </div>
+    );
+  }
 }
 
 export default App;
