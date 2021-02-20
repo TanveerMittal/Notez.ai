@@ -1,0 +1,1886 @@
+WEBVTT
+
+1
+00:00:02.040 --> 00:00:06.089
+Miles E Jones: Okay, good morning everyone let's get started i'm starting to record.
+
+2
+00:00:08.340 --> 00:00:08.910
+Miles E Jones: You just.
+
+3
+00:00:13.889 --> 00:00:15.570
+Miles E Jones: mute everybody if that's okay.
+
+4
+00:00:18.029 --> 00:00:21.210
+Miles E Jones: Okay, so let's start with some.
+
+5
+00:00:23.490 --> 00:00:24.120
+Miles E Jones: questions.
+
+6
+00:00:25.470 --> 00:00:27.390
+Miles E Jones: Anybody have any questions or comments.
+
+7
+00:00:28.920 --> 00:00:31.350
+Miles E Jones: Everybody know what's going on with the.
+
+8
+00:00:33.000 --> 00:00:39.300
+Miles E Jones: exam and everything there's no homework do this week so we'll be releasing the next homework.
+
+9
+00:00:40.440 --> 00:00:41.190
+Miles E Jones: On Wednesday.
+
+10
+00:00:42.690 --> 00:00:44.610
+Miles E Jones: And then it'll be do the following Wednesday.
+
+11
+00:00:45.900 --> 00:00:49.710
+Miles E Jones: Get back right on schedule the exam is going to be.
+
+12
+00:00:58.320 --> 00:00:59.640
+Miles E Jones: start at 8am.
+
+13
+00:01:01.170 --> 00:01:01.830
+Miles E Jones: Friday.
+
+14
+00:01:06.690 --> 00:01:08.070
+Miles E Jones: till 8am.
+
+15
+00:01:09.540 --> 00:01:11.970
+Miles E Jones: Saturday it'll be a timed.
+
+16
+00:01:13.980 --> 00:01:15.390
+Miles E Jones: 80 minutes.
+
+17
+00:01:16.740 --> 00:01:17.910
+Miles E Jones: it's gonna be great scope.
+
+18
+00:01:20.100 --> 00:01:21.030
+Miles E Jones: Online assignment.
+
+19
+00:01:31.350 --> 00:01:33.450
+Miles E Jones: hasn't been finished that hasn't been written.
+
+20
+00:01:34.560 --> 00:01:38.070
+Miles E Jones: or hasn't been finalized, so I can't tell you how many questions.
+
+21
+00:01:45.900 --> 00:01:58.410
+Miles E Jones: um so i'm going to encourage you to all just type your answers into the prompt, but I will give an option to upload files if that's what you prefer.
+
+22
+00:02:22.590 --> 00:02:23.910
+Miles E Jones: Okay let's get started, then.
+
+23
+00:02:28.260 --> 00:02:34.140
+Miles E Jones: So today we're going to shift gears a bit and talk about encoding but we're going to see that.
+
+24
+00:02:39.900 --> 00:02:41.130
+Miles E Jones: Did you not hear the answer.
+
+25
+00:02:55.410 --> 00:02:59.640
+Miles E Jones: That incoming is very closely related to counting.
+
+26
+00:03:01.980 --> 00:03:03.420
+Miles E Jones: which is what we kind of just did so.
+
+27
+00:03:05.250 --> 00:03:22.230
+Miles E Jones: we're going to look at encoding in general, then we're going to look at encoding strings, which is a very common type of object that we need to encode and then we're going to look at fixed length encoding strings or variable length and coding.
+
+28
+00:03:23.880 --> 00:03:27.660
+Miles E Jones: Alright, so indiscreet math class in CSE.
+
+29
+00:03:30.780 --> 00:03:39.780
+Miles E Jones: In this university but discrete math classes anywhere you take them you're going to be dealing with math objects right, and so what our math objects.
+
+30
+00:03:42.690 --> 00:03:59.670
+Miles E Jones: Really kind of anything we use in math it could be like a geometric shape or a graph or just integers themselves binary strings of course other strings right we did or depending on who you took it with you did a lot of string stuff with 20.
+
+31
+00:04:01.170 --> 00:04:10.800
+Miles E Jones: Of course, sets sets and subsets we just went over permutations and cycles right and combinations I should put those in there right combinations.
+
+32
+00:04:14.670 --> 00:04:17.190
+Miles E Jones: But even like kind of things that.
+
+33
+00:04:18.270 --> 00:04:25.860
+Miles E Jones: That were very specific to the class like domino tailings or night arrangements like these things are also basically math objects.
+
+34
+00:04:26.460 --> 00:04:42.810
+Miles E Jones: Now, when we're in class and we're talking about them, we have our own notation to write them do you think that's the best way to store them in a computer maybe maybe it's the best way to store it in the computer, because then, when you look at it, you know you, you understand the.
+
+35
+00:04:44.850 --> 00:04:55.470
+Miles E Jones: The notation but maybe it's not because it's takes up too much space, so now, you have to have some sort of balance of is there a better, more efficient way to store it.
+
+36
+00:04:56.880 --> 00:04:59.130
+Miles E Jones: And what are you giving up by doing that.
+
+37
+00:05:00.960 --> 00:05:07.290
+Miles E Jones: Okay, so in computers, we use bits to store data so that's what we're going to encode things by.
+
+38
+00:05:07.650 --> 00:05:26.700
+Miles E Jones: If this data comes in the form of one of the previous math objects in the process of translating an object or datum into bit strings is called encoding but computers are encoding all the time they encode of course text right all your text messages all the chat messages.
+
+39
+00:05:27.840 --> 00:05:35.880
+Miles E Jones: All your emails just basic websites that are mainly text right.
+
+40
+00:05:36.990 --> 00:05:40.380
+Miles E Jones: Images of course all the images that you see on the Internet.
+
+41
+00:05:42.150 --> 00:05:46.770
+Miles E Jones: Images like this image that I have here as my as my slide.
+
+42
+00:05:48.060 --> 00:06:02.940
+Miles E Jones: Video, of course, like the video that i'm presenting to you now it's going to be recorded is going to be stored in the computer as bits now there are kind of inefficient ways and efficient ways to do that.
+
+43
+00:06:04.320 --> 00:06:08.640
+Miles E Jones: Of course program sound right music.
+
+44
+00:06:11.070 --> 00:06:12.060
+Miles E Jones: Of course math.
+
+45
+00:06:13.380 --> 00:06:14.310
+Miles E Jones: object so.
+
+46
+00:06:17.880 --> 00:06:20.370
+Miles E Jones: Anything coded into a binary string.
+
+47
+00:06:21.540 --> 00:06:25.800
+Miles E Jones: Now there's different kinds of encoding there's something called lossy encoding.
+
+48
+00:06:27.450 --> 00:06:45.270
+Miles E Jones: Some of the data is lost in the encoding process so that means that if you have an original object, when you encode it with a lossy encoding there's no way that you can get the original object back what is lossy encoding good for does anybody know.
+
+49
+00:06:56.400 --> 00:06:56.910
+Miles E Jones: audio.
+
+50
+00:06:59.940 --> 00:07:00.660
+images.
+
+51
+00:07:03.810 --> 00:07:04.530
+Miles E Jones: Video.
+
+52
+00:07:06.240 --> 00:07:10.050
+Miles E Jones: Right so anything that really.
+
+53
+00:07:11.580 --> 00:07:22.710
+Miles E Jones: That the user interacts with with it with his or her senses is usually okay to do some awesome encoding the reasons, because our eyes are not perfect, our ears are not perfect.
+
+54
+00:07:23.340 --> 00:07:29.760
+Miles E Jones: You know if you give me an image and you compress it right, you make it smaller.
+
+55
+00:07:30.240 --> 00:07:39.000
+Miles E Jones: you're losing a lot of the details of that image, but maybe some of those details I don't care about maybe i'm just looking at the image to.
+
+56
+00:07:39.480 --> 00:07:52.680
+Miles E Jones: I don't know study I don't know a map or something right and maybe all I really need to know is, you know the general shape or the general roads, I don't need to know that there's like trees here or mountains there.
+
+57
+00:07:53.280 --> 00:08:04.560
+Miles E Jones: So, in certain circumstances it's okay to lose information in this class we're not going to do that, that those that's for kind of different classes.
+
+58
+00:08:05.730 --> 00:08:14.640
+Miles E Jones: we're going to do something called lossless encoding, which means that will after you encoded into binary you can.
+
+59
+00:08:15.840 --> 00:08:20.220
+Miles E Jones: there's enough information in the encoding for you to reconstruct.
+
+60
+00:08:20.400 --> 00:08:25.080
+Miles E Jones: The original object and that's going to be important for other things right.
+
+61
+00:08:28.500 --> 00:08:29.370
+Miles E Jones: programs.
+
+62
+00:08:31.200 --> 00:08:32.550
+Miles E Jones: text right.
+
+63
+00:08:33.660 --> 00:08:44.940
+Miles E Jones: And just kind of in general strings and other things that you don't you don't want to you don't want it to be corrupted you don't want anything to be wrong with it, you want all the information to be accessible.
+
+64
+00:08:47.070 --> 00:08:58.170
+Miles E Jones: Okay, and we're going to talk a little bit about something called an error detecting or error correcting code and coatings we're going to spend a lot of time on it, but I thought I would mention it, because they are kind of cool.
+
+65
+00:09:00.450 --> 00:09:21.270
+Miles E Jones: And it has to do with if your encoding is slightly modified right if you flip only a few bits, then the error can be detected or corrected, and this is really good for a lot of applications, because we don't always have a reliable network line.
+
+66
+00:09:22.710 --> 00:09:32.370
+Miles E Jones: It could kind of be affected by outside noise or even like malicious software or malicious people.
+
+67
+00:09:34.380 --> 00:09:36.510
+Miles E Jones: Okay lossy compression compression.
+
+68
+00:09:38.820 --> 00:09:43.020
+Miles E Jones: If you have an image described as a grid of pixels right.
+
+69
+00:09:44.100 --> 00:09:52.350
+Miles E Jones: The idea is that you can use linear algebra and we're not going to go over the way that you do this, I think you I think there's another class that does this image processing class.
+
+70
+00:09:53.400 --> 00:10:03.630
+Miles E Jones: And you can compress it down to a fraction of the size, so what you gain in saving space, you lose in details so.
+
+71
+00:10:05.100 --> 00:10:22.320
+Miles E Jones: If you compress the image down this much you can kind of see it sort of grainy and gritty Whereas the original image is is much more clear all the details are more well defined, but even going from here to there.
+
+72
+00:10:23.970 --> 00:10:34.470
+Miles E Jones: At least for me I can't discern any difference, you know my eyes aren't good enough to figure that out so maybe it's fine to compress it down a little bit.
+
+73
+00:10:36.420 --> 00:10:44.580
+Miles E Jones: Okay, you can save a lot of space how about videos or videos the the traditional way to.
+
+74
+00:10:45.480 --> 00:10:55.650
+Miles E Jones: To show a video right when you're looking at a film, they have a different image for every frame now if you're storing images on your computer.
+
+75
+00:10:56.130 --> 00:11:14.340
+Miles E Jones: Images take up a lot of space, so there are video compression algorithms that detect certain areas that don't change or change very little so that they can recycle the same data over and over again, for example.
+
+76
+00:11:15.570 --> 00:11:16.620
+Miles E Jones: This little.
+
+77
+00:11:17.970 --> 00:11:19.260
+Miles E Jones: patch of sky.
+
+78
+00:11:20.880 --> 00:11:26.910
+Miles E Jones: doesn't change right, and so you can you don't have to.
+
+79
+00:11:28.170 --> 00:11:35.730
+Miles E Jones: You don't have to store it eight times you can kind of just store it once or twice and and reuse it and there's there's.
+
+80
+00:11:37.140 --> 00:11:37.890
+Miles E Jones: tons of.
+
+81
+00:11:39.690 --> 00:11:50.400
+Miles E Jones: Great algorithms that do that, but of course that's lossy encoding because the cloud could have moved a little bit and you didn't detect it, but nobody really cares everybody's watching the golfer.
+
+82
+00:11:53.010 --> 00:12:02.520
+Miles E Jones: Okay error correcting codes what of somewhere along the line, some of your bits changes or, even worse, new BITs are introduced, or some of your bits are deleted.
+
+83
+00:12:03.570 --> 00:12:07.320
+Miles E Jones: This could be catastrophic depending on how you encoded your data right.
+
+84
+00:12:12.570 --> 00:12:22.380
+Miles E Jones: So you have your original data to encode it and you stored in your computer, but maybe something happened along the way, or maybe you dropped your computer or something.
+
+85
+00:12:23.430 --> 00:12:27.330
+Miles E Jones: Or it was in close proximity to like a high powered magnet.
+
+86
+00:12:28.740 --> 00:12:33.690
+Miles E Jones: or when you started to decode it the there was some sort of.
+
+87
+00:12:37.020 --> 00:12:43.290
+Miles E Jones: I don't know process that got changed, and then you get your data back, but it might not be your original data.
+
+88
+00:12:45.780 --> 00:12:47.550
+be different.
+
+89
+00:12:51.300 --> 00:12:55.380
+Miles E Jones: But there's a way around this there are these things, called error correcting codes.
+
+90
+00:12:56.760 --> 00:13:05.070
+Miles E Jones: The simplest example is something called a repetition code and you could do a repetition with with any number.
+
+91
+00:13:06.090 --> 00:13:07.350
+Miles E Jones: doing it with with.
+
+92
+00:13:09.480 --> 00:13:22.410
+Miles E Jones: Repeating every digit if you repeat every digit one time then that's just kind of the regular code, if you repeat it two times, then it's not really that helpful, but if you repeated three times, then maybe you can.
+
+93
+00:13:24.180 --> 00:13:32.430
+Miles E Jones: You can actually gain the original information back and, of course, if you're four or five or six times is much less susceptible to.
+
+94
+00:13:33.810 --> 00:13:44.970
+Miles E Jones: Two changes, but on the other hand, it is a lot more space that you need so there's a balance here right, if you want.
+
+95
+00:13:45.450 --> 00:14:00.900
+Miles E Jones: Something that is less susceptible for for errors, then you need more space, but if you want something that is more is a smaller space that is going to be more susceptible to errors is kind of the general trade off.
+
+96
+00:14:02.280 --> 00:14:10.800
+Miles E Jones: So, for example, this code I don't know what it's encoding but 0110 would encode to write you kind of have these blocks of three.
+
+97
+00:14:11.460 --> 00:14:25.740
+Miles E Jones: Right what types of errors with this detect and what types of errors, would it not be able to detect so of course if I change any single bit right if I change any single bit let's say I changed this bit to a one right.
+
+98
+00:14:26.790 --> 00:14:40.890
+Miles E Jones: If you change a single bit it can actually detect it because it will it will know, to read three bits in a row, and it will see this, and it will know that that one was changed because there's more zeros and ones right.
+
+99
+00:14:42.690 --> 00:14:45.810
+Miles E Jones: What kind of errors, would it not be able to detect.
+
+100
+00:14:53.040 --> 00:14:56.010
+Miles E Jones: Right to bit flips that are right next to each other.
+
+101
+00:14:57.240 --> 00:15:04.470
+Miles E Jones: So if you go like one one now you don't really know how to get back the original thing.
+
+102
+00:15:08.010 --> 00:15:11.490
+Miles E Jones: How about if you insert a bit.
+
+103
+00:15:12.540 --> 00:15:14.430
+Miles E Jones: Right, what if you inserted a bit here.
+
+104
+00:15:17.220 --> 00:15:34.230
+Miles E Jones: You might still be able to kind of figure out what the original thing was right, what if you didn't write bit deletion, what if you deleted a bit right, what if you deleted that bit there, it might kind of shift everything and maybe maybe mix you up a little bit, but.
+
+105
+00:15:35.520 --> 00:15:36.990
+Miles E Jones: But this is a really nice.
+
+106
+00:15:40.200 --> 00:15:41.550
+Miles E Jones: nice way to.
+
+107
+00:15:44.700 --> 00:15:58.830
+Miles E Jones: detect errors, but it's really inefficient there's much better ways to do it, and I think that there's a class that deals with that has anybody taken any of those classes before that you've ever talked about error correcting codes.
+
+108
+00:16:00.270 --> 00:16:02.220
+Miles E Jones: Something called the what is it.
+
+109
+00:16:31.380 --> 00:16:32.850
+Miles E Jones: called the hamming code.
+
+110
+00:16:37.230 --> 00:16:38.940
+Miles E Jones: For you all ever seen this stuff before.
+
+111
+00:16:45.660 --> 00:16:48.600
+Miles E Jones: Yes, error detecting.
+
+112
+00:17:22.470 --> 00:17:25.710
+Miles E Jones: Oh, you can have like a parody bit that's kind of a cool thing.
+
+113
+00:17:27.390 --> 00:17:28.980
+Miles E Jones: cryptographic hash function.
+
+114
+00:17:40.920 --> 00:17:54.960
+Miles E Jones: yeah So what are the applications a practical applications is like anytime you send data to any time of network, there is a possibility that your code your your.
+
+115
+00:17:56.250 --> 00:18:04.200
+Miles E Jones: data is going to be corrupted and there's sort of three types of ways, it can be corrupted it could have a bit change.
+
+116
+00:18:04.650 --> 00:18:18.930
+Miles E Jones: right we changes from zero to one or one to zero, you have a bit edition, where you insert a bit somewhere or but bit deletion, where you delete a bit and you could have some you know, depending on how a.
+
+117
+00:18:20.460 --> 00:18:30.810
+Miles E Jones: How susceptible your network is, you can have a combination of a bunch of those things, so the idea is, is there a way to kind of mitigate that at.
+
+118
+00:18:32.130 --> 00:18:37.680
+Miles E Jones: Those errors, is there a way to detect them and or correct them.
+
+119
+00:18:41.370 --> 00:18:42.930
+Miles E Jones: isn't that the case, all the time.
+
+120
+00:18:44.340 --> 00:18:46.980
+Miles E Jones: What that there, there is a possibility of.
+
+121
+00:18:48.720 --> 00:18:56.430
+Miles E Jones: yeah it's it's always a fear that that's going to happen, you know but and there's a bunch of.
+
+122
+00:18:58.080 --> 00:18:59.490
+Miles E Jones: there's a bunch of.
+
+123
+00:19:00.600 --> 00:19:09.510
+Miles E Jones: ideas that people have that will I mean this is just one of them, this is kind of like a simple one, but there are much more complicated ways to do it.
+
+124
+00:19:09.900 --> 00:19:21.150
+Miles E Jones: That are much more efficient right you don't need to multiply the number of bits by three right there's one that i'm trying to find what it's called.
+
+125
+00:19:23.220 --> 00:19:24.120
+Miles E Jones: kind of forgot.
+
+126
+00:19:26.010 --> 00:19:26.310
+But.
+
+127
+00:19:31.980 --> 00:19:32.370
+yeah.
+
+128
+00:19:37.890 --> 00:19:44.430
+Miles E Jones: It basically uses more bits than you need as kind of redundancy bits to kind of tell you what's going on right.
+
+129
+00:19:45.930 --> 00:19:57.210
+Miles E Jones: But another way to do it is to take a cryptographic hash function and send the result of the hash function, along with the code, so that when you receive the code.
+
+130
+00:19:58.020 --> 00:20:09.900
+Miles E Jones: You you do the same hash and make sure the hashes are equal, the ashes are equal, then you know the code is probably good that's that's like what they do a lot of the times with like credit card information.
+
+131
+00:20:11.310 --> 00:20:12.510
+Miles E Jones: Okay anyhow let's move on.
+
+132
+00:20:14.400 --> 00:20:20.760
+Miles E Jones: here's another error correcting code, it is something that you may have seen before.
+
+133
+00:20:25.290 --> 00:20:32.400
+Miles E Jones: it's called a two out of five code and I wanted to put it here because it deals with this combinations that we've.
+
+134
+00:20:33.840 --> 00:20:41.040
+Miles E Jones: That we've talked about five choose to is equal to 10 so what some people have done is they have.
+
+135
+00:20:43.170 --> 00:20:56.880
+Miles E Jones: assigned each digit 0123456789 to a unique fixed density binary string with exactly two ones.
+
+136
+00:20:59.430 --> 00:21:02.490
+Miles E Jones: And you can see it in your letters they use this.
+
+137
+00:21:04.920 --> 00:21:05.970
+Miles E Jones: and
+
+138
+00:21:08.130 --> 00:21:17.100
+Miles E Jones: Instead of using binary they use these kind of like short and long things well that's Nice, I think I think it's that this.
+
+139
+00:21:19.830 --> 00:21:21.270
+Miles E Jones: can't draw on that.
+
+140
+00:21:25.410 --> 00:21:45.780
+Miles E Jones: I think it's that this first one is is ignored, so you have short short long short long right so that's too too short or long short long right because you can see that again short short long short long right and then zero must be long long short short short.
+
+141
+00:21:48.600 --> 00:21:49.590
+Miles E Jones: Right and so.
+
+142
+00:21:51.630 --> 00:21:59.850
+Miles E Jones: This can detect errors, because a it's just like, why is this error detection.
+
+143
+00:22:02.220 --> 00:22:03.120
+error correcting.
+
+144
+00:22:05.370 --> 00:22:06.870
+Why are they use it like this.
+
+145
+00:22:15.690 --> 00:22:19.260
+Miles E Jones: I guess you're just using more bits because it's more redundant.
+
+146
+00:22:21.180 --> 00:22:24.990
+Miles E Jones: You know that there has to be too long bits somewhere so.
+
+147
+00:22:26.370 --> 00:22:29.160
+Miles E Jones: If one of them gets cut off, then.
+
+148
+00:22:32.340 --> 00:22:36.480
+Miles E Jones: Anyway, I thought it was cool because it has something to do with combinations.
+
+149
+00:22:37.650 --> 00:22:38.160
+Miles E Jones: Anyhow.
+
+150
+00:22:41.100 --> 00:22:48.990
+Miles E Jones: So let's talk about what we're going to do in this class we're all that stuff we're not really going to concern ourselves with I just thought it was nice to start with.
+
+151
+00:22:49.470 --> 00:23:03.480
+Miles E Jones: we're going to look at something called lossless data compression and so you have your original data, you have your encoding algorithm you can store it in your computer and then you have a decoding algorithm that you can get your original data back.
+
+152
+00:23:06.540 --> 00:23:08.640
+Miles E Jones: And we're going to assume that there's no.
+
+153
+00:23:12.120 --> 00:23:14.490
+Miles E Jones: there's no susceptibility to.
+
+154
+00:23:15.720 --> 00:23:16.560
+Miles E Jones: bit changes.
+
+155
+00:23:18.060 --> 00:23:34.410
+Miles E Jones: Okay, what does it mean for an encoding to be efficient, well there's two things, and they and they kind of opposite so when we talk about efficient codes i'm mainly going to be concerned with the length of the code or the space.
+
+156
+00:23:38.130 --> 00:23:39.300
+Miles E Jones: Space efficient.
+
+157
+00:23:49.680 --> 00:23:58.320
+Miles E Jones: But it's worth it to to know about time all the time it takes to encode and decode also you can talk about time efficiency.
+
+158
+00:24:15.990 --> 00:24:18.630
+Miles E Jones: But that's why I put this scale here is because.
+
+159
+00:24:19.350 --> 00:24:22.020
+Miles E Jones: In general, if it's more space efficient.
+
+160
+00:24:22.350 --> 00:24:32.010
+Miles E Jones: That means the encoding algorithm is more complicated and if it's more if it's less space efficient than the encoding algorithms is less complicated means that it's faster right so.
+
+161
+00:24:32.220 --> 00:24:45.210
+Miles E Jones: These things balance out, what do you want it depends on what you're doing if you're accessing these things, all the time you probably want a very simple encoding algorithm you're going to lose a lot of space you're going to save a lot of time and then the other way around.
+
+162
+00:24:46.560 --> 00:24:47.970
+Miles E Jones: Okay let's look at an example.
+
+163
+00:24:51.210 --> 00:24:56.910
+Miles E Jones: If you have like a genomic code right that's basically a string of four characters.
+
+164
+00:24:59.580 --> 00:25:12.390
+Miles E Jones: In the 1990s, when they first started using computer well not first started using computers for DNA but kind of when it kind of blew up and started they started doing it much more often.
+
+165
+00:25:13.980 --> 00:25:16.770
+Miles E Jones: They used something called ascii.
+
+166
+00:25:18.150 --> 00:25:29.550
+Miles E Jones: To code these strings which in hindsight seems kind of silly because ascii is a eight bit code.
+
+167
+00:25:30.660 --> 00:25:49.110
+Miles E Jones: That each each letter or symbol that your keyboard can type, there is an associated eight bit ascii code so, for example, a has this code here si T and G, and so you need eight bits for each letter.
+
+168
+00:25:51.300 --> 00:26:00.150
+Miles E Jones: So after they after they had tons and tons of storage full with these ascii code DNA sequences.
+
+169
+00:26:01.470 --> 00:26:22.200
+Miles E Jones: They had to save space somewhere, now the The easiest way to go, is to instead use binary and use two bits per letter right because there's four letters so since there's four letters, you only need two bits to uniquely identify every letter.
+
+170
+00:26:44.040 --> 00:26:55.050
+Miles E Jones: Or, and whatever and let her code is going to be two n bits rather than eight in bit so you save you know by a factor of four which is incredibly.
+
+171
+00:26:56.820 --> 00:27:07.050
+Miles E Jones: Okay, so let's just talk about strings in general, when talking about strings over a finite alphabet, for example, yeah binary strings well, those are probably those are arguably the easiest things to encode.
+
+172
+00:27:15.780 --> 00:27:33.090
+Miles E Jones: And the reason is because you just don't do anything now ternary strings they have three different characters euro one and two, we have quite ternary strings DNA strings decimals strings hexadecimal sex adjustable which is 6060 characters.
+
+173
+00:27:37.440 --> 00:27:50.310
+Miles E Jones: alpha numeric alphanumeric we're going to see that this is 92 characters if you include all of the 95 characters if you include all of the special symbols.
+
+174
+00:27:52.410 --> 00:27:58.260
+Miles E Jones: So we saw that okay binary strings you need one bit per.
+
+175
+00:27:59.310 --> 00:27:59.910
+Miles E Jones: character.
+
+176
+00:28:01.170 --> 00:28:04.080
+Miles E Jones: DNA strings we saw that we needed to bits.
+
+177
+00:28:05.160 --> 00:28:06.210
+Miles E Jones: per character.
+
+178
+00:28:09.180 --> 00:28:10.860
+Miles E Jones: How about ternary strings.
+
+179
+00:28:11.970 --> 00:28:23.760
+Miles E Jones: If we're talking if we're using a fixed length and coding, that means that every character is going to have the same number of bits so for fixed length and coding.
+
+180
+00:28:25.290 --> 00:28:25.590
+Miles E Jones: How.
+
+181
+00:28:27.960 --> 00:28:31.470
+Miles E Jones: Many bits are required for ternary strings.
+
+182
+00:28:34.830 --> 00:28:41.580
+Miles E Jones: Okay, good to bits where did you get that number, do you have, is there a formula that you can use to calculate that.
+
+183
+00:28:48.390 --> 00:28:54.420
+Miles E Jones: Okay excellent it's the ceiling of log base to have three.
+
+184
+00:28:55.770 --> 00:28:57.570
+Miles E Jones: Okay, how about decimal strings.
+
+185
+00:28:58.920 --> 00:29:01.920
+Miles E Jones: With a fixed length and coding, how many bits do you need.
+
+186
+00:29:04.020 --> 00:29:09.450
+Miles E Jones: For right because four is equal to the ceiling of law based to have 10.
+
+187
+00:29:11.070 --> 00:29:13.710
+Miles E Jones: And hexadecimal strings this is 16.
+
+188
+00:29:15.690 --> 00:29:17.730
+Miles E Jones: So you also need for.
+
+189
+00:29:23.910 --> 00:29:24.300
+Miles E Jones: Right.
+
+190
+00:29:26.070 --> 00:29:28.380
+Miles E Jones: How about 60 characters you need.
+
+191
+00:29:30.270 --> 00:29:31.770
+Miles E Jones: Six I suppose right.
+
+192
+00:29:36.360 --> 00:29:39.840
+Miles E Jones: And for alphanumeric you need seven.
+
+193
+00:29:46.110 --> 00:29:59.160
+Miles E Jones: Okay, so this is for each character, so that means that once you figure out the the the code for each character, then you can build a string by just putting those codes side by side.
+
+194
+00:30:09.540 --> 00:30:13.230
+Miles E Jones: yeah okay here's a i'll just read what what the students said.
+
+195
+00:30:14.280 --> 00:30:20.520
+Miles E Jones: Could we potentially get more bang for our buck with the ternary strings if we build some sort of coding that allows us to.
+
+196
+00:30:20.850 --> 00:30:35.040
+Miles E Jones: Quote unquote pack more information into the two bit words we have four bits but only three unique combinations are needed to represent characters that fourth value could be used to pack additional information about future values, yes.
+
+197
+00:30:37.050 --> 00:30:45.390
+Miles E Jones: So that's going to kind of be what we look at a little bit later something called a theoretical optimal encoding there is a you know, a.
+
+198
+00:30:47.070 --> 00:31:02.010
+Miles E Jones: A lower bound on the number of bits required to use, and that has that has links to something called entropy has something to do with chaos, a random random.
+
+199
+00:31:03.060 --> 00:31:19.950
+Miles E Jones: binary strings something to do with sort of the complexity of the object in a way, so all of these things have to do with what what is the minimum amount of information that I need to uniquely identify each thing, but if you do it that way.
+
+200
+00:31:21.210 --> 00:31:35.760
+Miles E Jones: you're not using a fixed length encoding anymore so fixed length and coding, is a very basic nice way to do things it's it's essentially what we did with this binary I sorry DNA strings.
+
+201
+00:31:36.930 --> 00:31:41.430
+Miles E Jones: it's really easy to encode and decode because all you have to do is.
+
+202
+00:31:44.100 --> 00:31:51.810
+Miles E Jones: is just decode each each block and you know how long each block is so you don't need any delay limiters between them.
+
+203
+00:31:53.190 --> 00:31:54.060
+Miles E Jones: Okay, great.
+
+204
+00:31:55.290 --> 00:31:59.460
+Miles E Jones: Great observation anybody have any other comments or observations.
+
+205
+00:32:11.040 --> 00:32:31.470
+Miles E Jones: Long blocks of ternary to integer that's going to actually be the optimal encoding for ternary strings is to convert them into their integer in based to that's the best way to do it, but that's not fixed density or fixed length and it's arguably a little bit more complicated because.
+
+206
+00:32:32.580 --> 00:32:46.950
+Miles E Jones: It takes it takes more processing time to convert basis rather than just convert each block of two to whatever character, there is so hopefully again idea of you know.
+
+207
+00:32:48.210 --> 00:32:50.880
+Miles E Jones: The differences.
+
+208
+00:32:53.820 --> 00:33:01.680
+Miles E Jones: Okay, so integers integers are among the main building blocks of mathematics, especially with in the sub field of arithmetic which our computers are very good at doing.
+
+209
+00:33:02.970 --> 00:33:13.650
+Miles E Jones: In our civilization we use base 10 numbers like 125 400 and 4013 and 72 How does a computer store these numbers does anybody know.
+
+210
+00:33:31.230 --> 00:33:35.910
+Miles E Jones: Well, I guess i'll start by saying there's two ways right so like a.
+
+211
+00:33:38.160 --> 00:33:40.470
+Miles E Jones: up more powerful computer.
+
+212
+00:33:45.030 --> 00:33:46.950
+Miles E Jones: will convert.
+
+213
+00:33:51.990 --> 00:33:53.820
+Miles E Jones: The number.
+
+214
+00:33:59.580 --> 00:33:59.790
+Miles E Jones: In.
+
+215
+00:34:03.420 --> 00:34:11.400
+Miles E Jones: Their binary expansion right, how do you call that binary power binary expansion binary number system.
+
+216
+00:34:17.880 --> 00:34:20.040
+Miles E Jones: Then do arithmetic on that.
+
+217
+00:34:26.700 --> 00:34:27.900
+Miles E Jones: Storage right.
+
+218
+00:34:30.000 --> 00:34:32.970
+Miles E Jones: Then convert back.
+
+219
+00:34:35.280 --> 00:34:35.970
+Miles E Jones: When.
+
+220
+00:34:37.140 --> 00:34:37.770
+Miles E Jones: When ready.
+
+221
+00:34:39.330 --> 00:34:41.370
+Miles E Jones: or when when when ready to print I guess.
+
+222
+00:34:44.010 --> 00:35:00.300
+Miles E Jones: Because, as the user i'm going to plug in the numbers like I know them right 125 times 4013 go it converts both does the arithmetic with binary numbers and then converts the result back.
+
+223
+00:35:03.930 --> 00:35:11.760
+Miles E Jones: Okay, this is actually the most efficient way to do it in a few different ways it's efficient with space right.
+
+224
+00:35:12.960 --> 00:35:14.850
+Miles E Jones: it's space efficient.
+
+225
+00:35:18.420 --> 00:35:19.770
+Miles E Jones: And the arithmetic.
+
+226
+00:35:22.710 --> 00:35:25.380
+Miles E Jones: is more time efficient.
+
+227
+00:35:29.400 --> 00:35:46.290
+Miles E Jones: Okay, so that's a powerful computer what's not a powerful computer something like this does anybody know how a sort of low power calculator stores integers.
+
+228
+00:35:49.200 --> 00:35:52.650
+Miles E Jones: binary coded decimal okay so like a calculator.
+
+229
+00:35:55.920 --> 00:35:56.910
+Miles E Jones: stores.
+
+230
+00:35:58.860 --> 00:36:07.920
+Miles E Jones: Using dcd and B, C D all it is, is a fixed and it's a fixed length think coatings.
+
+231
+00:36:18.240 --> 00:36:33.180
+Miles E Jones: So each digit is a is a four bit binary string right if we go back to here we can see that decimal strings require four bits if you want to use fixed density or sorry not fixed fixed length encoding so you need four bits per digit.
+
+232
+00:36:35.460 --> 00:36:36.870
+Each digit.
+
+233
+00:36:40.200 --> 00:36:41.130
+For this.
+
+234
+00:36:44.490 --> 00:36:46.470
+Miles E Jones: So what are the advantages of this.
+
+235
+00:36:54.330 --> 00:37:05.190
+Miles E Jones: Right, the encoding and the decoding are very fast right, so the encoding here and decoding.
+
+236
+00:37:06.450 --> 00:37:08.070
+Miles E Jones: is slow.
+
+237
+00:37:09.960 --> 00:37:12.240
+Miles E Jones: But the encoding is fast here.
+
+238
+00:37:16.410 --> 00:37:20.850
+Miles E Jones: Could you really don't have to do any math all you have to do is is is look up on a table.
+
+239
+00:37:23.160 --> 00:37:34.110
+Miles E Jones: Okay, so the BC D encodes each decimal digit to its binary equivalent B, C D is a fixed length and coding right, and this is how they do it.
+
+240
+00:37:35.310 --> 00:37:44.400
+Miles E Jones: This is the dcd code right, so how would you represent 711 and B, C D for you just code each digit.
+
+241
+00:37:44.970 --> 00:38:02.910
+Miles E Jones: So seven would encode to 0111 would encode to 00011 would encode to 0001 and so you have the string the binary strings 011100010001.
+
+242
+00:38:03.420 --> 00:38:15.660
+Miles E Jones: And you don't need any delay limiters in between them, because you know each digit is exactly four bits long, so you know exactly where one starts and one ends and that's very important and that's one of the main.
+
+243
+00:38:17.910 --> 00:38:26.550
+Miles E Jones: The main things that make fixed length encoding really good and really efficient.
+
+244
+00:38:28.710 --> 00:38:36.060
+Miles E Jones: Okay, so, then we have you know, since there are 16 different four bit strings we have these forbidden.
+
+245
+00:38:37.440 --> 00:38:43.680
+Miles E Jones: forbidden strings here, but you know if you're if you want to be clever, then you can.
+
+246
+00:38:44.280 --> 00:39:01.410
+Miles E Jones: Maybe you can encode certain operations right if you wanted to store that plus minus times and divide and goals or something if you wanted to kind of display them all, you could you could use those forbidden things as other symbols, if you wanted to.
+
+247
+00:39:03.030 --> 00:39:14.640
+Miles E Jones: But there's a whole way to do arithmetic using dcd it's not as efficient as just a rhythmic tick on binary numbers, but the.
+
+248
+00:39:15.870 --> 00:39:21.390
+Miles E Jones: The time you're saving with encoding really pays off for these things because.
+
+249
+00:39:23.100 --> 00:39:37.920
+Miles E Jones: it's it's a bit complicated, especially for big numbers to have to go back and forth between decimal and binary so now, when you need to display this thing the computer doesn't need a lot of.
+
+250
+00:39:39.690 --> 00:39:48.900
+Miles E Jones: A lot of time to just say Oh, the first four bits I just look them up oh it's a seven the next four bits is a one and one okay any questions about that.
+
+251
+00:39:51.090 --> 00:39:53.310
+Miles E Jones: So this is a fixed length encoding.
+
+252
+00:39:59.610 --> 00:40:12.240
+Miles E Jones: Who is the CD basically anything that has like this type of display clocks digital ovens I don't know any kind of like low.
+
+253
+00:40:13.560 --> 00:40:18.420
+Miles E Jones: Low power computer or sort of digital device.
+
+254
+00:40:23.130 --> 00:40:31.620
+Miles E Jones: Okay, so text editors and programming languages, usually allow for strings or text over the alphabet, and this is the alphabet containing.
+
+255
+00:40:31.950 --> 00:40:46.680
+Miles E Jones: 26 uppercase letters 26 lowercase letters 10 digits and 33 other symbols, including the space, so you add that all up and you get 95 how many bits are required for each character in this alphabet.
+
+256
+00:40:53.820 --> 00:40:55.020
+Miles E Jones: Seven right.
+
+257
+00:40:57.450 --> 00:41:02.640
+Miles E Jones: So you need seven bits per character so.
+
+258
+00:41:03.810 --> 00:41:16.650
+Miles E Jones: The whatever universal international computing people who decide on these things develop this thing called the ascii code now here's the ascii table.
+
+259
+00:41:17.820 --> 00:41:32.580
+Miles E Jones: And you can see that it has all of the uppercase letters all the lowercase letters and all of the digits and then it has a bunch of other stuff um.
+
+260
+00:41:33.750 --> 00:41:37.740
+Miles E Jones: But notice that the ascii ascii code use eight bits.
+
+261
+00:41:39.270 --> 00:41:57.780
+Miles E Jones: Now, why do they use a pitch does anybody anybody know there's if you if you look at this ascii table notice that the first bit is always zero right in all of these codes, so why use that extra bit Okay, so one reason is to allow for future extension which they did.
+
+262
+00:42:01.440 --> 00:42:02.460
+Miles E Jones: anybody else.
+
+263
+00:42:04.590 --> 00:42:06.660
+Miles E Jones: Any other reason is.
+
+264
+00:42:09.690 --> 00:42:26.700
+Miles E Jones: right if this thing, where a bite is a more convenient size right seven is weird to story memory and so there's all these operations at the computer can already do on these words sized chunks of of a bite of eight bits.
+
+265
+00:42:27.540 --> 00:42:38.730
+Miles E Jones: And so that extra bit you know it's worth it to just add it in there, so that your computer can can deal with these things better.
+
+266
+00:42:43.560 --> 00:42:43.950
+Miles E Jones: yeah.
+
+267
+00:42:45.660 --> 00:42:49.770
+Miles E Jones: um so also if you notice.
+
+268
+00:42:52.380 --> 00:42:56.340
+Miles E Jones: You have all of these these three columns here.
+
+269
+00:42:59.220 --> 00:43:02.010
+Miles E Jones: Are all the symbols and all of the.
+
+270
+00:43:03.030 --> 00:43:12.720
+Miles E Jones: letters and numbers and everything and then this column here is like a bunch of commands don't really know what that is, I guess, I recognize escape.
+
+271
+00:43:19.260 --> 00:43:22.560
+Miles E Jones: I don't really know what those are all right good I got recognized tab.
+
+272
+00:43:26.040 --> 00:43:27.990
+Miles E Jones: Right and then you have delete here.
+
+273
+00:43:33.300 --> 00:43:40.290
+Miles E Jones: that's where you get the 95 necessarily the symbols, the 95 symbols, but the whoever made this up.
+
+274
+00:43:43.050 --> 00:43:55.710
+Miles E Jones: You know they they wanted to get their best bang for their buck right they wanted to make sure that they were using all of the things that that was that was available, so they found other other commands to put.
+
+275
+00:44:01.800 --> 00:44:04.170
+Miles E Jones: Okay, then there's the extended ascii table.
+
+276
+00:44:05.220 --> 00:44:09.570
+Miles E Jones: which has all these kind of letters with accents and stuff and.
+
+277
+00:44:10.710 --> 00:44:12.210
+I know a bunch of weird stuff.
+
+278
+00:44:13.590 --> 00:44:35.370
+Miles E Jones: But we're not really going to work with that so much okay so um let's talk about a a way that you could think about a computer, to be able to store this encoding decoding information so one way to do it is to store it in something called the encoding decoding tree.
+
+279
+00:44:36.780 --> 00:44:45.840
+Miles E Jones: So, given an alphabet with an symbols if you're using fixed length and coding at least login bits are required to encode each symbol we've already talked about that right.
+
+280
+00:44:46.980 --> 00:44:49.830
+Miles E Jones: So if I have a alphabet with four.
+
+281
+00:44:52.050 --> 00:45:05.280
+Miles E Jones: characters, then I only need four bits and a way that I can encode the information code or store the encoding algorithm is by using a tree like this So how do you read the tree.
+
+282
+00:45:05.670 --> 00:45:17.730
+Miles E Jones: Well, you start from the root and then you go down to the leaf, so if I wanted to encode the letter b I would go down to be and I get a zero.
+
+283
+00:45:20.160 --> 00:45:34.560
+Miles E Jones: So be encodes 201 and then to decode you just kind of do the same process if I see a 01 I can just follow the tree or follow the zero, and then the one, and I know it's a B so it's a way to encode and decode.
+
+284
+00:45:36.540 --> 00:45:37.140
+wrote over there.
+
+285
+00:45:39.810 --> 00:45:42.330
+Miles E Jones: Okay, and since the tree is.
+
+286
+00:45:44.730 --> 00:46:01.680
+Miles E Jones: is full and complete right and balanced and everything and the the bottom level is fully filled, then you know that all of the paths from the root down to the leaf are the same length and so that's why you get that fixed length encoding.
+
+287
+00:46:04.350 --> 00:46:08.520
+Miles E Jones: Okay, so there's something else called variable length and coding.
+
+288
+00:46:09.690 --> 00:46:20.940
+Miles E Jones: And we've seen examples of fixed length and coding, where each symbol is encoded using the same number of bits if the symbols are roughly evenly distributed then fixed length and coding is really a great way to go.
+
+289
+00:46:22.260 --> 00:46:34.050
+Miles E Jones: Otherwise, if some symbols are more frequent than others than a variable length and coding is better because you can the more frequent symbols, you can shorten their code.
+
+290
+00:46:34.500 --> 00:46:45.870
+Miles E Jones: And the longer symbols, you can make their code longer, and this sort of trade off that you do will will make your code more space efficient.
+
+291
+00:46:49.440 --> 00:46:59.880
+Miles E Jones: Okay, so here's an example of a variable length encoding now this doesn't really encode it into bits, but it does encoded into some sort of.
+
+292
+00:47:01.020 --> 00:47:03.120
+Miles E Jones: More kind of digital form.
+
+293
+00:47:05.430 --> 00:47:07.980
+Miles E Jones: Okay, so here's the.
+
+294
+00:47:10.050 --> 00:47:12.810
+Miles E Jones: The general frequencies of letters.
+
+295
+00:47:14.250 --> 00:47:22.320
+Miles E Jones: He has the highest frequency of around 12.7% and what has the lowest frequency Q, maybe.
+
+296
+00:47:27.360 --> 00:47:29.760
+Miles E Jones: I guess Z is less frequent than Q.
+
+297
+00:47:34.620 --> 00:47:34.950
+Miles E Jones: Right.
+
+298
+00:47:36.570 --> 00:47:39.930
+Miles E Jones: And so, this this Morse code.
+
+299
+00:47:41.070 --> 00:47:45.840
+Miles E Jones: is a way to encode all those letters and the way that it works is that.
+
+300
+00:47:47.310 --> 00:48:05.730
+Miles E Jones: a.is just one unit of time and a dash is three units of time, the space between parts of the same letter is one unit, the space between the letters is three units and the space between words is seven units so.
+
+301
+00:48:06.840 --> 00:48:27.300
+Miles E Jones: You you kind of get like I don't know how to read Morse code or listen to it, but people who do you know or people that do it, they have their own little rhythm and you can start hearing the spaces and stuff like that in fact I was reading something about how, when they use Morse code.
+
+302
+00:48:30.210 --> 00:48:44.400
+Miles E Jones: People had their own kind of like accents where like if you're listening to a Morse code, you could sort of tell who, like the individual you could recognize his or her.
+
+303
+00:48:44.820 --> 00:48:52.440
+Miles E Jones: rhythm and be like oh yeah that's miles doing the Morse code, so there is sort of a lot of variability in here, which makes it.
+
+304
+00:48:53.670 --> 00:48:58.950
+Miles E Jones: susceptible right, but it was used a lot, so that you know, there must have been something good about it.
+
+305
+00:48:59.370 --> 00:49:17.520
+Miles E Jones: Okay, but notice that he is the shortest thing it's just a single da and Z is very long right, it has three plus one space plus three plus one plus one plus one plus one so that's 123456 is 11.
+
+306
+00:49:19.380 --> 00:49:23.370
+Miles E Jones: Right so it's like 11 times longer than the shortest one.
+
+307
+00:49:26.010 --> 00:49:27.120
+Miles E Jones: Okay, so.
+
+308
+00:49:28.140 --> 00:49:35.970
+Miles E Jones: Obviously you're not going to be doing a lot of z's you're going to probably do a lot more ease so that's why you have that variable length.
+
+309
+00:49:37.680 --> 00:49:48.270
+Miles E Jones: So Morse code was not super efficient, since we also need to store the spaces in between the word in between the letters are words right so.
+
+310
+00:49:51.240 --> 00:49:53.850
+Miles E Jones: Is there a way that we could eliminate those spaces.
+
+311
+00:49:55.800 --> 00:50:00.600
+Miles E Jones: Consider the following and coding scheme, how would you encode the word dad.
+
+312
+00:50:03.030 --> 00:50:03.480
+Miles E Jones: well.
+
+313
+00:50:04.530 --> 00:50:10.140
+Miles E Jones: I have D so let's do it dad I need D and then a.
+
+314
+00:50:11.850 --> 00:50:12.660
+And D.
+
+315
+00:50:14.940 --> 00:50:16.830
+Miles E Jones: So my question to you is.
+
+316
+00:50:18.660 --> 00:50:24.750
+Miles E Jones: Could I just give you this string 10010 and have you be able to.
+
+317
+00:50:26.730 --> 00:50:32.490
+Miles E Jones: reliably decode it or Do I need to actually give you.
+
+318
+00:50:33.810 --> 00:50:36.300
+Miles E Jones: commas, or the commas necessary.
+
+319
+00:50:43.230 --> 00:50:44.370
+Miles E Jones: Yes, right because.
+
+320
+00:50:45.960 --> 00:50:53.370
+Miles E Jones: So I guess dad would encode to this thing, but this thing could decode to a be.
+
+321
+00:50:55.110 --> 00:50:59.100
+Miles E Jones: A be or a bb a be right.
+
+322
+00:51:01.830 --> 00:51:07.770
+Miles E Jones: or it could be, or it could decode dad or it could decode to do a.
+
+323
+00:51:09.930 --> 00:51:10.500
+or sorry.
+
+324
+00:51:13.170 --> 00:51:28.320
+Miles E Jones: Oh hey is zero sorry this is be a a B, or it could decode to da BA right so it's like a many to one thing we kind of saw this before, maybe.
+
+325
+00:51:30.600 --> 00:51:41.400
+Miles E Jones: Wear shirts easy to encode something, but in order to decode it, you have all these options which one do you do so, you need these comments now, how do you encode commas.
+
+326
+00:51:44.610 --> 00:51:49.170
+Miles E Jones: You know, you could use ascii but then you're you're putting like this eight bit.
+
+327
+00:51:50.940 --> 00:51:52.680
+Miles E Jones: chunk in between the word.
+
+328
+00:51:53.820 --> 00:52:07.260
+Miles E Jones: It would be much better if we could figure out a way to get around using commas, just like we did with the fixed length and cody remember we didn't need comments, because we knew exactly how long each were.
+
+329
+00:52:15.930 --> 00:52:20.190
+Miles E Jones: or each through excuse me, each character was where the less.
+
+330
+00:52:27.120 --> 00:52:42.000
+Miles E Jones: Okay, so we want to do something called a comma free code a comma free P prefix free code is an encoding scheme in which no concatenation of two words to code words contains a valid code word that overlaps both.
+
+331
+00:52:44.550 --> 00:52:47.580
+Miles E Jones: So this is the one that we just looked at this is bad.
+
+332
+00:52:48.900 --> 00:52:51.600
+Miles E Jones: And I think somebody kind of said, it is that.
+
+333
+00:52:54.930 --> 00:52:56.730
+Miles E Jones: Be starts with one.
+
+334
+00:52:58.320 --> 00:53:10.650
+Miles E Jones: right but C and D also start with one, so if I if my first letter or my first character is a one, how do I know if it's a B, C or D.
+
+335
+00:53:13.440 --> 00:53:26.550
+Miles E Jones: I guess, more importantly, is that B is just one is just the code word one, and so, if I start with a one, how do I know if it's just a B, or if it's going to be the start of a C or D.
+
+336
+00:53:28.170 --> 00:53:32.580
+Miles E Jones: Okay, this one's good yeah this is fixed.
+
+337
+00:53:34.890 --> 00:53:35.460
+Miles E Jones: length.
+
+338
+00:53:36.900 --> 00:53:37.560
+encoding.
+
+339
+00:53:39.450 --> 00:53:52.380
+Miles E Jones: Fixed length and coding is always going to be comma free prefix free and it's basically because you know exactly when each word is going to end okay how about this one is this one good or bad.
+
+340
+00:54:02.340 --> 00:54:06.180
+Miles E Jones: it's good right any word that you have.
+
+341
+00:54:07.380 --> 00:54:11.940
+Miles E Jones: You can always decode it and get the original The reason is because.
+
+342
+00:54:13.440 --> 00:54:19.200
+Miles E Jones: All of these strings none or none of these strings are the prefix of another string.
+
+343
+00:54:24.000 --> 00:54:38.940
+Miles E Jones: Good bad bad good bad good good Okay, so one way to kind of generate a nice variable length prefix free encoding is something called a huffman code.
+
+344
+00:54:42.000 --> 00:54:42.870
+Miles E Jones: and
+
+345
+00:54:44.220 --> 00:54:56.490
+Miles E Jones: it's actually the most efficient variable length encoding if you are, if you are given the frequencies so, on average, the number of dates required to encode to give a message will be shorter than a fixed length and coding scheme.
+
+346
+00:54:57.930 --> 00:55:04.050
+Miles E Jones: It uses a binary tree like we saw before and different trees may be used for different messages.
+
+347
+00:55:05.070 --> 00:55:20.070
+Miles E Jones: Okay, so you can look in the book in page 764 it gives you the procedure for building a huffman tree i'm just going to give you a i'm just going to show you an example and and hopefully that'll kind of give you the idea.
+
+348
+00:55:22.410 --> 00:55:27.000
+Miles E Jones: Okay let's say we have a file with the following single letter frequencies.
+
+349
+00:55:28.260 --> 00:55:43.440
+Miles E Jones: Okay, so a is the most rare and G is the most frequent so i'm hoping that in my encoding the code word for G is short and the Cold War, for a long.
+
+350
+00:55:46.590 --> 00:55:49.740
+Miles E Jones: OK, so the way that we start is to.
+
+351
+00:55:50.970 --> 00:55:55.350
+Miles E Jones: sort the frequencies in decreasing order.
+
+352
+00:55:56.640 --> 00:55:56.880
+Okay.
+
+353
+00:56:00.240 --> 00:56:05.130
+Miles E Jones: Now, how do you break ties let's just say.
+
+354
+00:56:06.600 --> 00:56:09.390
+Miles E Jones: I guess what I did here is I just broke ties by.
+
+355
+00:56:13.230 --> 00:56:14.700
+Miles E Jones: Reverse alphabetical order.
+
+356
+00:56:31.530 --> 00:56:31.980
+Miles E Jones: Okay.
+
+357
+00:56:33.180 --> 00:56:35.040
+Miles E Jones: So what's going to happen here.
+
+358
+00:56:36.570 --> 00:56:40.320
+Miles E Jones: Is that we're going to take the two rarest.
+
+359
+00:56:42.060 --> 00:56:42.900
+Miles E Jones: letters.
+
+360
+00:56:50.280 --> 00:56:51.780
+Miles E Jones: And we're going to kind of.
+
+361
+00:56:54.450 --> 00:56:55.770
+Miles E Jones: join them together.
+
+362
+00:57:01.980 --> 00:57:05.610
+Miles E Jones: we're going to join them together and we're going to add their frequencies.
+
+363
+00:57:06.390 --> 00:57:25.350
+Miles E Jones: To close, 123 the idea here is to set a or B right then that set is going to occur with frequency three so this sort of Sub tree has frequency three.
+
+364
+00:57:25.830 --> 00:57:39.060
+Miles E Jones: And then, what you do is you put that sub tree back into the you resort it put it back into the list and then you repeat and you keep on doing that, until you build the whole tree.
+
+365
+00:57:41.730 --> 00:57:51.300
+Miles E Jones: Okay, so that's sort of after step one right now step two is take the two rarest kind of characters in this case is going to be two and three.
+
+366
+00:57:52.980 --> 00:58:08.220
+Miles E Jones: Right and connect those and add their frequencies, so now this subset ABC is going to occur with frequency five right so now reorder them.
+
+367
+00:58:11.310 --> 00:58:23.550
+Miles E Jones: So now, the five is is more frequent than end so now let's put those ones together right and I get eight and now that's the most frequent so move that to the front.
+
+368
+00:58:24.720 --> 00:58:28.020
+Miles E Jones: And so on right now we have 10.
+
+369
+00:58:29.670 --> 00:58:51.210
+Miles E Jones: That to the front, we connect the six in the 814 that's the front and then connect those two and we get 24 and 24 turned out to be the total number of letters Okay, so this is the Hoffman tree, and this is enough information to encode and decode every letter.
+
+370
+00:58:55.140 --> 00:58:56.940
+Miles E Jones: Okay, how do we obtain the code words.
+
+371
+00:58:59.790 --> 00:59:00.720
+Miles E Jones: All the.
+
+372
+00:59:02.190 --> 00:59:02.940
+Miles E Jones: left.
+
+373
+00:59:04.290 --> 00:59:05.340
+Miles E Jones: branches.
+
+374
+00:59:08.280 --> 00:59:11.220
+Miles E Jones: R zero and all the right branches.
+
+375
+00:59:14.790 --> 00:59:15.540
+Miles E Jones: Are one.
+
+376
+00:59:27.720 --> 00:59:45.540
+Miles E Jones: Okay, so hey how do I encode a well it's gonna be 11011101 where the code length of four right be is going to be 1100 with a coding for see is going to be 111.
+
+377
+00:59:46.710 --> 01:00:03.510
+Miles E Jones: D is going to be 001 right, so these head length of three he is 000 just three F is one zero, which is to n G is your one which is two.
+
+378
+01:00:04.740 --> 01:00:13.560
+Miles E Jones: Okay, so we have we have successfully made a variable length comma free.
+
+379
+01:00:14.610 --> 01:00:30.510
+Miles E Jones: code, why is it comma free it's because of the tree the tree structure prevents any prefix right, because if you kind of recall what happened before let's say I had another letter he let's say he.
+
+380
+01:00:32.220 --> 01:00:45.510
+Miles E Jones: If it wasn't prefix free That means that he would be kind of want in one of these interior nodes, meaning that the the code for age itself was a prefix.
+
+381
+01:00:45.900 --> 01:00:55.380
+Miles E Jones: For another code for like C and for a and for be so the problem is how do I know to stop at H or to keep on going.
+
+382
+01:00:56.130 --> 01:01:11.070
+Miles E Jones: So without any of the interior nodes being letters, we know that, once we get to a leaf right once we get to the bottom we're done and we can just move on, so we know exactly when to stop.
+
+383
+01:01:14.070 --> 01:01:22.650
+Miles E Jones: Okay, furthermore, this turns out to be a very the most optimal that you can get with a variable length.
+
+384
+01:01:24.480 --> 01:01:28.350
+Miles E Jones: Fixed no variable length encoding.
+
+385
+01:01:30.810 --> 01:01:37.320
+Miles E Jones: Okay, how awesome is it how good does it do well oops when I do here.
+
+386
+01:01:40.110 --> 01:01:46.530
+Miles E Jones: Oh here's a here's a challenge, use the hump and tree above to decrypt this thing and write your answer in the chat.
+
+387
+01:02:17.760 --> 01:02:26.010
+Miles E Jones: bags right and at first glance you're like how did you know when one letter stopped in one letter started there variable length.
+
+388
+01:02:26.430 --> 01:02:51.450
+Miles E Jones: But if you just run through it, you can see right that 1100 now i've gotten to a leaf, so this one stops there and that's a B 1101 i've gotten to a leaf so that's a 01 that's G right 01 that's a G 000 that's a E and 001 that's a tea bag.
+
+389
+01:02:54.180 --> 01:02:55.560
+Miles E Jones: Okay, so just for an example.
+
+390
+01:02:57.210 --> 01:03:14.460
+Miles E Jones: Alright, so um let's let's compare huffman code versus fixed length code if I used a fixed length code or let's do the huffman code first under huffman encoding the output length is going to be 64 how did you get that well.
+
+391
+01:03:16.830 --> 01:03:18.330
+Miles E Jones: This is the.
+
+392
+01:03:19.650 --> 01:03:20.730
+Miles E Jones: code length.
+
+393
+01:03:25.560 --> 01:03:30.870
+Miles E Jones: Of a a times the frequency.
+
+394
+01:03:34.530 --> 01:03:40.980
+Miles E Jones: Of a and you do that for each Okay, for example, this guy is the code length.
+
+395
+01:03:52.500 --> 01:03:57.480
+Miles E Jones: You do that you get 64 That means that this message here take 64 bits.
+
+396
+01:03:58.530 --> 01:04:01.740
+Miles E Jones: Okay, how how many bits do you need for the.
+
+397
+01:04:03.180 --> 01:04:04.410
+Miles E Jones: Fixed length encoded.
+
+398
+01:04:05.670 --> 01:04:12.390
+Miles E Jones: So for the fixed length encoding since there are 123456 since there's seven bits.
+
+399
+01:04:17.550 --> 01:04:23.730
+Miles E Jones: says there are seven bits I need three bits per character right.
+
+400
+01:04:26.130 --> 01:04:42.450
+Miles E Jones: So, since there are seven bits we need three bits per character, so the file length will be well three times 24 because there's 24 letters each letter is the same, and you get 72 So you can see, of what a difference, it makes to use this huffman and coding.
+
+401
+01:04:47.340 --> 01:04:51.480
+Miles E Jones: Okay, any questions about these computations these calculations.
+
+402
+01:05:08.160 --> 01:05:15.060
+Miles E Jones: um so in the last few minutes, I want to share with you another variable length and coding, which I think is really cool.
+
+403
+01:05:16.980 --> 01:05:19.980
+Miles E Jones: and actually does have some practical use.
+
+404
+01:05:22.620 --> 01:05:23.910
+Miles E Jones: But I don't think it's super common.
+
+405
+01:05:26.250 --> 01:05:42.660
+Miles E Jones: Okay, so suppose we want to store a sequence of positive integers in a particular range let's say one to 100, for example, you can have to 524 15 whatever right so um.
+
+406
+01:05:45.000 --> 01:05:50.700
+Miles E Jones: If I have a general idea that here's kind of a general thing is you.
+
+407
+01:05:51.750 --> 01:05:52.710
+Miles E Jones: generally.
+
+408
+01:05:54.000 --> 01:05:54.840
+Miles E Jones: expect.
+
+409
+01:06:00.450 --> 01:06:07.170
+Miles E Jones: shorter or yeah sorry you generally expect more.
+
+410
+01:06:09.210 --> 01:06:10.260
+Miles E Jones: Smaller.
+
+411
+01:06:12.060 --> 01:06:13.050
+Miles E Jones: numbers.
+
+412
+01:06:14.850 --> 01:06:17.160
+Miles E Jones: Then bigger numbers.
+
+413
+01:06:20.760 --> 01:06:33.000
+Miles E Jones: Which means that you want your smaller numbers to be shorter and your bigger numbers to be longer great all we have to do is just change them into their binary numbers.
+
+414
+01:06:34.350 --> 01:06:57.330
+Miles E Jones: Because binary expansions of small numbers are short binary experiences of big numbers are long right, for example, two is just 105 is 101 right 24 is bigger and you need five bits so this seems like it's a great way to do it, what is the problem here does anybody know.
+
+415
+01:07:00.630 --> 01:07:01.500
+Miles E Jones: The comma.
+
+416
+01:07:02.760 --> 01:07:09.630
+Miles E Jones: Right, like the comma comma is not good, because how do you how do you encode that.
+
+417
+01:07:14.340 --> 01:07:23.790
+Miles E Jones: coated with bits itself a bunch of ones, to use the ascii code and then even if you do that, since the length of the.
+
+418
+01:07:25.320 --> 01:07:33.180
+Miles E Jones: of each binary expansion is variable, how do you know when it ends and when the comma begins.
+
+419
+01:07:34.050 --> 01:07:44.190
+Miles E Jones: Right so there's a lot of problems with this it's probably much better off for you to just Since you know what the limit is it's probably better off of you just.
+
+420
+01:07:44.940 --> 01:08:03.090
+Miles E Jones: encode everybody, with seven bits do a fixed encoding right and just say two is going to be 1234567 that's going to be two and then five is going to be 1234101.
+
+421
+01:08:04.680 --> 01:08:15.180
+Miles E Jones: Right it's much better to do it that way 0011000 15 would be 0001111 because then you don't need.
+
+422
+01:08:16.740 --> 01:08:25.020
+Miles E Jones: Any limiters but you kind of lose this nice thing, where the small numbers are shorter and the big numbers are longer.
+
+423
+01:08:31.560 --> 01:08:37.740
+Miles E Jones: Okay, so there's this thing called fibonacci encoding and it uses this.
+
+424
+01:08:39.300 --> 01:08:43.290
+Miles E Jones: This theorem called can endorse theorem that I don't know for.
+
+425
+01:08:47.670 --> 01:08:55.530
+Miles E Jones: But will state it, and this has a lot to do with the domino timings right, this is actually related.
+
+426
+01:08:58.320 --> 01:08:59.550
+To domino.
+
+427
+01:09:01.350 --> 01:09:02.190
+timings.
+
+428
+01:09:04.140 --> 01:09:22.080
+Miles E Jones: And the idea here is that every positive integer can be uniquely written as the sum of nonconsecutive fibonacci numbers so, for example, 99 is equal to 89 plus eight plus to notice that they're not consecutive right.
+
+429
+01:09:23.460 --> 01:09:28.650
+Miles E Jones: 4734 plus 13 nonconsecutive right.
+
+430
+01:09:30.750 --> 01:09:43.320
+Miles E Jones: 375 is you know this whole thing and notice that they're not consecutive to 3389 3435 and right there there's a space between them.
+
+431
+01:09:45.600 --> 01:09:46.500
+Miles E Jones: Okay, so.
+
+432
+01:09:47.580 --> 01:09:48.210
+Miles E Jones: um.
+
+433
+01:09:49.410 --> 01:09:51.870
+Miles E Jones: This reminds us, maybe of.
+
+434
+01:09:52.920 --> 01:10:15.720
+Miles E Jones: binary expansions right if I if I take the binary numbers and the fibonacci numbers right it's you basically put a one in the column, if you have if that's one of your one of the terms in your expansion so, for example, 99 in fibonacci is going to be.
+
+435
+01:10:17.610 --> 01:10:28.710
+Miles E Jones: We, what do we do for nine we got to an eight and a 89, so this is going to be the expansion, whereas for.
+
+436
+01:10:30.690 --> 01:10:32.820
+Miles E Jones: For binary it would be.
+
+437
+01:10:35.460 --> 01:10:46.050
+Miles E Jones: One to 32 and 64 so the binary expansion of course is shorter that's the theoretically optimal expansion.
+
+438
+01:10:47.970 --> 01:10:48.870
+Miles E Jones: But.
+
+439
+01:10:50.520 --> 01:10:54.090
+Miles E Jones: The expansion of the fibonacci numbers has a very special property.
+
+440
+01:10:55.350 --> 01:10:55.710
+Miles E Jones: Okay.
+
+441
+01:11:01.920 --> 01:11:16.020
+Miles E Jones: there's only one way to write each positive integers is some of non consecutive fibonacci numbers if if the fibonacci numbers are not consecutive That means that the binary string avoids what little sub string.
+
+442
+01:11:24.750 --> 01:11:27.780
+Miles E Jones: Exactly it avoids the sub string one one.
+
+443
+01:11:29.490 --> 01:11:35.880
+Miles E Jones: So every expansion avoids that string so you can use that string as a comma.
+
+444
+01:11:37.620 --> 01:11:41.730
+Miles E Jones: And the smaller numbers are shorter and the bigger numbers are longer.
+
+445
+01:11:43.620 --> 01:11:46.890
+Miles E Jones: Okay, so let's do an example here.
+
+446
+01:11:48.600 --> 01:11:53.850
+Miles E Jones: What we're gonna do is we're going to expand each number two five.
+
+447
+01:11:55.650 --> 01:12:01.110
+Miles E Jones: Right we're going to expand each number using its fibonacci expansion loops.
+
+448
+01:12:06.750 --> 01:12:08.310
+Miles E Jones: You kind of write them backwards.
+
+449
+01:12:09.330 --> 01:12:16.740
+Miles E Jones: And so, since you've written them backwards, they all end in a one right notice that they all end in one.
+
+450
+01:12:20.340 --> 01:12:37.530
+Miles E Jones: One is just one right, so the code is going to be expand the number using this fibonacci expansion, then write a single one for the comma then write the next number, and then a single one the next number single one, and so on.
+
+451
+01:12:49.230 --> 01:13:03.150
+Miles E Jones: So it's a pretty cool way to do it, it makes it so that you do get this variable length encoding of all the integers, so this is sort of like you know you could you could.
+
+452
+01:13:04.830 --> 01:13:08.040
+Miles E Jones: You don't need to use like the Hoffman tree or anything like that.
+
+453
+01:13:10.170 --> 01:13:10.500
+Miles E Jones: So.
+
+454
+01:13:13.440 --> 01:13:22.200
+Miles E Jones: You need around one plus log base 1.6 to have an bits this comes from the.
+
+455
+01:13:25.170 --> 01:13:31.920
+Miles E Jones: The fi right one plus the square to five over to to encode an integer using fibonacci encoding.
+
+456
+01:13:33.270 --> 01:13:50.400
+Miles E Jones: And for each integer in general, this is not as efficient as based to but remember the problem that we found with base to is that if you use that, then you need commas and commas are bad, so this way each number is a little bit longer but you're able to do it without commerce.
+
+457
+01:13:52.110 --> 01:14:00.300
+Miles E Jones: Right, so the fibonacci encoding uses bits to encode this particular example that I showed you.
+
+458
+01:14:01.830 --> 01:14:07.680
+Miles E Jones: use a binary and eight bit ascii comma, how many bits would that take well.
+
+459
+01:14:09.870 --> 01:14:11.340
+Miles E Jones: How many colors do you need.
+
+460
+01:14:16.320 --> 01:14:17.220
+Miles E Jones: You need.
+
+461
+01:14:18.810 --> 01:14:26.190
+Miles E Jones: 1234567899 commas.
+
+462
+01:14:27.360 --> 01:14:29.250
+Miles E Jones: So just the commas.
+
+463
+01:14:32.850 --> 01:14:37.080
+Miles E Jones: Take nine times eight which is 72 bits.
+
+464
+01:14:38.850 --> 01:14:45.480
+Miles E Jones: Just the cause, but we're able to do it in 54 bits so that's that's a much, much better.
+
+465
+01:14:48.540 --> 01:14:58.680
+Miles E Jones: Okay, so next time we're going to find a lower bound on the number of bits required to encode certain math objects and the end the theoretical optimal encoding.
+
+466
+01:15:00.000 --> 01:15:10.740
+Miles E Jones: is not necessarily going to be a variable length and coding or a or a fixed length encoding it's much more like what some of the students were saying in the beginning of class where.
+
+467
+01:15:11.130 --> 01:15:23.220
+Miles E Jones: You you take bigger chunks if they're if they're strings you kind of take bigger chunks and crunch them down as far as you possibly can, and we'll find out what that limit is.
+
+468
+01:15:24.570 --> 01:15:31.740
+Miles E Jones: Okay, any questions or comments you want me to go back to anything, or I think that's kind of it for the class today.
+
+469
+01:15:33.690 --> 01:15:34.290
+Miles E Jones: and
+
+470
+01:15:36.780 --> 01:15:38.670
+Miles E Jones: i'll stick around for another 10 minutes or so.
+
+471
+01:20:40.350 --> 01:20:43.350
+Miles E Jones: Okay, I guess that's it then so see you all on Thursday.
+

@@ -1,0 +1,2370 @@
+WEBVTT
+
+1
+00:00:00.780 --> 00:00:04.589
+Miles E Jones: starting to record anybody have any questions or comments, before we begin.
+
+2
+00:00:26.670 --> 00:00:27.060
+Miles E Jones: alright.
+
+3
+00:00:29.070 --> 00:00:37.230
+Miles E Jones: So we're gonna continue the discussion of algorithms and just kind of some basic analysis so last time we did stuff with.
+
+4
+00:00:37.590 --> 00:00:56.190
+Miles E Jones: intuitive algorithms loop based algorithms and saw that often using a looping variant is a great way to show that they're correct or even just to kind of figure out what they do you know and and use that as like a way to to study the algorithm recursive algorithms.
+
+5
+00:01:02.130 --> 00:01:08.850
+Miles E Jones: we're going to learn about how to design recursive algorithms and sometimes you can design a recursive algorithm that is.
+
+6
+00:01:11.010 --> 00:01:13.800
+Miles E Jones: it's kind of like based on a loop based algorithm so we'll do.
+
+7
+00:01:13.800 --> 00:01:14.160
+That.
+
+8
+00:01:16.260 --> 00:01:16.920
+Miles E Jones: And then.
+
+9
+00:01:18.030 --> 00:01:23.910
+Miles E Jones: Talk about recursive algorithm correctness now, this is still using induction.
+
+10
+00:01:29.670 --> 00:01:30.990
+Miles E Jones: But as you'll see.
+
+11
+00:01:32.550 --> 00:01:40.590
+Miles E Jones: The recursive algorithm or recursive algorithms in general they really lend themselves to us induction it's kind of like how.
+
+12
+00:01:41.430 --> 00:01:54.930
+Miles E Jones: How they're designed is with induction in mind you kind of assume that the answer is going to be, or that the algorithm will work for smaller cases and you use that to.
+
+13
+00:01:54.930 --> 00:01:56.520
+Kyle Sasagawa: design the rest of the algorithm.
+
+14
+00:01:58.860 --> 00:02:02.820
+Miles E Jones: Okay, then we'll take a look at runtime which involves.
+
+15
+00:02:04.980 --> 00:02:05.940
+Miles E Jones: Solving.
+
+16
+00:02:07.530 --> 00:02:08.610
+Miles E Jones: A recurrence.
+
+17
+00:02:10.800 --> 00:02:11.460
+Miles E Jones: relation.
+
+18
+00:02:13.980 --> 00:02:31.260
+Miles E Jones: And then we'll take a little little detour into merged sort and merge merge store is a example of a recursive algorithm that has the that also has the classification of being a divide and conquer algorithm so we'll talk about.
+
+19
+00:02:33.450 --> 00:02:35.610
+Miles E Jones: divide and conquer.
+
+20
+00:02:37.710 --> 00:02:45.510
+Miles E Jones: And when we when we do the runtime of a divide and conquer algorithm we're going to use something called the master theorem okay so let's get started.
+
+21
+00:02:47.100 --> 00:02:48.090
+Miles E Jones: Last time.
+
+22
+00:02:49.890 --> 00:02:57.450
+Miles E Jones: On Tuesday we looked at this particular algorithm it counts the number of don't even have the.
+
+23
+00:02:59.790 --> 00:03:02.160
+Miles E Jones: Have the problem specification it counts.
+
+24
+00:03:04.410 --> 00:03:05.580
+Miles E Jones: The number.
+
+25
+00:03:07.560 --> 00:03:10.560
+Miles E Jones: Of 00 occurrences.
+
+26
+00:03:13.530 --> 00:03:19.830
+Miles E Jones: Right and it's pretty straightforward you basically just scan through and.
+
+27
+00:03:21.480 --> 00:03:25.440
+Miles E Jones: Every time you see a new occurrence you increment that count, by one.
+
+28
+00:03:26.820 --> 00:03:31.500
+Miles E Jones: Okay, how can we change this into a recursive algorithm does anybody have any ideas.
+
+29
+00:03:58.530 --> 00:04:09.630
+Miles E Jones: Okay, so okay good so in a recursive algorithm you, you always need to have base cases, because if you don't have those then there's no way for the algorithm to know when to stop.
+
+30
+00:04:14.430 --> 00:04:25.290
+Miles E Jones: Okay, good so yeah this is kind of the idea is to check the first two characters if they're a match right if they're an occurrence of 00.
+
+31
+00:04:27.240 --> 00:04:43.410
+Miles E Jones: Then you then you have one occurrence in the beginning, if they're not then you have zero occurrences in the beginning, and you add whatever whatever result you get to the recursive call, starting from the second bit, let me show you how that works.
+
+32
+00:04:45.480 --> 00:04:47.040
+Miles E Jones: Okay, just like we said.
+
+33
+00:04:49.200 --> 00:04:51.330
+Miles E Jones: This is called the base case.
+
+34
+00:04:54.450 --> 00:05:02.130
+Miles E Jones: Remember, I was saying recursive algorithms really lend themselves to thinking about induction thing about the algorithm inductive Lee.
+
+35
+00:05:02.580 --> 00:05:12.540
+Miles E Jones: And so, with induction you need base cases recursive algorithms you need base cases, so if n is less than two there's no possible way that you can get even one occurrence.
+
+36
+00:05:14.280 --> 00:05:15.120
+Miles E Jones: Otherwise.
+
+37
+00:05:17.220 --> 00:05:26.610
+Miles E Jones: If you get a occurrence in the first two bits then return one that's from this recurrence plus.
+
+38
+00:05:27.990 --> 00:05:38.070
+Miles E Jones: The the same algorithm applied to be two through bn how do I know that that will reliably count the.
+
+39
+00:05:39.780 --> 00:05:41.640
+Miles E Jones: Number of 00 occurrences.
+
+40
+00:05:43.590 --> 00:05:54.630
+Miles E Jones: Well kind of at this point, you don't really know you need to use induction to convince yourself Okay, otherwise just return.
+
+41
+00:05:57.060 --> 00:05:58.080
+Miles E Jones: The number of.
+
+42
+00:05:59.520 --> 00:06:04.770
+Miles E Jones: You know the the recursive call on B2B end without adding anything because you didn't have a.
+
+43
+00:06:07.080 --> 00:06:08.400
+Miles E Jones: pattern match in the beginning.
+
+44
+00:06:09.810 --> 00:06:10.290
+Miles E Jones: Okay.
+
+45
+00:06:11.340 --> 00:06:20.160
+Miles E Jones: So this example shows that essentially the same algorithm can be described as iterative or recursive it's not always so simple it's not always so easy.
+
+46
+00:06:30.510 --> 00:06:39.120
+Miles E Jones: But describing an algorithm recursive Lee can give us new insights and sometimes lead to more efficient algorithms and also.
+
+47
+00:06:40.320 --> 00:06:43.470
+Miles E Jones: efficient in terms of runtime.
+
+48
+00:06:48.120 --> 00:06:49.860
+Miles E Jones: But also sometimes.
+
+49
+00:06:53.340 --> 00:06:55.440
+Miles E Jones: leads to.
+
+50
+00:06:56.550 --> 00:06:58.230
+Miles E Jones: shorter algorithms.
+
+51
+00:07:01.170 --> 00:07:02.580
+Miles E Jones: And we're not going to really.
+
+52
+00:07:03.990 --> 00:07:22.320
+Miles E Jones: talk so much about that in this class having an algorithm be elegant and using few lines and stuff like that, I mean it should probably be something to think about right you don't want your algorithm to be super long and and confusing so recursive algorithms sometimes are able to.
+
+53
+00:07:24.990 --> 00:07:29.340
+Miles E Jones: make it a little bit more succinct another thing that I like about recursive algorithms.
+
+54
+00:07:30.510 --> 00:07:46.080
+Miles E Jones: As you'll see here is that we don't have to worry about keeping track of the indices like we did here, and you have these indices, and where you are in the thing, and you know it gets worse and worse, the more loops that you have so.
+
+55
+00:07:47.640 --> 00:07:57.210
+Miles E Jones: recursive algorithms kind of function all those indices in their recursive calls kind of like behind the scenes, so I kind of like that about them.
+
+56
+00:07:59.070 --> 00:08:01.320
+Miles E Jones: It also makes correctness proofs more intuitive.
+
+57
+00:08:05.010 --> 00:08:05.790
+Miles E Jones: You don't.
+
+58
+00:08:07.620 --> 00:08:09.600
+Miles E Jones: need a looping variant.
+
+59
+00:08:13.260 --> 00:08:18.960
+Miles E Jones: And as you're going to see the induction for the correctness proof is pretty much just the algorithm it's.
+
+60
+00:08:20.160 --> 00:08:21.870
+Miles E Jones: You just kind of going through it so.
+
+61
+00:08:23.970 --> 00:08:38.730
+Miles E Jones: So this is what i'm saying induction and recursion induction is approved strategy where you prove the base case and then, how do you to prove the statement of true about n plus one, you need to assume as true for and right.
+
+62
+00:08:41.130 --> 00:08:48.600
+Miles E Jones: recursion as a way of solving a problem where you give the base case and in order to solve a problem of size and plus one you.
+
+63
+00:08:49.140 --> 00:09:01.320
+Miles E Jones: You use the information of solving a problem, size and so they're they're very similar concepts, you know they do completely different things, but they kind of rely on the same fundamental.
+
+64
+00:09:01.980 --> 00:09:02.370
+idea.
+
+65
+00:09:04.170 --> 00:09:07.230
+Miles E Jones: Okay, so here's the template for proving a recursive algorithm correct.
+
+66
+00:09:08.370 --> 00:09:14.490
+Miles E Jones: um you use induction on N, which is the input input size.
+
+67
+00:09:15.600 --> 00:09:30.570
+Miles E Jones: The base cases of the recursion usually are the base cases of reduction of induction they're usually just written right out in the algorithm that you can just say this is the base case, and this is why it, this is why it is correct.
+
+68
+00:09:32.580 --> 00:09:35.700
+Miles E Jones: Right see why is it the correct answer all right.
+
+69
+00:09:37.260 --> 00:09:44.670
+Miles E Jones: Sometimes you need strong inductions sometimes you need regular induction but you just do a regular kind of induction.
+
+70
+00:09:47.400 --> 00:10:07.170
+Miles E Jones: And here's kind of the the key of the proof is that the induction hypothesis allows us to conclude that the algorithm is going to be correct and each one of those recursive calls, so you can kind of like replace the recursive call with what the algorithm is supposed to return.
+
+71
+00:10:08.310 --> 00:10:17.760
+Miles E Jones: And when you're proving it, you can just you can just use that for free because of induction see i'll tell you what I mean by that.
+
+72
+00:10:19.050 --> 00:10:20.790
+Miles E Jones: Okay inside of the inductive step.
+
+73
+00:10:22.230 --> 00:10:29.820
+Miles E Jones: express what the algorithm does in terms of the answers to the recursive calls to smaller inputs so usually this is.
+
+74
+00:10:34.500 --> 00:10:35.610
+Miles E Jones: is given.
+
+75
+00:10:37.110 --> 00:10:37.560
+and
+
+76
+00:10:39.300 --> 00:10:39.840
+Miles E Jones: problem.
+
+77
+00:10:41.700 --> 00:10:57.930
+Miles E Jones: Right, the problem says, I want to algorithm to return this thing then you say assume my algorithm returns this thing now show that it returns that thing I sometimes it kind of seems a little circular but just trust that we are using induction here.
+
+78
+00:10:59.940 --> 00:11:09.030
+Miles E Jones: replace the answers for the recursive calls with the correct answers, according to the problem, this is the inductive hypothesis we're really just going to be replacing them with what they should be.
+
+79
+00:11:09.840 --> 00:11:17.760
+Miles E Jones: And then show that the result is the correct answer all right let's let's actually get to work here, prove that for any string.
+
+80
+00:11:18.810 --> 00:11:29.940
+Miles E Jones: be one through bn count double rack be one through bn is equal to the number of places the sub string 00 occurs hey proving this claim by induction let's get started.
+
+81
+00:11:30.930 --> 00:11:45.660
+Miles E Jones: base case and is less than two that means and zero, and it is one or in a zero or and as one and zero, the only input is the empty string which has no substance, so the algorithm return zero, which is correct.
+
+82
+00:11:48.990 --> 00:11:57.510
+Miles E Jones: And as one the input is a single bit, so it has no two bits i'm strings therefore the algorithm return zero, which is correct, usually the base case is is.
+
+83
+00:11:59.040 --> 00:12:04.980
+Miles E Jones: pretty simple to state, you have to make sure that it agrees with what you want the algorithm to do.
+
+84
+00:12:07.920 --> 00:12:09.600
+Miles E Jones: Okay inductive hypothesis.
+
+85
+00:12:13.410 --> 00:12:21.960
+Miles E Jones: For some K greater than or equal to one assume that for any input of string of length K count double rack be one to bk is equal to the.
+
+86
+00:12:22.320 --> 00:12:35.640
+Miles E Jones: number of places the string 00 occurs, we want to show that it's true for any input of length K plus one Okay, are we using strong induction or regular induction and why.
+
+87
+00:12:53.340 --> 00:12:58.710
+Miles E Jones: we're using regular induction and that's because you your original input.
+
+88
+00:13:06.060 --> 00:13:06.480
+Miles E Jones: Is.
+
+89
+00:13:07.890 --> 00:13:08.640
+Miles E Jones: length.
+
+90
+00:13:10.710 --> 00:13:15.660
+Miles E Jones: And, and each one of your recursive calls is of length and minus one.
+
+91
+00:13:17.070 --> 00:13:20.370
+Miles E Jones: So, since you only going back once one or one thing.
+
+92
+00:13:23.760 --> 00:13:25.410
+Miles E Jones: Right any questions about that.
+
+93
+00:13:31.980 --> 00:13:33.570
+Miles E Jones: Okay, so let's do the inductive step.
+
+94
+00:13:35.370 --> 00:13:37.710
+Miles E Jones: you'll often see that the inductive step.
+
+95
+00:13:38.850 --> 00:13:40.440
+Miles E Jones: You have to do a few cases.
+
+96
+00:13:42.540 --> 00:13:52.830
+Miles E Jones: it's not always the case it's not always the case that you have to do cases but a clue that you have to do cases will be from the conditional so.
+
+97
+00:13:54.030 --> 00:13:56.610
+Miles E Jones: notice that I have this if statement.
+
+98
+00:13:58.320 --> 00:14:03.510
+Miles E Jones: If something happens then return this recursive call otherwise.
+
+99
+00:14:04.950 --> 00:14:10.530
+Miles E Jones: return this recursive call and so those are my two cases and an IT I need to show.
+
+100
+00:14:10.710 --> 00:14:18.600
+Miles E Jones: That it works in both cases and it'll work for the entire algorithm okay so case, one is that you do have an occurrence.
+
+101
+00:14:18.960 --> 00:14:21.150
+Miles E Jones: again be one zero.
+
+102
+00:14:23.370 --> 00:14:26.970
+Miles E Jones: And the out what happens in the algorithm.
+
+103
+00:14:30.450 --> 00:14:30.780
+Nikhil Rao: Some.
+
+104
+00:14:35.130 --> 00:14:41.820
+Miles E Jones: things happens in the algorithm is you're going to return this value one plus the result.
+
+105
+00:14:44.940 --> 00:14:58.350
+Miles E Jones: So one plus this recursive call is going to be equal to one plus the number of occurrences of 00 in this thing in this input.
+
+106
+00:15:00.300 --> 00:15:07.020
+Miles E Jones: And now that one refers to the one occurrence of 00 in the two first positions.
+
+107
+00:15:08.520 --> 00:15:16.440
+Miles E Jones: So the kind of the magic here happens when I replace the recursive call with what it's supposed to.
+
+108
+00:15:19.170 --> 00:15:19.530
+Give.
+
+109
+00:15:26.520 --> 00:15:28.950
+Miles E Jones: Sorry, my my volume was.
+
+110
+00:15:32.040 --> 00:15:33.450
+Miles E Jones: Was anybody trying to talk.
+
+111
+00:15:36.600 --> 00:15:37.410
+Dillan DeMoss: To somebody.
+
+112
+00:15:39.780 --> 00:15:49.410
+Miles E Jones: Okay, I just muted them all okay thanks okay so case to you can maybe just kind of go through this pretty easily.
+
+113
+00:15:51.930 --> 00:15:57.120
+Miles E Jones: If B one and B to our are not an occurrence, you can essentially.
+
+114
+00:16:01.590 --> 00:16:03.060
+Miles E Jones: throw away.
+
+115
+00:16:04.710 --> 00:16:20.790
+Miles E Jones: be one right just get rid of that because it's not going to contribute to any of them so that means that the number of occurrences of the full list is equal to the number of occurrences occurrences, starting at be two.
+
+116
+00:16:22.140 --> 00:16:25.260
+Miles E Jones: And by the induction hypothesis, it will count that one correctly.
+
+117
+00:16:27.960 --> 00:16:30.000
+Miles E Jones: Okay, any questions or comments.
+
+118
+00:16:47.730 --> 00:17:03.420
+Miles E Jones: Okay, in conclusion, we showed that the algorithm was correct for inputs of length zero and one and we show that is correct, for inputs of length K, that is correct, for inputs of link K plus one by induction that means it's it's correct for any input size greater than or equal to zero.
+
+119
+00:17:14.640 --> 00:17:18.420
+Miles E Jones: Now let's talk about runtime How long does this algorithm take.
+
+120
+00:17:21.270 --> 00:17:30.300
+Miles E Jones: We can kind of attempt to do the runtime analysis by by labeling each line of code right.
+
+121
+00:17:32.520 --> 00:17:37.620
+Miles E Jones: So this thing is a constant time operation, just to check to see if it's big enough.
+
+122
+00:17:39.240 --> 00:17:40.080
+Miles E Jones: And then.
+
+123
+00:17:41.280 --> 00:17:48.300
+Miles E Jones: If you have here then return count double rack of this, so how long does this take.
+
+124
+00:17:59.640 --> 00:18:00.180
+Miles E Jones: well.
+
+125
+00:18:01.350 --> 00:18:03.360
+Miles E Jones: In order to know how long that takes.
+
+126
+00:18:05.010 --> 00:18:11.910
+Miles E Jones: I need to know how long the algorithm takes so it's kind of like this circular logic it's like in order to.
+
+127
+00:18:13.110 --> 00:18:16.380
+Miles E Jones: calculate the runtime I need to know what the runtime is already.
+
+128
+00:18:17.940 --> 00:18:35.580
+Miles E Jones: And so we're going to use recurrence relations to kind of get around this fact and and solve them with the techniques that we did in the first few days so different cases come from the non base case return statements, the different cases come from the if statement.
+
+129
+00:18:36.990 --> 00:18:37.320
+yeah.
+
+130
+00:18:44.820 --> 00:18:52.320
+Miles E Jones: yeah there's two different recursive calls that happen in two different conditions, so you have to make sure that they are.
+
+131
+00:18:54.180 --> 00:18:55.530
+Miles E Jones: They both work.
+
+132
+00:18:57.120 --> 00:18:57.810
+Miles E Jones: doesn't make sense.
+
+133
+00:19:00.690 --> 00:19:01.050
+Miles E Jones: Okay.
+
+134
+00:19:02.760 --> 00:19:04.080
+Miles E Jones: So how do we get around this.
+
+135
+00:19:06.420 --> 00:19:17.670
+Miles E Jones: Well let's use a technique that we talked about the first few days is when you're talking about counting something, because here we're really trying to count the number of.
+
+136
+00:19:18.030 --> 00:19:29.250
+Miles E Jones: sort of computer steps that the algorithm takes when you're trying to count something you don't really know what it is yet often it's good to name it something so we're going to name it.
+
+137
+00:19:31.560 --> 00:19:44.970
+Miles E Jones: To, then let the vendors that represent the time the algorithm takes now this this term, time is a little vague because different computers will take different times.
+
+138
+00:19:45.780 --> 00:20:02.160
+Miles E Jones: So we're going to be using sort of kind of constants that we don't actually know their exact answer we just know that there are constant and you'll see that by doing that, then we can get these awesome topic bounce.
+
+139
+00:20:03.630 --> 00:20:15.420
+Miles E Jones: Okay, so do you have any of the time, the algorithm takes on the input of size and so sometimes I like to just write it like this to you then like that this takes big of and I started to go have one.
+
+140
+00:20:16.470 --> 00:20:26.610
+Miles E Jones: This recursive call well it's it's on the input of size and minus one, so this takes tf N minus one, and this recursive call also takes to you then minus one.
+
+141
+00:20:29.880 --> 00:20:30.690
+Miles E Jones: So.
+
+142
+00:20:34.680 --> 00:20:48.900
+Miles E Jones: When I say this is constant time let's just call this some constant see let's say that this takes see time, maybe see is like a second maybe see is like a fraction of a second whatever it is it's constant it.
+
+143
+00:20:50.370 --> 00:20:58.350
+Miles E Jones: I know that it could fluctuate a little bit, but it's not going to grow with the size of the input and that's the important part.
+
+144
+00:21:01.680 --> 00:21:03.390
+Miles E Jones: Okay, so let's see.
+
+145
+00:21:07.260 --> 00:21:08.370
+Miles E Jones: here's our occurrence.
+
+146
+00:21:12.390 --> 00:21:17.460
+Miles E Jones: Why is it Okay, so it looks like I have two recursive calls Why am I only.
+
+147
+00:21:18.510 --> 00:21:19.440
+Miles E Jones: Doing one.
+
+148
+00:21:24.510 --> 00:21:27.810
+Miles E Jones: One term of tf N minus one in the recurrence.
+
+149
+00:21:34.110 --> 00:21:46.050
+Miles E Jones: right because, like you said they they don't they don't ever both execute right it's either one or the other, and in both cases it's tf N minus one, so you just get this.
+
+150
+00:21:47.880 --> 00:21:49.830
+Miles E Jones: Okay base cases are also.
+
+151
+00:21:51.390 --> 00:21:53.130
+Miles E Jones: You know there's also constant time.
+
+152
+00:21:54.210 --> 00:22:01.050
+Miles E Jones: And so we have a nice recurrence it's in terms of constants but that's Okay, we still can kind of use our techniques.
+
+153
+00:22:02.130 --> 00:22:05.490
+Miles E Jones: hey so let's let's solve this is our recurrence relation.
+
+154
+00:22:06.900 --> 00:22:07.560
+currents.
+
+155
+00:22:09.030 --> 00:22:09.660
+relation.
+
+156
+00:22:11.220 --> 00:22:12.780
+For runtime.
+
+157
+00:22:14.370 --> 00:22:15.780
+Miles E Jones: let's solve it by unraveling.
+
+158
+00:22:19.110 --> 00:22:24.180
+Miles E Jones: history of tf n is equal to tf N minus one plus C.
+
+159
+00:22:25.710 --> 00:22:32.070
+Miles E Jones: Okay, so, then the next step is going to be t of and is equal to.
+
+160
+00:22:33.150 --> 00:22:34.740
+Miles E Jones: An inside of here.
+
+161
+00:22:35.880 --> 00:22:40.950
+Miles E Jones: I put t of N minus two plus see.
+
+162
+00:22:42.540 --> 00:22:43.680
+Miles E Jones: I have a policy.
+
+163
+00:22:45.480 --> 00:22:46.680
+Miles E Jones: All right, let's clean that up.
+
+164
+00:22:53.310 --> 00:22:57.000
+Miles E Jones: Okay, three I get tf n is equal to.
+
+165
+00:22:58.230 --> 00:23:04.170
+Miles E Jones: Now let's break up to you, then minus two and I get t of N minus three plus C.
+
+166
+00:23:07.680 --> 00:23:09.420
+Miles E Jones: Plus C plus C.
+
+167
+00:23:16.080 --> 00:23:17.190
+Miles E Jones: And in general.
+
+168
+00:23:19.140 --> 00:23:26.760
+Miles E Jones: You get to event is equal to t of N minus K plus K see.
+
+169
+00:23:28.620 --> 00:23:38.100
+Miles E Jones: right sort of get down to the base case and is equal to one, I want to plug in and minus one and I get to van is equal to t of one plus.
+
+170
+00:23:40.290 --> 00:23:41.520
+Miles E Jones: And minus one see.
+
+171
+00:23:42.600 --> 00:23:48.270
+Miles E Jones: Which is equal to some constant D plus and minus one C and.
+
+172
+00:23:49.560 --> 00:23:57.060
+Miles E Jones: What is C and D, we really don't care, all we really care about is how this thing grows ask them topically, so this is going to be.
+
+173
+00:23:59.130 --> 00:24:12.420
+Miles E Jones: The event is big data event shouldn't really be super surprising, but this at least gives you a way to to see how the how that recursion is.
+
+174
+00:24:13.500 --> 00:24:15.210
+Miles E Jones: Working okay any questions.
+
+175
+00:24:25.830 --> 00:24:26.250
+Miles E Jones: Okay.
+
+176
+00:24:27.450 --> 00:24:31.650
+Miles E Jones: let's talk about another problem merging two sorted lists.
+
+177
+00:24:32.730 --> 00:24:35.850
+Miles E Jones: So you have a one through eight K and b one through bl.
+
+178
+00:24:37.350 --> 00:24:51.300
+Miles E Jones: And let's say that N, is the sum of the two lengths, and you want to produce a sorted list that contains all the elements and if some of you may have seen this before, this is a sub routine of merge sort, which is a.
+
+179
+00:24:52.830 --> 00:25:01.410
+Miles E Jones: Common sorting algorithm that we're going to look at it in a minute, but in order to look at merge sort, we need to first figure out how to merge.
+
+180
+00:25:04.380 --> 00:25:08.220
+Miles E Jones: Okay design a recursive algorithm to solve this problem does anybody have any ideas.
+
+181
+00:25:31.980 --> 00:25:35.370
+Miles E Jones: so good, we need to have the base cases that's very important.
+
+182
+00:25:42.390 --> 00:25:44.700
+Miles E Jones: Okay, good, so this is the type of.
+
+183
+00:25:46.710 --> 00:25:53.250
+Miles E Jones: This is the type of thinking that I want you all to start trying to do with recursive algorithms is.
+
+184
+00:25:55.050 --> 00:25:59.670
+Miles E Jones: make a decision that will shorten the input.
+
+185
+00:26:00.930 --> 00:26:08.130
+Miles E Jones: And then recursive Lee solve the problem on that smaller input, so that way kind of.
+
+186
+00:26:09.300 --> 00:26:15.360
+Miles E Jones: You kind of have to like let go a little bit and have faith that the algorithm will work.
+
+187
+00:26:19.560 --> 00:26:29.700
+Miles E Jones: I call it faith, but in mathematics, we call it induction but sometimes it just feels like you just need to believe right.
+
+188
+00:26:32.070 --> 00:26:32.940
+Miles E Jones: Okay, so good.
+
+189
+00:26:33.990 --> 00:26:34.800
+Miles E Jones: So.
+
+190
+00:26:36.300 --> 00:26:48.600
+Miles E Jones: focus on merging the head elements right the first two elements, because of the two lists are sorted than the smallest element has got to be either the smallest element of the first list or the smallest element of the second list.
+
+191
+00:26:49.020 --> 00:26:54.180
+Miles E Jones: So, once you figure out what's the smallest element, you could just merge the remaining lists.
+
+192
+00:26:57.330 --> 00:27:01.200
+Miles E Jones: Okay, so good so here are the base cases again base cases.
+
+193
+00:27:05.070 --> 00:27:06.360
+Miles E Jones: And then we have.
+
+194
+00:27:07.590 --> 00:27:12.120
+Miles E Jones: The if statement right if a one is less than or equal to a B one then.
+
+195
+00:27:13.740 --> 00:27:16.440
+Miles E Jones: This is called are merged for recursive merge.
+
+196
+00:27:17.760 --> 00:27:18.990
+Miles E Jones: Our merge.
+
+197
+00:27:20.790 --> 00:27:26.280
+Miles E Jones: The remaining elements and the list a two through Ak be one through bl.
+
+198
+00:27:27.600 --> 00:27:41.190
+Miles E Jones: And if it's the other way, then be one is smaller and so concatenate be one academy one, with the result of merging the full a list and b list, starting from P to.
+
+199
+00:27:48.150 --> 00:27:48.930
+Miles E Jones: Any questions.
+
+200
+00:27:53.910 --> 00:28:03.570
+Miles E Jones: Okay let's prove it we're going to prove it by induction, and this is going to be induction on end, which is the total size of both list put together.
+
+201
+00:28:06.270 --> 00:28:12.000
+Miles E Jones: Okay, so base case suppose and zero, then that means that both lists have to be empty and.
+
+202
+00:28:14.430 --> 00:28:19.050
+Miles E Jones: That sort of taken care of in these two first lines.
+
+203
+00:28:24.450 --> 00:28:39.900
+Miles E Jones: Okay, so it trivially sorts it okay that's fine okay induction steps suppose and is greater than or equal to one and our merge a one through a kb want to be l returns a sorted list containing all elements from either list whenever the some of the Atlas length is.
+
+204
+00:28:42.360 --> 00:28:44.910
+Miles E Jones: N minus one, what do we want to show now.
+
+205
+00:28:48.210 --> 00:28:51.630
+Miles E Jones: That for any.
+
+206
+00:28:53.010 --> 00:28:53.700
+Miles E Jones: list.
+
+207
+00:28:54.840 --> 00:28:59.760
+Miles E Jones: Of length and our merge.
+
+208
+00:29:03.330 --> 00:29:04.290
+Miles E Jones: correctly.
+
+209
+00:29:06.750 --> 00:29:08.640
+Miles E Jones: merges the input.
+
+210
+00:29:12.930 --> 00:29:27.750
+Miles E Jones: Here we're also using regular induction again, and the reason is because, just like before if our original list is of length n both of the recursive calls are of length N minus one.
+
+211
+00:29:30.780 --> 00:29:33.960
+Miles E Jones: Right, because each one of them you're just only taking one thing away.
+
+212
+00:29:35.160 --> 00:29:36.240
+Okay questions about that.
+
+213
+00:29:44.400 --> 00:29:49.110
+Miles E Jones: Okay, so here's my induction hypothesis this thing.
+
+214
+00:29:52.560 --> 00:30:05.040
+Miles E Jones: Right, we want to prove that for any other list a one through ap be want to be Q returns is sorted list containing all elements from either list whenever people ask you is equal to, and for any.
+
+215
+00:30:06.480 --> 00:30:15.540
+Miles E Jones: For any list that of size n so case one at least one of the list is empty then return.
+
+216
+00:30:17.340 --> 00:30:18.270
+Miles E Jones: Other list.
+
+217
+00:30:22.650 --> 00:30:25.590
+Miles E Jones: Which is sorted.
+
+218
+00:30:27.240 --> 00:30:28.680
+Miles E Jones: And contains all elements.
+
+219
+00:30:33.960 --> 00:30:42.060
+Miles E Jones: Okay, so that's kind of like the easy part caves to neither of the lists are empty so that means we kind of have to go into.
+
+220
+00:30:43.560 --> 00:30:46.230
+Miles E Jones: This part of the algorithm let's see what happens.
+
+221
+00:30:48.180 --> 00:30:57.720
+Miles E Jones: Okay, so this is what I just said least one of the list is empty similar to the base case and in the first or second line return the elements return all the elements and sort of okay that's good.
+
+222
+00:30:59.160 --> 00:31:09.030
+Miles E Jones: Okay, so we're going to split up case to into two sub cases right, so we have to a is going to be.
+
+223
+00:31:11.640 --> 00:31:13.200
+Miles E Jones: This recursive call.
+
+224
+00:31:17.010 --> 00:31:25.440
+Miles E Jones: Since both lists are sorted this means and and a one is less than or equal to be one, this means a one is the smallest element overall.
+
+225
+00:31:27.360 --> 00:31:29.940
+Miles E Jones: The total size of this input here.
+
+226
+00:31:31.980 --> 00:31:40.680
+Miles E Jones: is always taken away and element from a so it's P minus one plus Q, which is N minus one right, because this is assuming.
+
+227
+00:31:43.410 --> 00:31:45.240
+Miles E Jones: P, plus Q is equal to end.
+
+228
+00:31:46.350 --> 00:31:50.310
+Miles E Jones: So by the induction hypothesis that recursive call.
+
+229
+00:31:51.330 --> 00:31:59.220
+Miles E Jones: correctly starts the list for free right you don't even have to do anything you just kind of use the induction hypothesis, and you get a sorted list.
+
+230
+00:32:00.810 --> 00:32:08.760
+Miles E Jones: So, what happens if you have a sorted list, and you put a very small element in the beginning of the list, the result is also sorted.
+
+231
+00:32:10.770 --> 00:32:17.220
+Miles E Jones: And a one to the start maintains the order and gives us sorted list with all elements okay questions about that.
+
+232
+00:32:26.310 --> 00:32:39.120
+Miles E Jones: Okay case to be very similar since both lists are sorted this means be one is the smallest overall, if I have be one is less than anyone when it's the same thing right you you pluck a.
+
+233
+00:32:40.200 --> 00:32:42.900
+Miles E Jones: You you pluck it element from the B list.
+
+234
+00:32:43.920 --> 00:32:50.550
+Miles E Jones: And now you get P, plus Q minus one and that's equal to N minus one this is assuming people as queue is equal to end.
+
+235
+00:32:51.930 --> 00:33:00.810
+Miles E Jones: So it returns, a sort of list containing all the elements and adding be one to the start maintains the order and gives us sort of lists were all the office that's it.
+
+236
+00:33:01.440 --> 00:33:12.300
+Miles E Jones: Conclusion we've shown that for any input size and greater than or equal to zero are merge correctly merges those two lists.
+
+237
+00:33:15.090 --> 00:33:16.800
+Miles E Jones: Okay, any questions or comments.
+
+238
+00:33:37.980 --> 00:33:39.240
+Miles E Jones: It negative one again.
+
+239
+00:33:43.500 --> 00:33:45.330
+Miles E Jones: Can you be a bit more specific.
+
+240
+00:33:52.860 --> 00:33:54.240
+Miles E Jones: Where does it say N minus one.
+
+241
+00:33:58.860 --> 00:34:11.070
+Chengjing Yuan: Does so like Professor in the previous slides like you mentioned that P, plus Q is equal to N minus one is that does that mean, like the the queue is one position smaller than qq is like one positional MP.
+
+242
+00:34:12.000 --> 00:34:14.040
+Miles E Jones: know people as queue is equal to n.
+
+243
+00:34:14.400 --> 00:34:18.180
+Miles E Jones: Is that was a here.
+
+244
+00:34:18.990 --> 00:34:20.280
+Miles E Jones: Yes, deduction status.
+
+245
+00:34:20.610 --> 00:34:23.250
+Chengjing Yuan: yeah I got that but what, why is it minus one, though.
+
+246
+00:34:24.600 --> 00:34:27.780
+Miles E Jones: Because P minus one plus Q.
+
+247
+00:34:28.800 --> 00:34:31.470
+Miles E Jones: If you just do some algebra on this.
+
+248
+00:34:33.900 --> 00:34:39.900
+Chengjing Yuan: So we're saying, like the the list of as like have one less element than the biggest.
+
+249
+00:34:40.560 --> 00:34:41.040
+know.
+
+250
+00:34:44.580 --> 00:34:45.750
+Miles E Jones: So we're okay so.
+
+251
+00:34:45.810 --> 00:34:56.730
+Miles E Jones: let's go back so we're assuming that the a list starts with P elements and the B list starts with Q elements and we're assuming that the total number of elements is and.
+
+252
+00:34:57.840 --> 00:34:58.950
+Chengjing Yuan: Yes, I got a.
+
+253
+00:34:59.460 --> 00:35:03.030
+Miles E Jones: Few is equal to end right now here.
+
+254
+00:35:06.420 --> 00:35:07.110
+Miles E Jones: I am.
+
+255
+00:35:07.140 --> 00:35:10.260
+Miles E Jones: rehearsing on a list that starts at a to.
+
+256
+00:35:10.320 --> 00:35:11.160
+Up to pee.
+
+257
+00:35:12.690 --> 00:35:15.330
+Miles E Jones: So how many elements are in there, p minus one.
+
+258
+00:35:17.070 --> 00:35:23.820
+Miles E Jones: And the entire list of be how many elements are there Q what's P minus one plus Q.
+
+259
+00:35:25.350 --> 00:35:26.490
+Chengjing Yuan: Oh, I got it Thank you.
+
+260
+00:35:28.260 --> 00:35:28.590
+Miles E Jones: one.
+
+261
+00:35:28.650 --> 00:35:30.210
+Miles E Jones: And that's just an yeah.
+
+262
+00:35:36.300 --> 00:35:40.170
+Miles E Jones: Okay, so how long does this thing take well if you do.
+
+263
+00:35:41.280 --> 00:35:42.360
+Miles E Jones: A similar.
+
+264
+00:35:44.280 --> 00:35:49.830
+Miles E Jones: Analysis you'll see that it has almost the same runtime recurrence as.
+
+265
+00:35:50.850 --> 00:35:58.770
+Miles E Jones: The counting 00 thing that we just did right these first two lines are constant time.
+
+266
+00:36:02.400 --> 00:36:13.110
+Miles E Jones: And then you only do one of the recursive calls and the recursive call is of length N minus one, so you get this same recurrence relation.
+
+267
+00:36:23.370 --> 00:36:25.650
+Count double.
+
+268
+00:36:33.180 --> 00:36:40.560
+Miles E Jones: Okay So how do we solve this, this is the same so it's going to be T event is equal to big oven, and you can.
+
+269
+00:36:42.150 --> 00:36:48.510
+Miles E Jones: You can do this as an exercise, if you like, but really it's identical to what we just did.
+
+270
+00:36:50.880 --> 00:36:56.250
+Miles E Jones: Okay, any questions about merging two lists because we're gonna we're going to use it in the next algorithm.
+
+271
+00:37:11.790 --> 00:37:17.460
+Miles E Jones: Okay merge sort so, how does this work it's a divide and conquer algorithm.
+
+272
+00:37:19.770 --> 00:37:25.560
+Miles E Jones: You divide the list into two sub lists you recursive Lee sort each sub list.
+
+273
+00:37:26.010 --> 00:37:48.420
+Miles E Jones: And then you the conquer part is to merge those two sorted sub list, now the reason that we're allowed to use merge here is because the two lists are are sorted remember that's what the input for emerges, how do we know that those lists are sorted or how do we sort those lists themselves.
+
+274
+00:37:50.220 --> 00:38:07.830
+Miles E Jones: Thank you, you split you have some jumbled list you split it up into two sub lists, you need to sort those sub lists in order to merge them together so here's kind of the thing is that, in order to sort them you sort them using the same algorithm.
+
+275
+00:38:08.880 --> 00:38:14.520
+Miles E Jones: Right it's supposed to sort so it's got a sort the smaller lists.
+
+276
+00:38:17.370 --> 00:38:18.780
+Miles E Jones: Okay, so here's emerged sort.
+
+277
+00:38:20.820 --> 00:38:22.950
+Miles E Jones: You have some input of length end.
+
+278
+00:38:25.710 --> 00:38:27.150
+Miles E Jones: Here are the base cases.
+
+279
+00:38:32.520 --> 00:38:38.160
+Miles E Jones: Now let let em be roughly the middle.
+
+280
+00:38:39.210 --> 00:38:48.180
+Miles E Jones: And we're going to split the list up from a one through a m N, a n plus one, through a n.
+
+281
+00:38:50.160 --> 00:38:51.930
+Miles E Jones: And we are going to.
+
+282
+00:38:53.880 --> 00:38:56.520
+Miles E Jones: recursive Lee call merge sort.
+
+283
+00:39:05.790 --> 00:39:17.130
+Miles E Jones: Now, if you were designing this algorithm How would you know beforehand that merge sort would successfully merge or excuse me successfully sort those sub lists.
+
+284
+00:39:25.620 --> 00:39:26.160
+question.
+
+285
+00:39:36.540 --> 00:39:37.200
+algorithm.
+
+286
+00:39:42.240 --> 00:39:42.840
+Miles E Jones: How.
+
+287
+00:39:44.730 --> 00:39:45.300
+Would.
+
+288
+00:39:46.440 --> 00:39:47.460
+Miles E Jones: You know.
+
+289
+00:39:51.210 --> 00:39:52.230
+merge soar.
+
+290
+00:39:54.900 --> 00:39:56.460
+Successful successfully.
+
+291
+00:39:59.160 --> 00:39:59.880
+sorts.
+
+292
+00:40:02.130 --> 00:40:04.830
+Those sub lists.
+
+293
+00:40:32.730 --> 00:40:34.440
+Miles E Jones: Okay, so.
+
+294
+00:40:47.370 --> 00:40:48.870
+Miles E Jones: Okay, so you all are.
+
+295
+00:40:50.430 --> 00:40:56.610
+Miles E Jones: You know, thinking about the recursive structure of the algorithm and it is important to know how that works.
+
+296
+00:40:58.770 --> 00:41:18.480
+Miles E Jones: You know how you start out with a list, and you keep on breaking it up and all the way down to the base cases and then it kind of like builds it its way back up, but what I want to, I want to train you all to do is to start thinking only one level deep and so.
+
+297
+00:41:19.920 --> 00:41:37.200
+Miles E Jones: This is especially important when you're designing recursive algorithms because, at least for me, I get I get lost if I try to go all the way down to the bottom, and then I under don't understand you know it's hard for me to keep track with everything so.
+
+298
+00:41:39.780 --> 00:41:41.640
+Miles E Jones: The answer that I was looking for.
+
+299
+00:41:43.020 --> 00:41:56.820
+Miles E Jones: It doesn't matter if this is the way that you think about it, you know if you want to think about all the way down to the base cases that's that's up to you, but i'm going to present a alternate way of thinking about it.
+
+300
+00:41:58.410 --> 00:42:03.480
+Miles E Jones: Okay, if you were designing this algorithm How would you know that Murray sorts successfully sorts those sub lists.
+
+301
+00:42:05.400 --> 00:42:07.830
+Miles E Jones: Faith just have faith in it.
+
+302
+00:42:12.480 --> 00:42:26.490
+Miles E Jones: have faith that it does its job and then show that it will do its job sounds circular I know but that's the that's kind of the that's kind of like inductive Lee thinking right and so.
+
+303
+00:42:27.540 --> 00:42:41.490
+Miles E Jones: This is going to be how we prove that the algorithm is correct, so I know I know this is not really a algorithm design class, but you know, maybe you will take an algorithm design class or you will find.
+
+304
+00:42:42.840 --> 00:42:50.490
+Miles E Jones: find that you need to design a recursive algorithm and I want you to think back to faith think back to well.
+
+305
+00:42:52.920 --> 00:43:01.920
+Miles E Jones: If I can, if I can assume that it works on small inputs, how can I use that to my advantage to have it work on bigger inputs.
+
+306
+00:43:06.180 --> 00:43:06.420
+yeah.
+
+307
+00:43:11.130 --> 00:43:12.240
+Miles E Jones: Okay, so.
+
+308
+00:43:14.640 --> 00:43:20.640
+Miles E Jones: Now the picture we all want to see right merged sore How does it work, this is really kind of what's going on.
+
+309
+00:43:22.140 --> 00:43:38.190
+Miles E Jones: You start with a list you break it into two each one of those is broken into two each one of those is broken into two until you get all one element subsets each one of those I think some I think this is what somebody said in the chat right each one of those is single element.
+
+310
+00:43:39.450 --> 00:43:41.280
+Miles E Jones: That is trivially sorted.
+
+311
+00:43:42.360 --> 00:43:49.140
+Miles E Jones: And so, then you start merging those things into pairs right and merge them back now.
+
+312
+00:43:50.400 --> 00:43:57.780
+Miles E Jones: What i'm proposing that you the way you should think about this, is to only think one level deep.
+
+313
+00:43:59.370 --> 00:44:03.450
+Miles E Jones: And so, that means that we're going to hide all of this stuff.
+
+314
+00:44:04.590 --> 00:44:11.100
+Miles E Jones: All of this stuff is taken care of in the recursive call so really the only thing that we're doing.
+
+315
+00:44:12.540 --> 00:44:15.210
+Miles E Jones: let's let's hide it with red right.
+
+316
+00:44:17.430 --> 00:44:18.120
+Miles E Jones: hidden.
+
+317
+00:44:20.280 --> 00:44:22.950
+Miles E Jones: So the thing only thing that we're really doing is.
+
+318
+00:44:24.000 --> 00:44:31.260
+Miles E Jones: we're splitting it up right that part that's the first part of the algorithm we get these sub lists.
+
+319
+00:44:33.270 --> 00:44:36.270
+Miles E Jones: And we immediately jump to here.
+
+320
+00:44:38.580 --> 00:44:39.450
+Miles E Jones: And here.
+
+321
+00:44:48.150 --> 00:44:50.280
+Miles E Jones: And then we say oh by faith.
+
+322
+00:44:51.450 --> 00:44:52.980
+Miles E Jones: We get to sorted list.
+
+323
+00:44:54.330 --> 00:45:02.010
+Miles E Jones: Now merge our merge we've shown that that is already already work so, then this last part is.
+
+324
+00:45:04.680 --> 00:45:05.760
+Miles E Jones: By the correctness.
+
+325
+00:45:12.150 --> 00:45:18.870
+Miles E Jones: Okay, any questions or comments or philosophical arguments or theological.
+
+326
+00:45:19.980 --> 00:45:28.620
+Miles E Jones: i'm interpretations of faith and God and math and induction.
+
+327
+00:45:31.770 --> 00:45:33.420
+Miles E Jones: And, just to be clear.
+
+328
+00:45:34.590 --> 00:45:38.550
+Miles E Jones: Whenever I say faith, I really just mean induction.
+
+329
+00:45:54.120 --> 00:45:54.450
+yeah.
+
+330
+00:45:55.740 --> 00:46:03.000
+Miles E Jones: So replace each word of faith by induction I don't want to be called out as like you're trying to force my religious beliefs on everybody.
+
+331
+00:46:11.490 --> 00:46:15.090
+Miles E Jones: Okay, so let's do the.
+
+332
+00:46:16.860 --> 00:46:21.510
+Miles E Jones: let's let's do the induction let's let's put the faith into action right.
+
+333
+00:46:29.370 --> 00:46:37.590
+Miles E Jones: Okay, so we're gonna we're going to prove this algorithm using strong induction what is the reason that we're using strong induction.
+
+334
+00:47:24.000 --> 00:47:24.870
+Miles E Jones: let's share.
+
+335
+00:47:29.370 --> 00:47:31.200
+Miles E Jones: Okay, most people are saying see.
+
+336
+00:47:32.310 --> 00:47:36.360
+Miles E Jones: Because we're calling the function recursive Lee twice so that's not.
+
+337
+00:47:37.440 --> 00:47:38.850
+Miles E Jones: that's not the reason.
+
+338
+00:47:41.220 --> 00:47:44.010
+Miles E Jones: The reason is the input size.
+
+339
+00:47:45.720 --> 00:47:52.470
+Miles E Jones: Of the recursive function call is less than N minus one, because what is the input size of the recursive call.
+
+340
+00:47:54.450 --> 00:47:57.090
+Miles E Jones: If this is length n right.
+
+341
+00:47:59.010 --> 00:48:00.900
+Miles E Jones: Each one of these is an over to.
+
+342
+00:48:07.080 --> 00:48:18.210
+Miles E Jones: Okay, so should we go Julie, to talk about this, do you all have any clarifying questions about when to use strong induction and rent to you when to use regular induction.
+
+343
+00:48:29.340 --> 00:48:29.880
+Miles E Jones: it's not clear.
+
+344
+00:48:34.590 --> 00:48:38.580
+Miles E Jones: it's not clear to you why we use it in this case or it's not clear to you the difference.
+
+345
+00:48:42.090 --> 00:48:45.060
+Miles E Jones: You want me to explain in general, or just for this particular example.
+
+346
+00:48:56.520 --> 00:49:03.030
+Miles E Jones: In general okay so regular induction I like to think of induction is a ladder.
+
+347
+00:49:04.230 --> 00:49:04.920
+Miles E Jones: And it's just me.
+
+348
+00:49:06.420 --> 00:49:07.500
+Miles E Jones: A ladder to heaven.
+
+349
+00:49:08.580 --> 00:49:14.820
+Miles E Jones: Based on faith no i'm just playing Okay, so you have your base case.
+
+350
+00:49:20.340 --> 00:49:20.730
+Right.
+
+351
+00:49:29.640 --> 00:49:30.750
+Miles E Jones: Regular induction.
+
+352
+00:49:32.370 --> 00:49:36.480
+Miles E Jones: You use the N minus one sub problem.
+
+353
+00:49:37.500 --> 00:49:40.980
+Miles E Jones: To prove the end sub problem.
+
+354
+00:49:42.210 --> 00:49:47.880
+Miles E Jones: or, in other words, in order to show the end sub problem you use the information from N minus one.
+
+355
+00:49:48.930 --> 00:49:49.620
+Miles E Jones: So.
+
+356
+00:49:51.270 --> 00:49:55.020
+Miles E Jones: it's really a kind of a very nearsighted.
+
+357
+00:49:57.840 --> 00:50:12.600
+Miles E Jones: idea you, you only look back one step right maybe you're afraid of heights and you don't want to look down you don't want to know what you've done all you care about is that you're on that step and I can get to the next step that's it.
+
+358
+00:50:14.880 --> 00:50:16.560
+Miles E Jones: Now, in strong induction.
+
+359
+00:50:20.400 --> 00:50:21.210
+let's do it like this.
+
+360
+00:50:33.060 --> 00:50:34.350
+Miles E Jones: You have your base case.
+
+361
+00:50:36.570 --> 00:50:39.510
+Miles E Jones: it's like getting on to that first step, or so.
+
+362
+00:50:43.110 --> 00:50:49.920
+Miles E Jones: And you're still trying to prove an but instead of only knowing that you've been on that step.
+
+363
+00:50:51.450 --> 00:50:53.640
+Miles E Jones: You use the information of.
+
+364
+00:50:55.140 --> 00:50:57.810
+Miles E Jones: All the steps that you've taken before.
+
+365
+00:51:00.990 --> 00:51:10.320
+Miles E Jones: Now, why is it useful to do this with this particular algorithm merged sort is because and over to his right here, right.
+
+366
+00:51:11.580 --> 00:51:16.410
+Miles E Jones: So an over to falls in that range and so.
+
+367
+00:51:18.840 --> 00:51:27.870
+Miles E Jones: You could argue that strong induction is kind of overkill for this problem, because we are, we are assuming way more than we need to.
+
+368
+00:51:28.440 --> 00:51:48.030
+Miles E Jones: it's just that we're assuming this big thing this big range of values, but really We only need one of them, but that one falls in the range, so it works and so that is why we're using strong induction here okay questions or comments or is still is still unclear.
+
+369
+00:51:59.460 --> 00:52:05.700
+Miles E Jones: Right, because you know you have an over to here also but, like you said, like maybe you're you're climbing up.
+
+370
+00:52:06.270 --> 00:52:12.660
+Miles E Jones: Think about it like this, regular induction you're climbing a ladder in the dark, so you don't all you know is that you've.
+
+371
+00:52:13.170 --> 00:52:29.880
+Miles E Jones: You going from the step that you're on to the step that you're going to and strong induction is you're climbing a ladder, in the light of day, so you have you can look down and see oh i've done all that oh i've done in over to, I guess, I can use that information to get to the next step.
+
+372
+00:52:34.170 --> 00:52:34.830
+Miles E Jones: Okay.
+
+373
+00:52:37.440 --> 00:52:49.590
+Miles E Jones: So let's do the induction base case, if any zero then returned the empty list is trivially sorted if and is one return just the singleton list is truly sorted okay so bass cases done.
+
+374
+00:52:52.020 --> 00:52:54.750
+Miles E Jones: Okay induction step assume.
+
+375
+00:52:59.100 --> 00:53:10.830
+Miles E Jones: That merge sort correctly sorts all this with K elements for any K in between zero and N minus one, so this is the you know, this is the.
+
+376
+00:53:12.510 --> 00:53:14.790
+Miles E Jones: wasn't strong induction was in purple.
+
+377
+00:53:16.770 --> 00:53:17.010
+Right.
+
+378
+00:53:22.380 --> 00:53:24.540
+Miles E Jones: So here's here's the link the.
+
+379
+00:53:27.360 --> 00:53:28.410
+Miles E Jones: the nth step.
+
+380
+00:53:32.250 --> 00:53:33.840
+Miles E Jones: here's the zero step.
+
+381
+00:53:35.070 --> 00:53:46.380
+Miles E Jones: And minus one, so this range here is talking about all of these steps here basically we're assuming that merge sort works on all of these steps.
+
+382
+00:53:49.890 --> 00:53:53.340
+Miles E Jones: And now we want to show that moves toward works at that next step and.
+
+383
+00:53:55.830 --> 00:53:56.310
+Miles E Jones: Okay.
+
+384
+00:53:57.330 --> 00:54:04.440
+Miles E Jones: So i'm just going to Oh, I guess, I need to fill in the blanks okay it's fine all right.
+
+385
+00:54:06.660 --> 00:54:09.750
+Miles E Jones: How do I prove this okay so.
+
+386
+00:54:12.300 --> 00:54:14.670
+Miles E Jones: we're assuming that n is greater than one.
+
+387
+00:54:23.340 --> 00:54:24.570
+Miles E Jones: We split.
+
+388
+00:54:26.550 --> 00:54:27.420
+Miles E Jones: The list.
+
+389
+00:54:28.920 --> 00:54:31.620
+Miles E Jones: into a one through eight.
+
+390
+00:54:33.000 --> 00:54:37.260
+Miles E Jones: And a n plus one, through a n.
+
+391
+00:54:38.340 --> 00:54:38.670
+Miles E Jones: Right.
+
+392
+00:54:41.250 --> 00:54:45.210
+Miles E Jones: Then by the induction hypothesis.
+
+393
+00:54:46.380 --> 00:54:47.340
+Miles E Jones: Since.
+
+394
+00:54:50.250 --> 00:54:57.570
+Miles E Jones: A one through am since the number of elements in this list is strictly less than n.
+
+395
+00:54:58.980 --> 00:55:00.060
+Miles E Jones: merge sort.
+
+396
+00:55:03.540 --> 00:55:07.380
+Miles E Jones: or l one is equal to merge sort of a one through eight.
+
+397
+00:55:08.820 --> 00:55:10.020
+Miles E Jones: is sorted.
+
+398
+00:55:13.620 --> 00:55:17.340
+Miles E Jones: Then by induction hypothesis since.
+
+399
+00:55:18.540 --> 00:55:27.300
+Miles E Jones: The number of elements from a n plus one, up to a n is strictly less than an L two is equal to merge sort.
+
+400
+00:55:30.210 --> 00:55:34.950
+Miles E Jones: A n plus one, up to a n is sorted.
+
+401
+00:55:37.800 --> 00:55:41.370
+Miles E Jones: Then by correctness.
+
+402
+00:55:43.920 --> 00:55:45.000
+Miles E Jones: of our merge.
+
+403
+00:55:47.430 --> 00:55:48.420
+Miles E Jones: Our merge.
+
+404
+00:55:49.980 --> 00:55:51.480
+Miles E Jones: l one L two.
+
+405
+00:55:53.040 --> 00:55:54.360
+Miles E Jones: Is a sorted.
+
+406
+00:55:55.860 --> 00:55:56.490
+Miles E Jones: list.
+
+407
+00:55:57.690 --> 00:55:58.620
+Miles E Jones: Of all.
+
+408
+00:55:59.760 --> 00:56:00.510
+Miles E Jones: elements.
+
+409
+00:56:02.880 --> 00:56:06.090
+Miles E Jones: Okay questions or comments about the correctness proof.
+
+410
+00:56:16.410 --> 00:56:28.980
+Miles E Jones: You how how much we're we're relying on induction how much we're leaning on it, we need it bad, it is the driving force it's almost kind of like the the.
+
+411
+00:56:31.170 --> 00:56:32.550
+Miles E Jones: Where where you.
+
+412
+00:56:33.600 --> 00:56:36.510
+Miles E Jones: were using it to its full advantage here, it seems.
+
+413
+00:56:38.640 --> 00:56:43.470
+Miles E Jones: Oh, are merged just means recursive merge because there's a iterative version of it but.
+
+414
+00:56:46.230 --> 00:56:48.510
+Miles E Jones: it's just the algorithms that we did here.
+
+415
+00:56:50.550 --> 00:56:52.170
+Miles E Jones: Are merge that's what I called it.
+
+416
+00:57:02.700 --> 00:57:05.400
+Miles E Jones: We always going to be assuming the algorithm is correct.
+
+417
+00:57:10.320 --> 00:57:15.570
+Miles E Jones: When you say always are you talking about every algorithm that we encounter.
+
+418
+00:57:32.430 --> 00:57:33.540
+Miles E Jones: What do you mean by that.
+
+419
+00:57:38.790 --> 00:57:48.900
+Miles E Jones: yeah So if you want to prove an algorithm is correct recursive algorithm is correct, you always assume that it's correct on smaller inputs.
+
+420
+00:57:50.280 --> 00:58:03.330
+Miles E Jones: And if the algorithm war, I mean if the correctness prove works right if you're able to use to leverage that into a into the algorithm being correct then your algorithms great it's correct, but what might happen is that.
+
+421
+00:58:04.530 --> 00:58:10.020
+Miles E Jones: you're even if you assume the algorithm is correct, on smaller instances.
+
+422
+00:58:11.100 --> 00:58:14.730
+Miles E Jones: That might not be enough to show that the algorithm is correct and so.
+
+423
+00:58:16.350 --> 00:58:25.050
+Miles E Jones: It all depends on the proof, but yes that's always going to be the inductive hypothesis for for proving recursive algorithms are correct.
+
+424
+00:58:27.420 --> 00:58:27.660
+yeah.
+
+425
+00:58:32.100 --> 00:58:34.740
+Miles E Jones: Okay, so let's talk about the runtime here.
+
+426
+00:58:36.090 --> 00:58:42.750
+Miles E Jones: This whole thing is going to be constant time let's call it what did I call this C one C zero.
+
+427
+00:58:50.820 --> 00:59:01.980
+Miles E Jones: And then each one of these recursive calls is t of N minus two in over two if this is to then do you have an over to T event over to, and this is the time it takes to merge.
+
+428
+00:59:05.340 --> 00:59:10.200
+Miles E Jones: Of the input of size and remember that we've you know recall that we.
+
+429
+00:59:11.760 --> 00:59:13.770
+Miles E Jones: We calculated this.
+
+430
+00:59:17.310 --> 00:59:17.850
+earlier.
+
+431
+00:59:20.400 --> 00:59:20.820
+Miles E Jones: Right.
+
+432
+00:59:25.350 --> 00:59:32.640
+Miles E Jones: So here is our recurrence relation, but we can we can replace merge with big of an and we get this Nice.
+
+433
+00:59:34.950 --> 00:59:36.210
+Miles E Jones: recurrence relation here.
+
+434
+00:59:38.100 --> 00:59:41.250
+Miles E Jones: Okay, so let's try to solve this thing using unraveling.
+
+435
+00:59:42.420 --> 00:59:43.800
+Miles E Jones: Actually I should I should.
+
+436
+00:59:45.900 --> 00:59:49.290
+Miles E Jones: I should rewrite it instead of big old endless right in terms of.
+
+437
+00:59:54.810 --> 00:59:56.610
+Miles E Jones: let's call it C and.
+
+438
+01:00:01.140 --> 01:00:03.480
+Miles E Jones: Okay, so let's do the unraveling.
+
+439
+01:00:04.710 --> 01:00:08.640
+Miles E Jones: So the first step is going to be to human.
+
+440
+01:00:14.670 --> 01:00:16.080
+Miles E Jones: Is the original records.
+
+441
+01:00:17.610 --> 01:00:19.530
+Miles E Jones: Okay, the second step.
+
+442
+01:00:29.490 --> 01:00:33.690
+Miles E Jones: Two, and then we will what is how do we.
+
+443
+01:00:36.180 --> 01:00:46.380
+Miles E Jones: How do we do this one it's going to be to T have an over two divided by two so that's an over two squared plus C and over two.
+
+444
+01:00:52.740 --> 01:00:53.850
+Plus C and.
+
+445
+01:00:55.170 --> 01:01:00.360
+Miles E Jones: All right, let's clean that up that's going to be two squared T have an over two squared.
+
+446
+01:01:01.380 --> 01:01:07.380
+Miles E Jones: plus two times CN over to his CN C n plus.
+
+447
+01:01:08.850 --> 01:01:10.350
+Miles E Jones: Okay, how about the next one.
+
+448
+01:01:12.420 --> 01:01:13.830
+Miles E Jones: We have two squared.
+
+449
+01:01:15.450 --> 01:01:16.950
+Miles E Jones: myself a little bit more room here.
+
+450
+01:01:20.040 --> 01:01:27.300
+Miles E Jones: Okay, this is going to be two T have an over two squared divided by two is an over to cubed.
+
+451
+01:01:28.320 --> 01:01:33.420
+Miles E Jones: Plus C times and over two squared.
+
+452
+01:01:35.460 --> 01:01:36.510
+Miles E Jones: still not enough room.
+
+453
+01:01:43.800 --> 01:01:57.540
+Miles E Jones: So let's clean that up we get to cubed T have an over to cubed plus two squared time see and over two squared is just CN so we get see in policy in us.
+
+454
+01:02:01.410 --> 01:02:14.640
+Miles E Jones: You might start seeing a pattern right the case iteration is going to be t of and as equal to two to the K T have an over to to the K plus Casey and.
+
+455
+01:02:15.750 --> 01:02:16.080
+Miles E Jones: Right.
+
+456
+01:02:18.000 --> 01:02:27.390
+Miles E Jones: In general, now we need to, we need to plug in a number for K that will bring the.
+
+457
+01:02:28.860 --> 01:02:44.130
+Miles E Jones: The recursive call down to one right or right that whatever is inside of the team, we need to bring that down to one, so how big do we need to make K, in order to get down to the base case.
+
+458
+01:02:57.840 --> 01:03:15.600
+Miles E Jones: Around log base to event right exactly because you're really just asking how many times do I need to divide by two to reduce and down to roughly one, so if I put in log base to have in.
+
+459
+01:03:17.370 --> 01:03:21.780
+Miles E Jones: Then I get to heaven is equal to to to the log base to event.
+
+460
+01:03:23.610 --> 01:03:29.160
+Miles E Jones: Times T have an over to to the lock based to have n.
+
+461
+01:03:31.590 --> 01:03:37.200
+Miles E Jones: Plus log base to have n time see times in.
+
+462
+01:03:41.430 --> 01:03:41.700
+Miles E Jones: Right.
+
+463
+01:03:43.860 --> 01:04:03.750
+Miles E Jones: And this is just and T of one plus C and log base to event and tier one is just some constant to, so this is just see one and plus C and log base to read.
+
+464
+01:04:05.430 --> 01:04:06.570
+Miles E Jones: Okay, so.
+
+465
+01:04:08.010 --> 01:04:12.180
+Miles E Jones: This is the this is kind of the result of.
+
+466
+01:04:13.980 --> 01:04:31.050
+Miles E Jones: unraveling and you know I don't know if you're bothered by this but I put in log base to event, but it could be the case that K is or that and is not a power of to sort might not actually divide out evenly but remember we're doing these kind of.
+
+467
+01:04:32.760 --> 01:04:44.940
+Miles E Jones: asset classes, so the the fine details kind of get swept under the rug so in general, this is this is good enough for us so based on that.
+
+468
+01:04:47.880 --> 01:04:49.110
+Miles E Jones: We can say that.
+
+469
+01:04:50.340 --> 01:04:57.150
+Miles E Jones: tf n is see one and class C and log base to end.
+
+470
+01:04:58.170 --> 01:05:02.730
+Miles E Jones: And so to have an is big theta have an login.
+
+471
+01:05:06.630 --> 01:05:08.250
+Miles E Jones: Which.
+
+472
+01:05:09.330 --> 01:05:11.850
+Miles E Jones: is why his team are big on.
+
+473
+01:05:18.060 --> 01:05:18.480
+Miles E Jones: here.
+
+474
+01:05:44.490 --> 01:05:53.460
+Miles E Jones: Okay, so let's think about the general strategy of divide and conquer merge sort isn't the only algorithm that uses this strategy, and we can generalize it.
+
+475
+01:05:54.240 --> 01:05:58.770
+Miles E Jones: merge sorts what's the problem in to each problem is of half the size.
+
+476
+01:05:59.460 --> 01:06:20.730
+Miles E Jones: And it does some work to combine them taking linear time, so if we kind of change these things up, in general, you divide the problem of and into a sub problems each of size and over B and then you conquer the size, the size, by combining the solutions of the sub problems.
+
+477
+01:06:22.800 --> 01:06:23.760
+Miles E Jones: So.
+
+478
+01:06:25.800 --> 01:06:28.590
+Miles E Jones: If I go back to this poll.
+
+479
+01:06:37.980 --> 01:06:41.310
+Miles E Jones: I divide the problem into a sub problems up see.
+
+480
+01:06:42.330 --> 01:06:52.770
+Miles E Jones: A sub problems each of size and over be and we assume that G event is the time to do the kind of conquer step, or in other words the.
+
+481
+01:06:54.660 --> 01:06:56.280
+Miles E Jones: Non recursive part.
+
+482
+01:07:00.030 --> 01:07:00.600
+Miles E Jones: Then.
+
+483
+01:07:01.800 --> 01:07:03.660
+Miles E Jones: What is a recurrence for tf n.
+
+484
+01:07:54.120 --> 01:07:56.730
+Miles E Jones: Share results okay so most people are saying a.
+
+485
+01:07:59.790 --> 01:08:08.700
+Miles E Jones: So you split the problem into a sub problems right, so you have to do a recursive you have to do a different recursive calls.
+
+486
+01:08:09.180 --> 01:08:25.710
+Miles E Jones: Right, each one of those calls takes to have an over be time so somewhere in your recursion you should have the a times T event over be and then, when you're done with the recursion the non recursive part just takes Jia, then time, so this should take.
+
+487
+01:08:31.230 --> 01:08:32.370
+Miles E Jones: Questions or comments about.
+
+488
+01:08:44.940 --> 01:08:45.300
+Okay.
+
+489
+01:08:48.900 --> 01:08:56.040
+Miles E Jones: So if you have a recursion in this form, and G event is a polynomial.
+
+490
+01:08:57.390 --> 01:09:00.330
+Miles E Jones: Then there's a nice theorem called the master theorem that.
+
+491
+01:09:01.890 --> 01:09:03.240
+Miles E Jones: That you can use.
+
+492
+01:09:04.650 --> 01:09:06.840
+Miles E Jones: Without proof in this class I guess.
+
+493
+01:09:07.860 --> 01:09:21.480
+Miles E Jones: And you'll learn a little bit more about it in one on one and essentially it's just more of like a shorthand way or like a shortcut way to get to the answer so that you don't have to do that unraveling for every single thing.
+
+494
+01:09:23.190 --> 01:09:27.270
+Miles E Jones: Okay, and here it is in all of its glory the master theorem.
+
+495
+01:09:28.560 --> 01:09:32.730
+Miles E Jones: Okay there's three parts and this kind of depends on.
+
+496
+01:09:34.890 --> 01:09:40.200
+Miles E Jones: How the what the recursion tree is doing okay so.
+
+497
+01:09:42.060 --> 01:09:42.750
+Miles E Jones: um.
+
+498
+01:09:45.330 --> 01:09:54.900
+Miles E Jones: let's start out with the recursion so we have to event is equal to a times so this a year is the number.
+
+499
+01:09:56.430 --> 01:09:57.960
+Miles E Jones: Of recursive calls.
+
+500
+01:10:02.790 --> 01:10:04.800
+Miles E Jones: This be here is the.
+
+501
+01:10:05.880 --> 01:10:12.000
+Miles E Jones: or this and over be I guess is the size of each sub problem.
+
+502
+01:10:15.390 --> 01:10:18.450
+Miles E Jones: And this big event of the D is the.
+
+503
+01:10:21.390 --> 01:10:24.930
+Miles E Jones: time it takes.
+
+504
+01:10:26.040 --> 01:10:29.010
+Miles E Jones: For the non recursive part.
+
+505
+01:10:41.070 --> 01:10:52.290
+Miles E Jones: Okay, so let's go through each one of these is a is is less than B to the D, then what that means is that you're not splitting it up a lot right.
+
+506
+01:10:57.480 --> 01:11:03.900
+Miles E Jones: And I guess that be right is really big, meaning that you have.
+
+507
+01:11:05.910 --> 01:11:20.940
+Miles E Jones: The size of the problem has reduced a lot right so at each layer of the recursion tree, the size of the problem has reduced a lot, and you haven't really split it up into that many problems, so the amount of work that you're doing.
+
+508
+01:11:21.810 --> 01:11:28.590
+Miles E Jones: decreases as you go down the tree, so this thing is called top heavy.
+
+509
+01:11:31.590 --> 01:11:32.910
+Miles E Jones: And it means that.
+
+510
+01:11:34.800 --> 01:11:35.640
+Miles E Jones: Most.
+
+511
+01:11:37.320 --> 01:11:38.190
+Miles E Jones: work.
+
+512
+01:11:39.600 --> 01:11:40.650
+Miles E Jones: is done.
+
+513
+01:11:41.670 --> 01:11:42.840
+Miles E Jones: In the top.
+
+514
+01:11:44.820 --> 01:11:47.490
+Miles E Jones: layer of the recursion tree.
+
+515
+01:11:50.790 --> 01:11:52.440
+Miles E Jones: Okay now.
+
+516
+01:11:54.480 --> 01:12:08.940
+Miles E Jones: This one here is it a is equal to be in be to the D, that means that the amount of work of each layer is roughly equivalent so you're doing a roughly the same amount of work in each recursive in each layer of the recursion tree.
+
+517
+01:12:09.720 --> 01:12:29.040
+Miles E Jones: And so that's why there's a log in there it's because you're basically multiplying the time it takes to do the top layer by the number of layers if you're assuming that they all are cons are are equal time, this is the, this is the kind of format for merge sort, as we saw.
+
+518
+01:12:30.270 --> 01:12:35.970
+Miles E Jones: What I guess we didn't really see it, but we figured it out with the unraveling.
+
+519
+01:12:37.050 --> 01:12:43.920
+Miles E Jones: Is that you're doing the same amount of work in each recursive step that's essentially what these.
+
+520
+01:12:46.530 --> 01:12:56.160
+Miles E Jones: What these see ends were we're telling you those are basically telling you what the each one of those recursive steps are and so you're saying i'm doing this, all the way down.
+
+521
+01:12:57.240 --> 01:12:57.870
+Right.
+
+522
+01:13:02.520 --> 01:13:04.140
+Miles E Jones: So this is called steady state.
+
+523
+01:13:08.190 --> 01:13:08.910
+Miles E Jones: And this is.
+
+524
+01:13:10.530 --> 01:13:11.430
+Miles E Jones: Equal.
+
+525
+01:13:12.570 --> 01:13:14.610
+Miles E Jones: time for.
+
+526
+01:13:15.690 --> 01:13:16.320
+Each.
+
+527
+01:13:18.240 --> 01:13:18.810
+Miles E Jones: later.
+
+528
+01:13:23.610 --> 01:13:28.140
+Miles E Jones: Okay, and then the last one is called bottom heavy.
+
+529
+01:13:33.090 --> 01:13:51.090
+Miles E Jones: And that's going to be when you when you kind of when the when the tree kind of spreads out faster than it's decreasing right or that the size of the sub problem is decreasing, so you have a lot of branches right as big and be as small so you're you're not.
+
+530
+01:13:54.780 --> 01:14:02.250
+Miles E Jones: you're not decreasing it as much right and so all of the work now is going to be on the bottom layer or most of the work.
+
+531
+01:14:15.540 --> 01:14:23.970
+Miles E Jones: Okay, you don't really have to memorize all this stuff you can just write it down and use it as a reference all you have to do is.
+
+532
+01:14:25.740 --> 01:14:27.660
+Miles E Jones: Come compare A, B and D.
+
+533
+01:14:29.640 --> 01:14:35.160
+Miles E Jones: figure out what their relationship is and just write down the the the case.
+
+534
+01:14:39.780 --> 01:14:46.440
+Miles E Jones: The one we did know the one we did is steady state merged sort of steady state, I think I have it here.
+
+535
+01:14:48.900 --> 01:15:05.220
+Miles E Jones: Right merge sort a is equal to to be as equal to two and D is equal to one, so a is equal to be to the D to is equal to to to the one, and so we use the middle thing right because a is equal to be to the G big of an okay.
+
+536
+01:15:08.820 --> 01:15:10.170
+Miles E Jones: here's kind of a picture.
+
+537
+01:15:11.250 --> 01:15:11.880
+Miles E Jones: i'm.
+
+538
+01:15:13.050 --> 01:15:23.730
+Miles E Jones: Right, the the tree is going to branch out into a sub problems I guess in the picture is equal to four But just think about a in general.
+
+539
+01:15:24.510 --> 01:15:35.670
+Miles E Jones: And each one of these sub problems is of size and over B and you kind of bring it down all the way down to the bottom level and the bottom level is going to.
+
+540
+01:15:38.100 --> 01:15:38.670
+Miles E Jones: Have.
+
+541
+01:15:40.080 --> 01:15:44.310
+Miles E Jones: A raised the log base be of and sub problems and that's because.
+
+542
+01:15:45.630 --> 01:15:55.890
+Miles E Jones: One is equal to an over been to the log base be have an right the depth of the tree is log base, be a man.
+
+543
+01:15:57.720 --> 01:16:08.550
+Miles E Jones: And so, if it's top heavy most of the stuff is at the top of the tree bottom heavy most of the stuff is at the bottom and steady state means that you're doing the same amount of work for every level.
+
+544
+01:16:14.850 --> 01:16:19.770
+Miles E Jones: I meant to say I get what he represents, but what about be to the D so.
+
+545
+01:16:22.620 --> 01:16:27.540
+Miles E Jones: Be is this or an over be is the size of each so problem.
+
+546
+01:16:29.640 --> 01:16:34.380
+Miles E Jones: And, and to the D is the time for the non recursive part of the algorithm.
+
+547
+01:16:51.510 --> 01:16:53.070
+Miles E Jones: So maybe i'll do one more example.
+
+548
+01:16:54.180 --> 01:16:56.070
+Miles E Jones: But what about be to the D.
+
+549
+01:16:59.070 --> 01:17:05.580
+Miles E Jones: I don't know if I understand, do you understand what be is be is like the.
+
+550
+01:17:07.410 --> 01:17:09.840
+Miles E Jones: Like in this case let's do it like this.
+
+551
+01:17:12.180 --> 01:17:21.330
+Miles E Jones: Be is this number that's inside right it's an over be whatever number that's there that's B and then D is the exponent of n.
+
+552
+01:17:27.900 --> 01:17:29.880
+Miles E Jones: D is so.
+
+553
+01:17:55.590 --> 01:18:19.170
+Miles E Jones: So emerged sort this was the recurrence relation now this follows the form of the master theorem because you have this this guy is a is equal to to be as equal to two and this part here is a is a power of n it's into the one power right.
+
+554
+01:18:22.320 --> 01:18:24.300
+Miles E Jones: And so D is equal to one.
+
+555
+01:18:30.480 --> 01:18:32.100
+Miles E Jones: So you know if.
+
+556
+01:18:35.970 --> 01:18:41.220
+Miles E Jones: If there are three recursive calls.
+
+557
+01:18:46.350 --> 01:18:48.240
+Miles E Jones: Each of size.
+
+558
+01:18:49.560 --> 01:18:50.790
+Miles E Jones: and over two.
+
+559
+01:18:52.950 --> 01:18:56.700
+Miles E Jones: And the non recursive part.
+
+560
+01:19:01.470 --> 01:19:02.310
+Miles E Jones: takes.
+
+561
+01:19:03.720 --> 01:19:06.030
+Miles E Jones: Big of n squared time.
+
+562
+01:19:08.220 --> 01:19:08.880
+Miles E Jones: Then.
+
+563
+01:19:10.200 --> 01:19:11.520
+Miles E Jones: The runtime.
+
+564
+01:19:12.660 --> 01:19:14.280
+Miles E Jones: Has the.
+
+565
+01:19:16.800 --> 01:19:18.000
+Miles E Jones: recurrence relation.
+
+566
+01:19:23.730 --> 01:19:33.060
+Miles E Jones: To have an is equal to three T have an over to right number of her personal calls and then plus big of n squared.
+
+567
+01:19:34.080 --> 01:19:44.370
+Miles E Jones: Right now, we can break this down this three is a This too is be in this too is D and so now we compare.
+
+568
+01:19:48.630 --> 01:19:51.000
+Miles E Jones: Three is less than.
+
+569
+01:19:52.260 --> 01:19:56.610
+Miles E Jones: Two to the to write a is less than B to the D.
+
+570
+01:19:57.900 --> 01:20:05.430
+Miles E Jones: Therefore, that means that if I go back you can see that that means that i'm in the top heavy version.
+
+571
+01:20:10.410 --> 01:20:17.550
+Miles E Jones: And so that implies that tf n is equal to a bigger and to the D in this case big of n squared.
+
+572
+01:20:28.770 --> 01:20:29.490
+Miles E Jones: That clear it up.
+
+573
+01:20:32.640 --> 01:20:38.250
+Miles E Jones: yeah okay good okay so i'll stick around for a few more minutes to answer any follow up questions.
+
+574
+01:20:51.300 --> 01:21:02.490
+Miles E Jones: It means you do most of the work of the top of the recursion tree it's kind of hard to talk about start and finish of a recursive algorithm, what do you, what do you consider to be which right because.
+
+575
+01:21:03.240 --> 01:21:09.630
+Miles E Jones: You can kind of think about it, as I can merge sword you're just breaking it up first and then you're putting it back together.
+
+576
+01:21:11.040 --> 01:21:11.490
+Miles E Jones: So.
+
+577
+01:21:12.570 --> 01:21:23.220
+Miles E Jones: top heavy means that most of the work is in that last recursive call the the the last one that gives you the final answer that's where most of the work is done.
+
+578
+01:21:30.180 --> 01:21:41.130
+Miles E Jones: Bottom heavy means that most of the work is done after you've kind of broken everything down to their individual bits and you're working on those bits and you have to do a lot of work down there.
+
+579
+01:21:41.820 --> 01:21:52.500
+Miles E Jones: And then it kind of builds back up to the top that's bottom heavy steady state means that the amount of work you do is steady throughout the entire recursion tree you do the same amount of work, each time.
+
+580
+01:22:22.530 --> 01:22:37.470
+Dillan DeMoss: So originally I said see and then I was thinking a and then he said it was see and what was confusing me is why we don't have a times you Ben and we just have Cuban.
+
+581
+01:22:40.530 --> 01:22:49.560
+Miles E Jones: But each recursive algorithm has two parts, has the recursive calls and then it has the the rest, the rest of the stuff that right.
+
+582
+01:22:49.980 --> 01:22:52.050
+Miles E Jones: So you do all those recursive calls.
+
+583
+01:22:52.830 --> 01:22:58.710
+Miles E Jones: that's clear that's going to take a time to event over be time to do the recursive calls.
+
+584
+01:22:59.100 --> 01:23:00.540
+Dillan DeMoss: Right yeah that part mason's.
+
+585
+01:23:00.870 --> 01:23:05.490
+Miles E Jones: The rest of the algorithm i'm claiming that it takes G event time so.
+
+586
+01:23:07.290 --> 01:23:18.930
+Miles E Jones: Whatever, that is to come up to split the list to check to see if it's a base case, like all of that stuff is all kind of pushed into that g of enter.
+
+587
+01:23:20.070 --> 01:23:24.360
+Dillan DeMoss: Okay, so it's not multiplied by the sun problems because the entire thing itself is just human.
+
+588
+01:23:25.110 --> 01:23:25.680
+Yes.
+
+589
+01:23:27.870 --> 01:23:29.460
+Miles E Jones: Just like emerged sort.
+
+590
+01:23:29.910 --> 01:23:36.510
+Miles E Jones: right that G event is kind of like the merge part or that's the part that takes up the most time.
+
+591
+01:23:44.100 --> 01:23:47.310
+Miles E Jones: it's separate from the recursive calls that's why you added.
+
+592
+01:24:24.600 --> 01:24:27.870
+Miles E Jones: Okay, thanks y'all see you all next week have a nice weekend.
+

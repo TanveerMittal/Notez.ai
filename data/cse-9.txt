@@ -1,0 +1,2414 @@
+WEBVTT
+
+1
+00:00:01.829 --> 00:00:03.689
+Miles E Jones: Okay, we are recording now.
+
+2
+00:00:06.750 --> 00:00:07.440
+All right.
+
+3
+00:00:08.820 --> 00:00:11.099
+Miles E Jones: Okay, so it just a motivation for sorting.
+
+4
+00:00:12.150 --> 00:00:19.140
+Miles E Jones: we'll talk about what kind of operations are are are reasonable for sorting.
+
+5
+00:00:20.550 --> 00:00:28.860
+Miles E Jones: Then we'll talk about how to sort of permutation which is really kind of like at the essence of what sorting is because.
+
+6
+00:00:29.880 --> 00:00:30.570
+sorting.
+
+7
+00:00:31.590 --> 00:00:47.130
+Miles E Jones: sorting a list that list is jumbled right or it's it's rearrange somehow and we already know how to count the number of different rearrangements which is n factorial the number of permutations so they there, there is some link there.
+
+8
+00:00:48.540 --> 00:00:53.430
+Miles E Jones: sorting in general sorting algorithms and then I forgot to put this on here searching.
+
+9
+00:00:56.340 --> 00:00:57.240
+Miles E Jones: algorithms.
+
+10
+00:00:59.670 --> 00:01:01.020
+Miles E Jones: Alright, so we'll get to that.
+
+11
+00:01:02.310 --> 00:01:04.050
+Miles E Jones: Alright sorting or ordering.
+
+12
+00:01:06.150 --> 00:01:17.430
+Miles E Jones: um so the picture on the left is somebody's room a child's room and you can see the child here i've already highlighted him a few times he's highlighted in red.
+
+13
+00:01:17.970 --> 00:01:34.020
+Miles E Jones: He might have not even known that he was there and then you have these dolls that fit inside of each other, now the dolls it's very obvious they're sorted in decreasing order of height right this child's room is this sorted.
+
+14
+00:01:36.240 --> 00:01:45.150
+Miles E Jones: kind of depends on who you ask right if you ask me, it doesn't look sorry it looks completely out of order right it looks like.
+
+15
+00:01:47.490 --> 00:01:58.020
+Miles E Jones: You know the you need to put in considerable time to put everything back in the place where it's supposed to be, but maybe to this kid.
+
+16
+00:01:59.820 --> 00:02:02.520
+Miles E Jones: This is exactly where everything is supposed to be.
+
+17
+00:02:03.750 --> 00:02:07.650
+Miles E Jones: You know, maybe he has it maybe this is sorted for him.
+
+18
+00:02:09.000 --> 00:02:13.830
+Miles E Jones: So, for example, maybe he wants the.
+
+19
+00:02:19.350 --> 00:02:23.970
+Miles E Jones: Maybe he wants the pizza box or exactly right there on the floor, you know.
+
+20
+00:02:27.510 --> 00:02:28.530
+Miles E Jones: I don't know what he's doing.
+
+21
+00:02:29.610 --> 00:02:30.660
+Miles E Jones: With his computer.
+
+22
+00:02:35.820 --> 00:02:39.060
+Miles E Jones: The numbers on the chalkboard look pretty sorted yeah so.
+
+23
+00:02:40.410 --> 00:02:45.810
+Miles E Jones: Anyhow, I just wanted to kind of give you an idea that sorted is kind of like in the eye of the beholder.
+
+24
+00:02:49.140 --> 00:02:53.250
+Miles E Jones: yeah he's pretty creative okay so let's do a poll here.
+
+25
+00:02:54.570 --> 00:02:55.680
+Miles E Jones: That being said.
+
+26
+00:02:59.340 --> 00:03:02.850
+Miles E Jones: Which of the following collections of elements is inserted hoarder.
+
+27
+00:03:05.580 --> 00:03:06.390
+Miles E Jones: How is he going to.
+
+28
+00:03:10.440 --> 00:03:10.980
+Miles E Jones: How are you going to.
+
+29
+00:03:12.840 --> 00:03:17.880
+Miles E Jones: feed the fish and then what else he eats chips and muffins out of dog food trays.
+
+30
+00:03:19.500 --> 00:03:21.090
+Miles E Jones: I think that's the name of his dog.
+
+31
+00:03:24.810 --> 00:03:28.290
+Miles E Jones: How is he going to feed the all the fish, all the way up there, oh yeah.
+
+32
+00:03:30.360 --> 00:03:32.190
+Miles E Jones: Okay, what other kind of jokes we got.
+
+33
+00:03:33.870 --> 00:03:35.670
+Miles E Jones: here's a good artist he's on zoom.
+
+34
+00:03:36.900 --> 00:03:44.940
+Miles E Jones: he's napping on his desk okay good all right back to the thing which of the following collections of elements is listed in sorted order.
+
+35
+00:04:13.260 --> 00:04:21.450
+Miles E Jones: Alright, so most people are saying D, some people are saying be some people are saying see nobody's saying hey okay so be.
+
+36
+00:04:24.510 --> 00:04:26.790
+Miles E Jones: Be we're going to say is sorted.
+
+37
+00:04:29.400 --> 00:04:30.870
+Miles E Jones: In increasing order.
+
+38
+00:04:35.340 --> 00:04:42.090
+Miles E Jones: In this class when we talk about sorting we're we're mainly going to be talking about increasing order sorting and increasing order.
+
+39
+00:04:49.200 --> 00:04:50.880
+Miles E Jones: Okay, how is see sorted.
+
+40
+00:04:55.260 --> 00:04:56.220
+Miles E Jones: This is sorted.
+
+41
+00:04:59.040 --> 00:05:00.330
+Miles E Jones: In decreasing order.
+
+42
+00:05:04.380 --> 00:05:07.500
+Miles E Jones: So do you need um.
+
+43
+00:05:09.150 --> 00:05:17.880
+Miles E Jones: Do you need different like completely different algorithms to sort a list in increasing order, rather than sort of in decreasing order.
+
+44
+00:05:22.590 --> 00:05:26.580
+Miles E Jones: You can generally use the same idea what's the difference.
+
+45
+00:05:32.610 --> 00:05:39.150
+Miles E Jones: The comparison, so all you have to do is change the definition of comparison right.
+
+46
+00:05:40.320 --> 00:05:45.570
+Miles E Jones: And you can use the same exact algorithm to sort it in these two orders right.
+
+47
+00:05:47.670 --> 00:05:50.160
+Use same algorithm.
+
+48
+00:05:53.010 --> 00:05:55.650
+Miles E Jones: Just change.
+
+49
+00:05:56.970 --> 00:05:57.840
+Miles E Jones: definition.
+
+50
+00:05:59.730 --> 00:06:00.690
+Miles E Jones: of comparison.
+
+51
+00:06:03.600 --> 00:06:07.890
+Miles E Jones: Right what comes before.
+
+52
+00:06:09.450 --> 00:06:09.810
+Miles E Jones: What.
+
+53
+00:06:11.820 --> 00:06:24.480
+Miles E Jones: What comes before what if it's a decreasing order a bigger number of comes before a smaller number if it's an increasing order a smaller number comes before a bigger number, so if you just have that simple idea of comparison.
+
+54
+00:06:25.680 --> 00:06:29.280
+Miles E Jones: Okay, how about a does anybody know how a sorted.
+
+55
+00:06:30.390 --> 00:06:32.670
+Miles E Jones: Or is a just not sorted at all.
+
+56
+00:06:47.790 --> 00:06:49.920
+Miles E Jones: Oh, it is a comparison that you do know.
+
+57
+00:07:00.600 --> 00:07:08.490
+Miles E Jones: It is a lightning bolt permutation but remember that you already counted how many lightning bolt permutations there are right, so there.
+
+58
+00:07:08.940 --> 00:07:24.330
+Miles E Jones: The thing about increasing and decreasing is there as a unique way to arrange them in increasing order there's a unique way to arrange them in decreasing order so in order to sort something you need a unique way to order them.
+
+59
+00:07:25.950 --> 00:07:28.770
+Miles E Jones: And remember, there are more than one lightning permutation so.
+
+60
+00:07:30.120 --> 00:07:32.160
+Miles E Jones: that's not going to be a way to sort it.
+
+61
+00:07:49.920 --> 00:07:50.340
+Miles E Jones: out them out.
+
+62
+00:07:52.980 --> 00:07:59.070
+Miles E Jones: Okay Max mean second maximum second men, so this is true that it follows that but.
+
+63
+00:08:01.020 --> 00:08:05.160
+Miles E Jones: You need to have a complete ordering.
+
+64
+00:08:06.840 --> 00:08:11.100
+Miles E Jones: What would you say Alphabetically okay exactly right if you write out the numbers.
+
+65
+00:08:13.860 --> 00:08:20.760
+Miles E Jones: 42 1020.
+
+66
+00:08:22.500 --> 00:08:25.980
+Miles E Jones: Oh sorry 30.
+
+67
+00:08:39.990 --> 00:08:42.030
+Miles E Jones: Again, you can use the same algorithm.
+
+68
+00:08:43.140 --> 00:08:54.570
+Miles E Jones: All you have to do is change the definition of which one comes before the other one in this case it's alphabetical order which one comes before the other one in the dictionary.
+
+69
+00:08:55.590 --> 00:08:55.920
+Miles E Jones: Okay.
+
+70
+00:08:57.240 --> 00:09:05.160
+Miles E Jones: So why do we sort sorting is organizing and organizing is good organizing means that you can find things easier.
+
+71
+00:09:05.790 --> 00:09:22.050
+Miles E Jones: In algorithm designs sorting is a common sub routine to organize the input it's common it happens all the time, your phones or computers they're sorting things thousands and thousands of times per second just so that you can access them easier.
+
+72
+00:09:23.850 --> 00:09:33.240
+Miles E Jones: Any problems or easier on data that has been sorted searching we're going to see that today, of course, finding the minimum and maximum now is trivial.
+
+73
+00:09:34.410 --> 00:09:39.750
+Miles E Jones: Finding duplicates is really good if you sort it, because all the duplicates kind of clump together.
+
+74
+00:09:44.130 --> 00:09:55.410
+Miles E Jones: Set intersection or Union is also easier when things are sorted, because you can when you do in the set intersection in Union, you need to figure out when.
+
+75
+00:09:56.940 --> 00:10:03.900
+Miles E Jones: Two lists share the same element and it's easier to do that if they're if they're in sorted order.
+
+76
+00:10:08.490 --> 00:10:13.830
+Miles E Jones: Okay, but in this class also sorting is a great way to introduce.
+
+77
+00:10:14.850 --> 00:10:24.180
+Miles E Jones: students to certain algorithms we're gonna we're gonna look at sorting algorithms that are iterative that are recursive that are divide and conquer.
+
+78
+00:10:25.230 --> 00:10:26.580
+Miles E Jones: And that a randomized.
+
+79
+00:10:27.930 --> 00:10:35.160
+Miles E Jones: Okay, so we'll see the iterative algorithm will see men sort, among others, will see recursive men sort.
+
+80
+00:10:39.570 --> 00:10:42.240
+Miles E Jones: divide and conquer will see something called merge sort.
+
+81
+00:10:44.610 --> 00:10:52.230
+Miles E Jones: And randomize will see something called quick sort we won't really spend so much time on quick store but it's good to know that it exists.
+
+82
+00:10:53.250 --> 00:11:11.250
+Miles E Jones: Okay sorting also aids and ranking what is ranking remember we just did this last week ranking is just putting things in a particular order sorting them lexicographical order and then using that order to encode them, so it all comes back to sorting.
+
+83
+00:11:13.170 --> 00:11:15.510
+Miles E Jones: Okay, what kind of operations help you sort.
+
+84
+00:11:17.850 --> 00:11:26.490
+Miles E Jones: What do you all, what would you all, what kind of operations, would you all want to have okay good so we definitely need some something about comparison.
+
+85
+00:11:29.070 --> 00:11:30.900
+Miles E Jones: And we need something about swapping.
+
+86
+00:11:34.830 --> 00:11:36.930
+Miles E Jones: So we're going to.
+
+87
+00:11:38.310 --> 00:11:41.280
+Miles E Jones: we're going to split swapping into two different categories.
+
+88
+00:11:42.420 --> 00:11:46.890
+Miles E Jones: Are you allowed to swap any two positions.
+
+89
+00:11:55.740 --> 00:11:59.460
+Miles E Jones: Or are you only allowed to swap adjacent positions.
+
+90
+00:12:09.090 --> 00:12:12.750
+Miles E Jones: Is one better than the other, is there a way, is there a.
+
+91
+00:12:13.950 --> 00:12:15.510
+Miles E Jones: scenario where.
+
+92
+00:12:16.800 --> 00:12:22.170
+Miles E Jones: You would want to use one more than the other, depending on the kind of hardware you're using.
+
+93
+00:12:25.860 --> 00:12:43.560
+Miles E Jones: I don't actually don't know if this is a question for you all anybody who's taken any kind of like hardware classes, all you electrical engineer computer engineers, is there is it harder to swap two things far away or to swap two things that are close together.
+
+94
+00:12:51.390 --> 00:12:58.410
+Miles E Jones: Maybe it's easier to swap things that are closer so you'd rather use that but maybe it's a trade off right.
+
+95
+00:13:06.630 --> 00:13:08.370
+Miles E Jones: Okay yeah, this is the kind of.
+
+96
+00:13:10.200 --> 00:13:13.530
+Miles E Jones: This is the kind of information, I was looking for.
+
+97
+00:13:20.130 --> 00:13:20.400
+yeah.
+
+98
+00:13:22.110 --> 00:13:22.950
+Miles E Jones: Okay anyhow.
+
+99
+00:13:26.430 --> 00:13:27.000
+let's move on.
+
+100
+00:13:28.920 --> 00:13:30.750
+Miles E Jones: Oh God, I do.
+
+101
+00:13:41.790 --> 00:13:42.840
+Well, we have more here.
+
+102
+00:13:43.980 --> 00:13:50.100
+Miles E Jones: Alright, so we talked about swapping what I should put comparison here too that's definitely.
+
+103
+00:13:53.730 --> 00:13:55.890
+Miles E Jones: How about this moving and inserting.
+
+104
+00:13:57.090 --> 00:14:07.170
+Miles E Jones: Like if I wanted to sort a deck of cards, I could take a card out right and insert it into the place where.
+
+105
+00:14:11.370 --> 00:14:12.270
+Miles E Jones: i'm.
+
+106
+00:14:13.590 --> 00:14:19.770
+Miles E Jones: into the place where it's supposed to go is this easy to do in a computer.
+
+107
+00:14:25.020 --> 00:14:38.310
+Miles E Jones: it's kind of it's kind of a pain right because you have to put something in you have to move everybody over right so it's kind of annoying it's possible but annoying right annoying.
+
+108
+00:14:39.810 --> 00:14:40.620
+Miles E Jones: To do.
+
+109
+00:14:42.030 --> 00:14:45.510
+Miles E Jones: In a array.
+
+110
+00:14:47.160 --> 00:14:50.790
+Miles E Jones: Right it's kind of easy to do if you have a linked list right.
+
+111
+00:15:01.980 --> 00:15:07.560
+Miles E Jones: So all of these things I think are good to think about we're not going to dwell a lot on.
+
+112
+00:15:08.880 --> 00:15:16.560
+Miles E Jones: The data structure and which one is better than the other we're just going to kind of consider them all and see which one you know which one kind of.
+
+113
+00:15:18.300 --> 00:15:23.010
+Miles E Jones: lends itself to which algorithm so but I think it's good to think about.
+
+114
+00:15:31.170 --> 00:15:37.140
+Miles E Jones: Okay splitting the list and reorganizing This is something that will be doing with with merge sort.
+
+115
+00:15:42.510 --> 00:15:54.030
+Miles E Jones: Now, how is it easy to split the list again it kind of depends on the data structure, maybe it's a linked list, and you can just break one of the links and then you have these two different things, but maybe it's an array where you have to.
+
+116
+00:15:55.020 --> 00:16:08.070
+Miles E Jones: do in order to split the list you have to copy the second half over to another array and then erase all the things or copy both So there are a lot of things that that you have to do like under the hood.
+
+117
+00:16:09.570 --> 00:16:14.070
+Miles E Jones: we're going to kind of sweep all that stuff under the rug for the most part.
+
+118
+00:16:16.380 --> 00:16:17.730
+Miles E Jones: All that kind of hardware stuff.
+
+119
+00:16:19.260 --> 00:16:20.970
+Miles E Jones: Okay, so.
+
+120
+00:16:22.200 --> 00:16:36.600
+Miles E Jones: let's talk about sorting permutations suppose the only operation that we can do, I mean we can compare but the only like physical movement so i'll call it like a movement operation.
+
+121
+00:16:38.490 --> 00:16:46.740
+Miles E Jones: Is swap any two positions that you want you and let's say that you have all the time in the world, and you can look at the.
+
+122
+00:16:48.150 --> 00:17:03.990
+Miles E Jones: The permutation all you want and do as many comparisons, as you want, how would you sort the following permutations, in other words what sequence of swaps, would you use so that the result is the list in increasing order okay how about for this first one.
+
+123
+00:17:13.350 --> 00:17:15.690
+Miles E Jones: Okay, I would swap.
+
+124
+00:17:17.280 --> 00:17:19.770
+Miles E Jones: four and three now.
+
+125
+00:17:31.530 --> 00:17:32.640
+Miles E Jones: We are.
+
+126
+00:17:34.230 --> 00:17:37.620
+Miles E Jones: OK we'll swap four and three Okay, so this requires.
+
+127
+00:17:40.680 --> 00:17:43.410
+Miles E Jones: Only one swap.
+
+128
+00:17:44.910 --> 00:17:46.020
+Miles E Jones: Okay, how about this one.
+
+129
+00:17:52.110 --> 00:17:54.390
+Miles E Jones: This requires two swaps right swap.
+
+130
+00:17:55.470 --> 00:18:01.050
+Miles E Jones: To one then swap for three right.
+
+131
+00:18:07.620 --> 00:18:08.580
+Miles E Jones: Okay, how about this one.
+
+132
+00:18:14.100 --> 00:18:15.570
+Miles E Jones: You need three swaps.
+
+133
+00:18:23.250 --> 00:18:24.450
+Miles E Jones: You to swaps.
+
+134
+00:18:25.530 --> 00:18:26.280
+Miles E Jones: What do you do.
+
+135
+00:18:28.860 --> 00:18:30.360
+Miles E Jones: First swap.
+
+136
+00:18:32.310 --> 00:18:34.140
+Miles E Jones: For with two.
+
+137
+00:18:35.190 --> 00:18:36.870
+Miles E Jones: right then.
+
+138
+00:18:39.270 --> 00:18:40.170
+Miles E Jones: Two with one.
+
+139
+00:18:44.520 --> 00:18:45.000
+Miles E Jones: Okay.
+
+140
+00:18:47.850 --> 00:18:51.510
+Miles E Jones: And these are swapping the numbers right, not the position, so the numbers.
+
+141
+00:18:55.530 --> 00:18:56.910
+Miles E Jones: Okay, so.
+
+142
+00:18:59.160 --> 00:19:06.150
+Miles E Jones: These two things are both both require two swamps they're kind of a little bit different right.
+
+143
+00:19:07.290 --> 00:19:08.160
+Miles E Jones: here.
+
+144
+00:19:09.540 --> 00:19:12.960
+Miles E Jones: Does the order matter the order of swamps.
+
+145
+00:19:21.480 --> 00:19:26.700
+Miles E Jones: It doesn't matter right because you could you could swap the foreign the three first and then the two and the one.
+
+146
+00:19:28.650 --> 00:19:34.350
+Miles E Jones: What about here, what happens if you swap the two and the one first and then the four and the two.
+
+147
+00:19:35.670 --> 00:19:38.640
+Miles E Jones: that's going to be bad right, so the order.
+
+148
+00:19:40.170 --> 00:19:41.490
+Miles E Jones: Of the swaps.
+
+149
+00:19:44.460 --> 00:19:45.090
+matters.
+
+150
+00:19:48.810 --> 00:19:52.590
+Miles E Jones: Right, can you kind of see the difference in those things.
+
+151
+00:20:04.950 --> 00:20:07.380
+Miles E Jones: I mean, of course, for the first one you just do one swamp.
+
+152
+00:20:09.360 --> 00:20:18.120
+Miles E Jones: Okay, so let's talk about where does that come from and what is the what is the property that that second one, has it the first one doesn't.
+
+153
+00:20:21.300 --> 00:20:33.450
+Miles E Jones: Okay we're going to do that in a minute so worst case, in the best case, so if we're using this sorting algorithm that you can you can do any of these swaps.
+
+154
+00:20:34.590 --> 00:20:39.180
+Miles E Jones: Which permutation requires the fewest number of swaps, this is easy right.
+
+155
+00:20:41.880 --> 00:20:42.450
+Miles E Jones: sorted.
+
+156
+00:20:44.400 --> 00:20:45.420
+Miles E Jones: Already sorted.
+
+157
+00:20:49.800 --> 00:20:51.750
+Miles E Jones: i'm requiring.
+
+158
+00:20:54.510 --> 00:20:55.620
+Miles E Jones: Zero swaps.
+
+159
+00:20:58.980 --> 00:21:02.610
+Miles E Jones: Okay, which permutation requires the greatest number of swaps.
+
+160
+00:21:10.500 --> 00:21:14.490
+Miles E Jones: reverse order so let's do 432 and one.
+
+161
+00:21:15.960 --> 00:21:17.040
+Miles E Jones: You can swap.
+
+162
+00:21:18.720 --> 00:21:25.740
+Miles E Jones: One four and 2342 swaps.
+
+163
+00:21:31.290 --> 00:21:45.330
+Miles E Jones: So, is that the worst in with if you only have four numbers is that the is that the worst possible thing, or is there a link for permutation that requires three swaps.
+
+164
+00:21:48.090 --> 00:21:49.860
+Miles E Jones: i'll give you all a minute to think about that.
+
+165
+00:21:58.650 --> 00:22:02.670
+Miles E Jones: Okay yeah What about this 12341.
+
+166
+00:22:09.270 --> 00:22:13.650
+Miles E Jones: Okay, so in this one we'd have to swap.
+
+167
+00:22:15.300 --> 00:22:17.310
+Miles E Jones: The one in the two right.
+
+168
+00:22:18.450 --> 00:22:33.330
+Miles E Jones: Then the two in the three so you swap the one of the two you get 1342, then the two and three, and you get 1243 right, then the three in the four.
+
+169
+00:22:35.070 --> 00:22:36.690
+You get 1234.
+
+170
+00:22:39.000 --> 00:22:41.700
+Miles E Jones: Can you sort this with fewer swaps.
+
+171
+00:22:55.950 --> 00:22:57.450
+Miles E Jones: must take three swamps.
+
+172
+00:23:00.120 --> 00:23:07.290
+Miles E Jones: yeah, so this is there are there are a few others that take three swaps, but this is one of them, so.
+
+173
+00:23:08.610 --> 00:23:13.860
+Miles E Jones: The which permutation requires the greatest number of swaps and we'll talk about it it's a.
+
+174
+00:23:14.910 --> 00:23:16.350
+Miles E Jones: i'm going to call a.
+
+175
+00:23:19.290 --> 00:23:23.460
+Miles E Jones: single cycle permutation.
+
+176
+00:23:26.760 --> 00:23:30.540
+Miles E Jones: And how many swaps in in general, does it take.
+
+177
+00:23:31.860 --> 00:23:32.700
+Miles E Jones: And minus one.
+
+178
+00:23:38.100 --> 00:23:47.070
+Miles E Jones: So to for a length for permutation the worst possible case is going to take three swamps and we found one that did take three swaps.
+
+179
+00:23:48.180 --> 00:23:49.830
+Miles E Jones: Okay, so.
+
+180
+00:23:52.650 --> 00:23:55.890
+Miles E Jones: How are we going to let's say that we have this permutation here.
+
+181
+00:24:00.120 --> 00:24:02.490
+Miles E Jones: So this, this is the position.
+
+182
+00:24:04.710 --> 00:24:06.060
+Miles E Jones: And this is the permutation.
+
+183
+00:24:10.170 --> 00:24:16.350
+Miles E Jones: Okay, so I want to sort this whole permutation with the fewest number of swaps.
+
+184
+00:24:17.550 --> 00:24:23.640
+Miles E Jones: This is what i'm going to do is i'm going to write the permutation in cycle notate.
+
+185
+00:24:36.060 --> 00:24:38.280
+Miles E Jones: Okay, do you all remember how to do that.
+
+186
+00:24:43.290 --> 00:24:44.910
+Miles E Jones: One way was to.
+
+187
+00:24:46.050 --> 00:24:47.520
+Miles E Jones: To draw the graph.
+
+188
+00:24:48.720 --> 00:24:50.280
+Miles E Jones: Right, do we want to do it that way.
+
+189
+00:24:51.810 --> 00:24:54.450
+Miles E Jones: So one goes to eight.
+
+190
+00:24:57.300 --> 00:25:03.600
+Miles E Jones: Eight goes 299 goes to seven and seven goes to one.
+
+191
+00:25:05.010 --> 00:25:05.340
+Right.
+
+192
+00:25:06.990 --> 00:25:09.720
+Miles E Jones: To goes to six.
+
+193
+00:25:11.220 --> 00:25:15.570
+Miles E Jones: Six goes to 1212 goes two to.
+
+194
+00:25:18.360 --> 00:25:21.390
+Miles E Jones: Three goes to three.
+
+195
+00:25:23.460 --> 00:25:24.960
+Miles E Jones: Four goes to five.
+
+196
+00:25:27.210 --> 00:25:35.220
+Miles E Jones: Five goes to 1111 goes to 1010 goes to four.
+
+197
+00:25:37.890 --> 00:25:44.580
+Miles E Jones: Okay, so this permutation has four cycles now when you swap things.
+
+198
+00:25:46.440 --> 00:25:50.070
+Miles E Jones: Do you ever want to swap to things that are in different cycles.
+
+199
+00:26:03.840 --> 00:26:04.500
+Miles E Jones: know.
+
+200
+00:26:05.910 --> 00:26:13.620
+Miles E Jones: right because you're going to kind of jumble it up more what you want to do is you want to work on each cycle.
+
+201
+00:26:15.630 --> 00:26:21.900
+Miles E Jones: themselves Okay, so let me write the cycles in there in the other way, so write them as.
+
+202
+00:26:25.410 --> 00:26:26.010
+like this.
+
+203
+00:26:27.210 --> 00:26:28.260
+Miles E Jones: i'll just write them up here.
+
+204
+00:26:32.370 --> 00:26:33.750
+Miles E Jones: So the cycle notation.
+
+205
+00:26:38.040 --> 00:26:48.480
+Miles E Jones: is going to be 18972 612.
+
+206
+00:26:50.520 --> 00:26:52.620
+Miles E Jones: Three and.
+
+207
+00:26:53.700 --> 00:26:57.330
+Miles E Jones: Four 511 10.
+
+208
+00:26:58.350 --> 00:26:58.680
+Miles E Jones: Right.
+
+209
+00:27:05.040 --> 00:27:10.860
+Miles E Jones: You need right, you need K minus one swaps for every cycle of length K.
+
+210
+00:27:15.600 --> 00:27:26.130
+Miles E Jones: Right and every time you swap you will decrease the length of that cycle by one Okay, so what you're what you're going to do is you're going to.
+
+211
+00:27:28.200 --> 00:27:33.210
+Miles E Jones: You essentially right each cycle cycle backwards okay so.
+
+212
+00:27:36.360 --> 00:27:47.820
+Miles E Jones: we're going to write each cycle backwards So these are the swaps i'm going to make seven nine comma nine eight comma eight one.
+
+213
+00:27:48.870 --> 00:28:02.310
+Miles E Jones: Okay that's going to kind of on or whatever sort just that cycle and it's going to leave everything else, as they are right So the first thing is to swap seven and nine.
+
+214
+00:28:04.020 --> 00:28:04.770
+Miles E Jones: and
+
+215
+00:28:10.560 --> 00:28:14.490
+Miles E Jones: i'm sorry that I did this, but these are these are positional swaps.
+
+216
+00:28:19.440 --> 00:28:21.690
+Miles E Jones: So swap position, seven and nine.
+
+217
+00:28:23.370 --> 00:28:45.720
+Miles E Jones: So positions, seven and nine so swap those and you get eight six so i'll just go like this position 798-635-1112 791 410 two.
+
+218
+00:28:47.310 --> 00:28:53.700
+Miles E Jones: Right now, if you if you write the cycle notation of this you'll see that seven.
+
+219
+00:28:56.400 --> 00:28:58.350
+Miles E Jones: isn't a cycle by itself now.
+
+220
+00:28:59.490 --> 00:29:07.110
+Miles E Jones: And one nine and eight are now in a cycle so we've kind of taken that cycle of like four and.
+
+221
+00:29:08.820 --> 00:29:16.830
+Miles E Jones: Take basically kind of plucked seven out of that cycle right, because now, one goes to eight eight goes to nine and nine goes to one.
+
+222
+00:29:17.940 --> 00:29:23.820
+Miles E Jones: Okay, so that was the first swap the second swap is nine eight.
+
+223
+00:29:24.900 --> 00:29:30.180
+Miles E Jones: And remember, these are positional swaps so i'm going to swap the positions nine and eight.
+
+224
+00:29:31.530 --> 00:29:44.220
+Miles E Jones: Alright, so that's going to be that's going to result in 863-511-1271 nine 410 two.
+
+225
+00:29:46.530 --> 00:29:55.350
+Miles E Jones: Now you can see that nine is in its own position and then we're going we're going to swap positions eight and one.
+
+226
+00:29:57.480 --> 00:30:18.510
+Miles E Jones: So that's positions eight and one or one eight and we get 1635 1112 789 410 two so we've kind of like taken this cycle and sorted just the cycle using three swaps.
+
+227
+00:30:21.540 --> 00:30:29.850
+Miles E Jones: Okay, so, then, if we want to keep on going, then we would you know right each cycle backwards so 12 662.
+
+228
+00:30:31.470 --> 00:30:43.710
+Miles E Jones: You don't need any swaps for a cycle of length one right it's already in its position, so you just keep it there and then 10 1111 554.
+
+229
+00:30:45.930 --> 00:30:47.130
+Miles E Jones: Okay, any questions.
+
+230
+00:30:54.270 --> 00:31:00.900
+Miles E Jones: So this particular permutation requires 12345678 swaps right.
+
+231
+00:31:04.950 --> 00:31:07.200
+Miles E Jones: This example requires.
+
+232
+00:31:08.940 --> 00:31:10.110
+Miles E Jones: A swaps.
+
+233
+00:31:13.350 --> 00:31:14.910
+Miles E Jones: How do you calculate this eight.
+
+234
+00:31:16.680 --> 00:31:19.830
+Miles E Jones: How do I know that it requires eight swaps what is that number from.
+
+235
+00:31:34.740 --> 00:31:40.140
+Miles E Jones: Okay, good you sum up all the cycle length minus one, so you are cycle length are.
+
+236
+00:31:41.160 --> 00:31:56.610
+Miles E Jones: We have 431 and four, so a sum up the number of swaps is equal to four minus one plus three minus one plus one minus one plus four minus one.
+
+237
+00:32:01.770 --> 00:32:03.330
+Miles E Jones: Okay, good.
+
+238
+00:32:06.870 --> 00:32:10.290
+Miles E Jones: So you can finish this sorting as an exercise.
+
+239
+00:32:22.410 --> 00:32:28.410
+Miles E Jones: Okay, so here's a theorem let Sigma be a permutation of one through and then let Sigma B.
+
+240
+00:32:29.550 --> 00:32:39.030
+Miles E Jones: C one C two ck be the cycles of Sigma then Sigma can be sorted using the sum of all the.
+
+241
+00:32:40.110 --> 00:32:49.110
+Miles E Jones: I shouldn't have done it like that I should do it like this size of Sigma minus what size of see size of the cycle minus one and use some of them all up.
+
+242
+00:32:50.640 --> 00:32:53.280
+Miles E Jones: And the theorem here is that.
+
+243
+00:32:54.750 --> 00:32:59.130
+Miles E Jones: This is the minimum.
+
+244
+00:33:01.410 --> 00:33:02.160
+number.
+
+245
+00:33:04.260 --> 00:33:05.040
+swaps.
+
+246
+00:33:09.690 --> 00:33:20.430
+Miles E Jones: And we're not going to go through the proof of it, but it would be kind of a nice exercise to kind of think about why this is the minimum and what what is the what is the reason.
+
+247
+00:33:21.600 --> 00:33:29.610
+Miles E Jones: Like why can't you do it in fewer and fewer swaps and the end part of the argument is that.
+
+248
+00:33:31.620 --> 00:33:35.520
+Miles E Jones: it's really bad to swap two.
+
+249
+00:33:36.750 --> 00:33:45.990
+Miles E Jones: elements in different cycles right, because when you do that, you sort of linked the cycles together they kind of come together and that's not good.
+
+250
+00:33:46.560 --> 00:34:08.550
+Miles E Jones: really what we want to do is, we want to kind of work on cycle and kind of do each cycle, one by one and sort them all and I guess the the other part of the proof would be to prove that in order to sort a cycle, it requires a cycle of length K let's say it requires K minus one.
+
+251
+00:34:09.720 --> 00:34:12.060
+Miles E Jones: swaps minimum.
+
+252
+00:34:13.470 --> 00:34:14.940
+Miles E Jones: Okay questions or comments.
+
+253
+00:34:24.120 --> 00:34:34.440
+Miles E Jones: Okay, so that was sorting permutations permutations have this really nice property that the numbers that you're sorting are exactly the numbers one through n.
+
+254
+00:34:34.890 --> 00:34:43.590
+Miles E Jones: And that made it easy for us to build the cycles now if you just are if you're just given sort of a random list of numbers.
+
+255
+00:34:44.040 --> 00:34:53.430
+Miles E Jones: You don't know how to build the cycles beforehand, because, in order to know how to build the cycles, you need to know the relative order of all the numbers.
+
+256
+00:34:54.420 --> 00:35:04.500
+Miles E Jones: I mean, this is a small list here, but if I just told you, you know if I just gave you 14 it would take you a minute to figure out that 14 is the second.
+
+257
+00:35:04.890 --> 00:35:25.980
+Miles E Jones: smallest number in the list right it's not as immediate as having a permutation, and so we want to develop an out of rhythm that that still uses this minimum number of swaps but doesn't rely on knowing the relative order of the elements.
+
+258
+00:35:27.510 --> 00:35:28.110
+At first.
+
+259
+00:35:29.310 --> 00:35:38.610
+Miles E Jones: Okay, so the difference here is that we don't know at first glance, which is the smallest element or in general, where the elements are supposed to go sorting algorithms figure this out along the way.
+
+260
+00:35:40.020 --> 00:35:46.200
+Miles E Jones: And sorts them as you go and idea for sorting algorithm okay so let's think about this.
+
+261
+00:35:48.120 --> 00:35:53.220
+Miles E Jones: let's think about the big picture, what is it we're trying to do, given a list.
+
+262
+00:35:54.630 --> 00:36:08.700
+Miles E Jones: i'm a one through eight and we want to arrange the value so that a one is less than or equal to a two is less than or equal to all the way up to a N and I put less than or equal to this is increasing order.
+
+263
+00:36:10.440 --> 00:36:13.500
+Miles E Jones: Excuse me, but you could change this relationship.
+
+264
+00:36:14.850 --> 00:36:18.030
+Miles E Jones: To be whatever you want, maybe it's alphabetical order.
+
+265
+00:36:19.230 --> 00:36:27.480
+Miles E Jones: Maybe it's decreasing order right whatever you need and the values really can be of any type that have an underlying total order.
+
+266
+00:36:28.680 --> 00:36:32.310
+Miles E Jones: But for simplicity we're going to just use integers in this class, for the most part.
+
+267
+00:36:33.720 --> 00:36:34.080
+Miles E Jones: Okay.
+
+268
+00:36:35.400 --> 00:36:35.760
+Miles E Jones: Good.
+
+269
+00:36:38.130 --> 00:36:47.940
+Miles E Jones: Okay, so if swapping any two positions isn't available operation, then we can use something called selection store selection sort of what it does, is it.
+
+270
+00:36:49.350 --> 00:37:01.500
+Miles E Jones: It finds the smallest number and it swaps it with position one right, because we know that the smallest number has to go in position one, so we just swap it like that.
+
+271
+00:37:03.300 --> 00:37:07.380
+Miles E Jones: Then that number, the first number is locked in place.
+
+272
+00:37:08.430 --> 00:37:16.830
+Miles E Jones: And then we just do it with the next smallest number and swap it with position to the next smallest number swap it with position so on.
+
+273
+00:37:19.110 --> 00:37:19.560
+So.
+
+274
+00:37:21.510 --> 00:37:23.370
+Miles E Jones: Here is the pseudo code.
+
+275
+00:37:25.110 --> 00:37:27.540
+Miles E Jones: hey you have a list of integers.
+
+276
+00:37:29.700 --> 00:37:42.930
+Miles E Jones: You have a for loop that loops from one to N minus one you don't have to go all the way up to end because once you've sorted, the first and minus one smallest numbers, the end number has to go in the last position.
+
+277
+00:37:44.970 --> 00:37:58.110
+Miles E Jones: Okay, you said, am to be the minimum of all of the number, starting at a I right we're going to start at one so that's going to be the entire list during the first iteration and then.
+
+278
+00:37:59.340 --> 00:38:06.930
+Miles E Jones: And so on so on, as you go and then you swap am with Ai is going to be like the minimum element you're putting into place.
+
+279
+00:38:10.320 --> 00:38:12.960
+Miles E Jones: here's more of like a low level.
+
+280
+00:38:16.890 --> 00:38:17.850
+Miles E Jones: pseudo code.
+
+281
+00:38:22.200 --> 00:38:22.770
+Miles E Jones: With.
+
+282
+00:38:25.410 --> 00:38:26.280
+Miles E Jones: Finding.
+
+283
+00:38:28.050 --> 00:38:28.890
+Miles E Jones: A minimum.
+
+284
+00:38:36.360 --> 00:38:37.140
+Miles E Jones: spelled out.
+
+285
+00:38:38.220 --> 00:38:38.460
+Miles E Jones: Right.
+
+286
+00:38:42.360 --> 00:38:42.660
+So.
+
+287
+00:38:44.460 --> 00:38:48.420
+Miles E Jones: I have a animation for you Okay, so how does Min sort work.
+
+288
+00:38:49.860 --> 00:38:58.080
+Miles E Jones: The first thing it does is it finds the smallest element this case it's six and you swap that with the.
+
+289
+00:39:00.540 --> 00:39:02.040
+Miles E Jones: element in the first position.
+
+290
+00:39:09.660 --> 00:39:11.310
+Miles E Jones: Okay next smallest element seven.
+
+291
+00:39:12.420 --> 00:39:29.850
+Miles E Jones: swab with the second position keep those smaller numbers in green because those are already in there sorted position okay next smallest is nine swap it with 32 okay next smallest is 11 swap it with.
+
+292
+00:39:31.500 --> 00:39:33.030
+Miles E Jones: Next smallest is 14.
+
+293
+00:39:34.380 --> 00:39:51.630
+Miles E Jones: swap that with 18 right next smallest is 16 swap that next small city teen swap that next smallest 20 to swap that next mile is just 24 so that just just just stays where it is.
+
+294
+00:39:54.870 --> 00:39:55.140
+Right.
+
+295
+00:39:56.970 --> 00:40:01.830
+Miles E Jones: And then you have 32 you don't need to move right because it's already in place.
+
+296
+00:40:02.940 --> 00:40:05.280
+Miles E Jones: So how many swaps did that require.
+
+297
+00:40:07.560 --> 00:40:07.890
+back.
+
+298
+00:40:09.330 --> 00:40:10.860
+Miles E Jones: hey you did one swap.
+
+299
+00:40:12.240 --> 00:40:13.260
+Miles E Jones: To swaps.
+
+300
+00:40:14.490 --> 00:40:15.780
+Miles E Jones: Three swaps.
+
+301
+00:40:17.010 --> 00:40:18.240
+Miles E Jones: For swaps.
+
+302
+00:40:19.350 --> 00:40:41.670
+Miles E Jones: 56788 swaps right and how long is this permutation 1-234-567-8910 requires.
+
+303
+00:40:43.920 --> 00:40:45.510
+Miles E Jones: A swaps.
+
+304
+00:40:46.890 --> 00:40:56.940
+Miles E Jones: Right and so it's N minus one of the worst case, but N minus one is nine So this was able to do it in eight So what does that tell you it tells you that.
+
+305
+00:40:59.550 --> 00:41:03.180
+Miles E Jones: There is a cycle of length nine somewhere in there.
+
+306
+00:41:18.150 --> 00:41:19.050
+Miles E Jones: When we go back.
+
+307
+00:41:27.660 --> 00:41:28.620
+Miles E Jones: If we.
+
+308
+00:41:29.880 --> 00:41:33.480
+Miles E Jones: If we talk about the permutation that the underlying permutation.
+
+309
+00:41:40.740 --> 00:41:47.550
+Miles E Jones: it's going to be 1-234-567-8910.
+
+310
+00:41:49.560 --> 00:41:49.920
+Miles E Jones: Right.
+
+311
+00:41:51.000 --> 00:42:13.590
+Miles E Jones: Six is the lowest so that's a one than seven than 934-567-8910.
+
+312
+00:42:19.980 --> 00:42:24.750
+Miles E Jones: Okay So what are the cycles, here we have one that goes to eight.
+
+313
+00:42:26.310 --> 00:42:27.570
+Miles E Jones: Eight goes to nine.
+
+314
+00:42:28.740 --> 00:42:34.980
+Miles E Jones: Nine goes to five five goes to four four goes to seven.
+
+315
+00:42:41.130 --> 00:43:10.350
+Miles E Jones: Seven goes to six and six goes back to 110 10 goes to three three goes back to two so notice that we have one cycle of length 1234567 into the cycle of length three so that's seven minus one plus three minus one is equal to.
+
+316
+00:43:11.580 --> 00:43:23.010
+Miles E Jones: six plus two is equal to eight so that's where those eight swaps come from, in fact, the the this sorting algorithm will do the fewest number of swaps.
+
+317
+00:43:24.780 --> 00:43:26.580
+Miles E Jones: Okay, any questions or comments about that.
+
+318
+00:43:38.880 --> 00:43:40.530
+NAYELI GUZMAN: So it is eight the minimum.
+
+319
+00:43:41.580 --> 00:43:43.470
+Miles E Jones: eight is the minimum number of swamps yeah.
+
+320
+00:43:45.540 --> 00:43:59.700
+Miles E Jones: And this procedure requires eight swaps, so it it actually did it actually did the minimum number of swamps, and this would be important if if swapping things were really.
+
+321
+00:44:00.780 --> 00:44:06.240
+Miles E Jones: Intensive or you know resource intensive right let's say that uh.
+
+322
+00:44:07.710 --> 00:44:20.850
+Miles E Jones: let's say that you're trying to sort cars right and moving cars is you know takes a lot of time and effort, so you know, maybe that maybe you want to figure out the best way to do it first.
+
+323
+00:44:22.170 --> 00:44:35.040
+Miles E Jones: And selection sort is a really good way to go, because you're going to you're going to do it using the fewest number of swaps let's say that you only have two people and you're trying to sort sort cars.
+
+324
+00:44:35.670 --> 00:44:43.380
+Miles E Jones: On like a busy road, so you know they always have to be parked right, so the only way that you can really do it is to sort them.
+
+325
+00:44:45.690 --> 00:44:48.660
+Miles E Jones: Two at a time or swap them two at a time.
+
+326
+00:44:50.910 --> 00:44:53.880
+Miles E Jones: I don't know, maybe that's not really like a real scenario, but.
+
+327
+00:44:58.410 --> 00:45:04.020
+Miles E Jones: But does it do the minimum number of comparisons so that's we're going to talk about the comparisons.
+
+328
+00:45:05.130 --> 00:45:09.330
+Miles E Jones: required and that's going to be a little bit more of a.
+
+329
+00:45:11.280 --> 00:45:14.190
+Miles E Jones: it's a good it's going to be kind of a different problem to think about.
+
+330
+00:45:16.500 --> 00:45:30.750
+Miles E Jones: When we're considering best and worst case, are we only counting swaps, for now, are only counting swaps but, but we are going to kind of move on to comparisons, because even though it didn't swap 24 right remember that it.
+
+331
+00:45:32.640 --> 00:45:38.760
+Miles E Jones: It just 24 cut kept its position, it still had to compare.
+
+332
+00:45:40.170 --> 00:45:56.460
+Miles E Jones: Right, it still had to find that comparison so it's not like we got that for free it's just like kind of in a certain scenario where you would need to wear a be very Labor intensive to do these swaps, this would be a great way to to do it.
+
+333
+00:46:00.870 --> 00:46:04.080
+Miles E Jones: I don't think you need to care about the maximum number of swaps.
+
+334
+00:46:10.890 --> 00:46:15.780
+Miles E Jones: yeah comparisons can also be Labor intensive so we'll talk about how many comparisons does it take.
+
+335
+00:46:19.350 --> 00:46:27.780
+Miles E Jones: Actually that's The next thing right so on a list of length and how many swaps does this algorithm do it actually does the minimum.
+
+336
+00:46:30.300 --> 00:46:30.960
+Miles E Jones: number.
+
+337
+00:46:32.250 --> 00:46:33.240
+Miles E Jones: Of swaps.
+
+338
+00:46:34.290 --> 00:46:49.800
+Miles E Jones: Which is equal to the some I equals one up to K see I minus one right where see I are the length of the cycles, is there, another operation, we should count yes.
+
+339
+00:46:52.770 --> 00:46:53.700
+Miles E Jones: comparisons.
+
+340
+00:46:56.550 --> 00:46:59.670
+Miles E Jones: And how many comparisons does it require.
+
+341
+00:47:14.340 --> 00:47:15.750
+Miles E Jones: n times N minus one or two.
+
+342
+00:47:24.390 --> 00:47:24.750
+Miles E Jones: groups.
+
+343
+00:47:27.540 --> 00:47:31.260
+Miles E Jones: Okay, I guess i'll do it right here n times N minus one over to.
+
+344
+00:47:33.480 --> 00:47:34.740
+Miles E Jones: So where does that come from.
+
+345
+00:47:36.780 --> 00:47:38.070
+Miles E Jones: Well, in order to.
+
+346
+00:47:40.410 --> 00:47:41.730
+Miles E Jones: In order to find.
+
+347
+00:47:46.260 --> 00:47:47.190
+Miles E Jones: The minimum.
+
+348
+00:47:50.850 --> 00:47:56.520
+Miles E Jones: of a list of length let's say.
+
+349
+00:48:00.090 --> 00:48:07.710
+Miles E Jones: let's say a linked list of length are right requires.
+
+350
+00:48:10.470 --> 00:48:12.570
+Miles E Jones: Our minus one comparisons.
+
+351
+00:48:16.890 --> 00:48:17.280
+Miles E Jones: Right.
+
+352
+00:48:18.330 --> 00:48:32.130
+Miles E Jones: So the way that you do it right is you kind of keep this running minimum and you update it every time you find something smaller, but how do you know it's smaller, you have to do a comparison and you only do it.
+
+353
+00:48:33.150 --> 00:48:40.290
+Miles E Jones: Because the first the first element you just set as the minimum and then every subsequent element is a comparison.
+
+354
+00:48:42.030 --> 00:48:42.870
+Miles E Jones: So.
+
+355
+00:48:44.310 --> 00:48:47.820
+Miles E Jones: How many comparisons total does this algorithm make.
+
+356
+00:48:50.550 --> 00:48:51.600
+Miles E Jones: Right, it makes.
+
+357
+00:48:54.510 --> 00:48:57.150
+Miles E Jones: And minus one comparisons.
+
+358
+00:48:59.460 --> 00:49:20.220
+Miles E Jones: When is equal to one in the first iteration because you're finding the minimum of the whole list and minus two when I is equal to two and minus three is equal to three all the way down to one comparison when is equal to N minus one, so you have one plus two, plus three.
+
+359
+00:49:21.600 --> 00:49:30.900
+Miles E Jones: Plus, plus and minus three plus and minus two plus and minus one, and we should know that that's equal to this.
+
+360
+00:49:33.060 --> 00:49:34.860
+Miles E Jones: Any questions or comments about that.
+
+361
+00:49:47.760 --> 00:49:48.030
+Okay.
+
+362
+00:49:50.940 --> 00:49:56.550
+Miles E Jones: How about restricted swapping What if we're only allowed to swap consecutive items.
+
+363
+00:49:58.020 --> 00:50:00.660
+Miles E Jones: or adjacent items so maybe.
+
+364
+00:50:03.840 --> 00:50:04.290
+I don't know.
+
+365
+00:50:05.340 --> 00:50:17.670
+Miles E Jones: I don't know what scenario would restrict you from doing that, but maybe your hardware, maybe it's a lot easier to do consecutive swapping rather than swapping any two elements.
+
+366
+00:50:19.230 --> 00:50:21.900
+Miles E Jones: So, how would you start a permutation in this way.
+
+367
+00:50:23.190 --> 00:50:30.300
+Miles E Jones: Just compare each pair as you go up and swap it if they're backwards and repeat across the list until they do no swaps okay.
+
+368
+00:50:31.350 --> 00:50:32.160
+Miles E Jones: So.
+
+369
+00:50:33.450 --> 00:50:38.850
+Miles E Jones: that's exactly what we're going to do so, the first thing you do is you look at the first two elements.
+
+370
+00:50:40.950 --> 00:50:47.400
+Miles E Jones: four and three and since they're out of order let's put them in order so three four.
+
+371
+00:50:51.660 --> 00:50:54.420
+Miles E Jones: Then the next two elements.
+
+372
+00:50:55.560 --> 00:50:58.230
+Miles E Jones: Three they're out of order so put them in order.
+
+373
+00:51:01.470 --> 00:51:05.880
+Miles E Jones: Then the next two elements they're already in order so leave them alone right.
+
+374
+00:51:10.500 --> 00:51:12.720
+Miles E Jones: OK, the next two elements are out of order.
+
+375
+00:51:14.490 --> 00:51:15.660
+Miles E Jones: So put them in order.
+
+376
+00:51:17.850 --> 00:51:20.550
+Miles E Jones: And so on exactly bubble sort.
+
+377
+00:51:23.040 --> 00:51:31.140
+Miles E Jones: Okay, if swapping only a Jason positions is the only operation, then we can use something called bubble sort so, given the list a one through a n.
+
+378
+00:51:31.800 --> 00:51:46.680
+Miles E Jones: Compare the first two elements and swap them if they're out of order continue all the way up to the end of the list, now a consequence of doing this is that the largest element will be at the end after one iteration or after one pass.
+
+379
+00:51:48.930 --> 00:51:56.100
+Miles E Jones: So you can kind of lock that element in and start over from the beginning to get the second biggest and the third biggest and so on.
+
+380
+00:51:59.580 --> 00:52:01.080
+Miles E Jones: Okay, so this is how it works.
+
+381
+00:52:02.550 --> 00:52:15.450
+Miles E Jones: You have this double loop, and you make the comparison of consecutive elements AJ and AJ plus one if AJ is bigger than AJ plus one and swamp them.
+
+382
+00:52:17.040 --> 00:52:30.630
+Miles E Jones: You just kind of go up like that is called bubble sort because you can kind of think about like the largest bubble is like the largest element that will float up to the top or to the end of the list, and then it just kind of bubbles up each.
+
+383
+00:52:33.930 --> 00:52:35.580
+Miles E Jones: Okay, so.
+
+384
+00:52:37.140 --> 00:52:47.220
+Miles E Jones: I think I made a few illustrations let's see if this is the one that that works Okay, so we look at 41 and 75 there in order so don't do the swap okay.
+
+385
+00:52:48.750 --> 00:53:11.760
+Miles E Jones: swap those 75 and 50 to swap those 75 to 85 are in the right order okay so leave them alone 85 and 3485 and 4985 and 63 now 85 is the biggest number it got bubble to the top every time you do that, it bubbles, the next one, up to the top.
+
+386
+00:53:13.260 --> 00:53:21.240
+Miles E Jones: So the next biggest element is 75 that should in theory bubble to the top in the next pass let's see.
+
+387
+00:53:22.320 --> 00:53:22.950
+Miles E Jones: 14 and.
+
+388
+00:53:24.090 --> 00:53:38.970
+Miles E Jones: They swamp 41 and 5252 and 7575 and 34 out of order 75 and 4975 and 63 okay now 75 is in its correct position.
+
+389
+00:53:40.410 --> 00:53:46.020
+Miles E Jones: Okay do it again and the next one should be the next biggest which is 63.
+
+390
+00:53:47.760 --> 00:53:55.860
+Miles E Jones: All those are in order, those need to swap those need to swap and those are in order so 63 is there.
+
+391
+00:53:58.410 --> 00:54:12.720
+Miles E Jones: Now we do it again and let's see what happens 18 and 41 or in order 41 and 34 swap 41 and 4949 52 so lock in 52 okay.
+
+392
+00:54:15.360 --> 00:54:23.790
+Miles E Jones: Now next thing is watch this 18 and 34 in order 34 and 41 or in order 41 and 49 or an order.
+
+393
+00:54:25.140 --> 00:54:32.370
+Miles E Jones: We didn't do any more swamps so once you figure out that you don't need to do any more swaps, you can you can be sure that you're done.
+
+394
+00:54:35.340 --> 00:54:36.510
+Miles E Jones: The other questions about.
+
+395
+00:54:44.790 --> 00:54:45.510
+To go through this.
+
+396
+00:54:51.690 --> 00:54:52.140
+Miles E Jones: In this.
+
+397
+00:54:53.820 --> 00:54:55.110
+Miles E Jones: In this original.
+
+398
+00:54:56.220 --> 00:55:08.730
+Miles E Jones: Implementation of bubble sort this is sort of like an a naive implementation, it goes through all of the passes it ignores whether or not it's sorted or not, it just kind of blindly goes through.
+
+399
+00:55:09.240 --> 00:55:27.180
+Miles E Jones: But there's a there's a version of bubble sort where you can kind of do this early abort of the algorithm when you find out that it's already sorted, could you keep track of the last index you swapped and just never iterate that far again on each pass you know that's another.
+
+400
+00:55:30.960 --> 00:55:33.810
+Miles E Jones: Another way, I think that you can save some time.
+
+401
+00:55:40.140 --> 00:55:43.440
+Miles E Jones: Okay, so early exit pseudo code is that.
+
+402
+00:55:50.430 --> 00:55:51.930
+Miles E Jones: Oh, I didn't even write it in there.
+
+403
+00:56:04.650 --> 00:56:07.260
+Miles E Jones: I guess what you can do is a.
+
+404
+00:56:09.810 --> 00:56:14.460
+Miles E Jones: have some sort of you have a like a line in here that says like.
+
+405
+00:56:15.510 --> 00:56:24.930
+Miles E Jones: sorted equals true right and then every time you swap something, then you change it to sorted.
+
+406
+00:56:26.130 --> 00:56:27.540
+Miles E Jones: is equal to false.
+
+407
+00:56:30.060 --> 00:56:33.090
+Miles E Jones: And then out here, you say right or.
+
+408
+00:56:37.770 --> 00:56:39.780
+Miles E Jones: No, sorry you want this to be out here.
+
+409
+00:56:48.840 --> 00:56:53.400
+Miles E Jones: And then out here, you say if sorted is true.
+
+410
+00:56:55.620 --> 00:56:56.190
+Miles E Jones: and
+
+411
+00:56:58.230 --> 00:56:59.490
+Miles E Jones: Exit loop.
+
+412
+00:57:01.560 --> 00:57:02.310
+Miles E Jones: Something like that.
+
+413
+00:57:09.900 --> 00:57:15.810
+Miles E Jones: Right so yeah the naive bubble chart is good because it's short and it's kind of my it's almost.
+
+414
+00:57:16.920 --> 00:57:26.730
+Miles E Jones: A little bit mindless right it just kind of goes through, and does this thing and stops when it's done it's just a simple double loop yeah.
+
+415
+00:57:30.660 --> 00:57:33.720
+Miles E Jones: Okay, how many swaps does this algorithm do in the worst case.
+
+416
+00:57:36.330 --> 00:57:36.990
+Miles E Jones: Anybody know.
+
+417
+00:57:53.190 --> 00:57:58.170
+Miles E Jones: More than N minus one I mean this one, for example, how many swaps to this one do.
+
+418
+00:58:00.240 --> 00:58:00.960
+Miles E Jones: You count them.
+
+419
+00:58:05.160 --> 00:58:38.790
+Miles E Jones: I did want to know 1-234-567-8910 1112 12 swaps.
+
+420
+00:58:50.850 --> 00:58:57.510
+Miles E Jones: Okay, how many swatches is doing the worst case right if the if the list is in reverse order, then that means.
+
+421
+00:58:58.800 --> 00:59:16.110
+Miles E Jones: Every iteration you're just kind of bubbling the biggest element, up to the lab up to the end right, and each time you do that buyers and minus one swaps for the largest and minus two swaps, for the second largest and minus three and so on.
+
+422
+00:59:27.540 --> 00:59:29.490
+Miles E Jones: n times N minus one divided by two.
+
+423
+00:59:31.050 --> 00:59:34.410
+Miles E Jones: Is there any other operation, we should count comparisons.
+
+424
+00:59:36.900 --> 00:59:38.550
+Miles E Jones: How many comparisons does it do.
+
+425
+00:59:45.270 --> 00:59:48.810
+Miles E Jones: Also n times N minus one divided by two.
+
+426
+00:59:51.360 --> 01:00:08.820
+Miles E Jones: it's kind of for the same reason right, and you can you can even see that in the animation right you're you're doing you're doing N minus one comparisons, no matter what, in the first pass and minus two comparisons in the second and minus three and so on, and.
+
+427
+01:00:10.350 --> 01:00:17.340
+Miles E Jones: If you're doing the naive bubble sort, then you then you will always do exactly this many comparisons.
+
+428
+01:00:19.200 --> 01:00:27.990
+Miles E Jones: Okay, so let's do a little bit of comparison here men sort or selection sort the number of comparisons was always.
+
+429
+01:00:30.750 --> 01:00:33.420
+Miles E Jones: And times N minus one over to.
+
+430
+01:00:35.670 --> 01:00:37.590
+Miles E Jones: The number of swaps was.
+
+431
+01:00:40.980 --> 01:00:44.010
+Miles E Jones: N minus one in the worst case.
+
+432
+01:00:47.250 --> 01:00:49.590
+Miles E Jones: And zero in the best case.
+
+433
+01:00:53.310 --> 01:00:55.170
+Miles E Jones: Okay bubble sort.
+
+434
+01:00:56.790 --> 01:01:03.150
+Miles E Jones: Was number of comparisons n times N minus one over to for.
+
+435
+01:01:05.400 --> 01:01:06.780
+Miles E Jones: naive bubble sort.
+
+436
+01:01:11.310 --> 01:01:21.000
+Miles E Jones: and less than or equal to n times N minus one or two for early exit bubbles or.
+
+437
+01:01:25.290 --> 01:01:32.310
+Miles E Jones: Okay, the number of swaps is going to be n times N minus one over to in the worst case.
+
+438
+01:01:34.860 --> 01:01:37.470
+Miles E Jones: And the best case is also zero.
+
+439
+01:01:41.160 --> 01:01:42.840
+Miles E Jones: This is for a sorted list.
+
+440
+01:01:44.070 --> 01:01:46.140
+Miles E Jones: This is for a reverse list.
+
+441
+01:01:49.380 --> 01:01:52.860
+Miles E Jones: over here the best case here is sorted.
+
+442
+01:01:54.600 --> 01:01:57.660
+Miles E Jones: And the best the worst case here is a single cycle.
+
+443
+01:02:06.120 --> 01:02:09.330
+Miles E Jones: Okay, so does that mean that one of the algorithms is better than the other.
+
+444
+01:02:17.190 --> 01:02:18.420
+Miles E Jones: Or does it depend.
+
+445
+01:02:20.250 --> 01:02:34.320
+Miles E Jones: On what you're trying to do, or does it depend on what operations, you have available to you or what resources, you have available right it all depends so that's why we're going through both of them is that one is not better than the other in all scenarios.
+
+446
+01:02:35.850 --> 01:02:36.780
+Miles E Jones: Questions about that.
+
+447
+01:02:41.430 --> 01:02:43.470
+Miles E Jones: Alright let's jump into searching.
+
+448
+01:02:44.820 --> 01:02:51.210
+Miles E Jones: searching is attempting to find an item in a collection indicate whether or not the item is found by giving its location.
+
+449
+01:02:53.580 --> 01:03:01.170
+Miles E Jones: The index or the position or by returning negative one or zero or not found or something like that, depending on how you implement.
+
+450
+01:03:02.850 --> 01:03:05.460
+Miles E Jones: Why do we need to search well.
+
+451
+01:03:07.320 --> 01:03:18.720
+Miles E Jones: Finding files finding errors in a code searching, the Internet, even like the ranking algorithm we needed to searching if we were talking about ranking using.
+
+452
+01:03:20.220 --> 01:03:21.600
+Miles E Jones: A dictionary right.
+
+453
+01:03:23.490 --> 01:03:27.810
+Miles E Jones: You defined out where that bit string was and then output its position.
+
+454
+01:03:31.650 --> 01:03:39.240
+Miles E Jones: Okay, so linear search is sort of like the naive way to search, while there are more items in the list look at the next item.
+
+455
+01:03:40.650 --> 01:03:52.920
+Miles E Jones: Is this the item you're looking for, if it is then return the position, if not, then go to the next item, if you got to the end of the list and didn't find then print item not found.
+
+456
+01:03:53.970 --> 01:04:00.750
+Miles E Jones: Pretty pretty straightforward, but even though it's straightforward I made an animation for it.
+
+457
+01:04:02.220 --> 01:04:11.070
+Miles E Jones: Okay we're looking for the element okay so um is 19 the same as 20 know may as well, keep on going.
+
+458
+01:04:12.540 --> 01:04:15.090
+Miles E Jones: Is 19 the same as 42 know.
+
+459
+01:04:16.260 --> 01:04:18.390
+Miles E Jones: there's 19 the same as 16 know.
+
+460
+01:04:19.950 --> 01:04:22.350
+Miles E Jones: Is 19 the same as eight know.
+
+461
+01:04:23.760 --> 01:04:25.050
+Miles E Jones: Is 19 the same as.
+
+462
+01:04:27.120 --> 01:04:28.110
+Miles E Jones: Yes.
+
+463
+01:04:30.570 --> 01:04:32.490
+Miles E Jones: Okay, so, then you would output five.
+
+464
+01:04:38.790 --> 01:04:39.570
+Miles E Jones: Questions about that.
+
+465
+01:04:46.260 --> 01:04:49.410
+Miles E Jones: Okay here's the pseudo code for linear search.
+
+466
+01:04:51.660 --> 01:04:53.310
+Miles E Jones: is just a single for loop.
+
+467
+01:04:54.930 --> 01:05:07.380
+Miles E Jones: You ask every every element, you ask if it's equal to that element, or to equal to your target element X and, if so, return the position, otherwise return zero or.
+
+468
+01:05:08.460 --> 01:05:09.570
+Miles E Jones: Negative one or.
+
+469
+01:05:11.460 --> 01:05:12.480
+Miles E Jones: Not found.
+
+470
+01:05:14.220 --> 01:05:16.080
+Miles E Jones: Depending on how you implement.
+
+471
+01:05:17.160 --> 01:05:20.370
+Miles E Jones: So how many comparisons does this do in the worst case.
+
+472
+01:05:23.040 --> 01:05:27.570
+Miles E Jones: And right and how many comparisons does it do in the best case.
+
+473
+01:05:29.070 --> 01:05:29.370
+one.
+
+474
+01:05:30.570 --> 01:05:32.100
+Miles E Jones: Right, so this is.
+
+475
+01:05:33.150 --> 01:05:33.780
+Miles E Jones: If.
+
+476
+01:05:34.860 --> 01:05:38.430
+Miles E Jones: X is last element.
+
+477
+01:05:40.230 --> 01:05:42.300
+Miles E Jones: or not found.
+
+478
+01:05:44.700 --> 01:05:47.160
+Miles E Jones: And this is if X is first Ellen.
+
+479
+01:05:50.760 --> 01:05:51.240
+Okay, good.
+
+480
+01:05:53.910 --> 01:05:59.340
+Miles E Jones: Okay, so the the worst case runtime this is usually what we're going to be looking at.
+
+481
+01:06:02.310 --> 01:06:06.300
+Miles E Jones: or zero comparisons of n is equal to zero sure.
+
+482
+01:06:09.270 --> 01:06:09.630
+Okay.
+
+483
+01:06:12.180 --> 01:06:12.930
+Miles E Jones: i'm.
+
+484
+01:06:14.760 --> 01:06:16.380
+Miles E Jones: The worst case runtime.
+
+485
+01:06:20.910 --> 01:06:31.800
+Miles E Jones: Is a linear graph right the size of the input is the same length as the worst case runtime or sorry the, the number of comparisons.
+
+486
+01:06:32.880 --> 01:06:41.430
+Miles E Jones: Right, so if I had a list of size 20 than in the worst case, I would have to do 20 comparisons right, so this is the graph for them.
+
+487
+01:06:42.930 --> 01:06:46.140
+Miles E Jones: and number of comparisons is usually a good.
+
+488
+01:06:47.940 --> 01:06:48.930
+Miles E Jones: estimation.
+
+489
+01:06:51.480 --> 01:06:55.560
+Miles E Jones: of how long algorithm.
+
+490
+01:06:59.220 --> 01:06:59.790
+takes.
+
+491
+01:07:02.490 --> 01:07:06.150
+Miles E Jones: Okay well let's talk about binary search.
+
+492
+01:07:09.570 --> 01:07:18.930
+Miles E Jones: This can only be used if the list is sorted, so another way another reason that sorting a list is really helpful because binary search is much faster than linear search.
+
+493
+01:07:19.200 --> 01:07:27.150
+Miles E Jones: How much faster well that's what we're going to look at in the next 10 minutes so divide the list into two smaller list based on a midpoint.
+
+494
+01:07:28.290 --> 01:07:31.680
+Miles E Jones: The elements before the midpoint and the elements after the midpoint.
+
+495
+01:07:33.180 --> 01:07:43.770
+Miles E Jones: Compare the target element to the midpoint if it is smaller search the elements before if it is greater search the elements after if it is equal return the position.
+
+496
+01:07:44.520 --> 01:07:52.650
+Miles E Jones: Continue splitting the list and searching until the list has only one element, at this point, either we have found the item or the item is not in the list.
+
+497
+01:07:55.470 --> 01:07:57.570
+Miles E Jones: Okay, so here is a pseudo code.
+
+498
+01:08:01.440 --> 01:08:02.880
+Miles E Jones: The way that this works.
+
+499
+01:08:04.140 --> 01:08:07.200
+Miles E Jones: is to have these um.
+
+500
+01:08:08.460 --> 01:08:18.240
+Miles E Jones: indices that we keep track of and we're going to call them I nj in your other classes, maybe you call them low and high.
+
+501
+01:08:19.680 --> 01:08:32.610
+Miles E Jones: They kind of the kind of define an interval of the list that we're looking in so we start I at the first element one we start at the lat or J at the last element and.
+
+502
+01:08:33.180 --> 01:08:44.820
+Miles E Jones: And we kind of flip flop these things around to zero in on the on the element right, so if your target is our sorry the next thing you do is you find your mid point.
+
+503
+01:08:50.280 --> 01:08:54.900
+Miles E Jones: And you do that by finding the middle of I put I nj right.
+
+504
+01:08:56.220 --> 01:09:03.000
+Miles E Jones: So if you found the element, then you return the position you're all done otherwise if X is bigger.
+
+505
+01:09:04.050 --> 01:09:11.040
+Miles E Jones: than you know you have to look in the right half of the list, so what that means is that you move I.
+
+506
+01:09:12.150 --> 01:09:23.040
+Miles E Jones: To be n plus one right right after the midpoint and if it's if it's less than you move J over to be N minus one right before the midpoint.
+
+507
+01:09:24.360 --> 01:09:26.010
+Miles E Jones: Okay let's look at how this works.
+
+508
+01:09:27.780 --> 01:09:37.620
+Miles E Jones: Okay, so i'm looking for the item 21 okay So the first thing i'm going to do is set my I nj to be equal to one and 15.
+
+509
+01:09:39.180 --> 01:09:40.680
+Miles E Jones: Then i'm going to.
+
+510
+01:09:42.090 --> 01:09:50.610
+Miles E Jones: find the midpoint well, what is the midpoint you're going to do one plus 15 divided by two so that's going to be eight the big points eight.
+
+511
+01:09:52.080 --> 01:09:53.520
+Miles E Jones: Okay, so, then you compare it.
+
+512
+01:09:55.230 --> 01:09:58.410
+Miles E Jones: So 21 is less than 44.
+
+513
+01:09:59.430 --> 01:10:02.310
+Miles E Jones: Okay watch this because this comes pretty fast ready.
+
+514
+01:10:03.630 --> 01:10:09.270
+Miles E Jones: Less than okay so less than means, what do we move I, or do we move J.
+
+515
+01:10:12.030 --> 01:10:14.400
+Miles E Jones: move J and where do we move it.
+
+516
+01:10:15.450 --> 01:10:16.020
+Miles E Jones: over here.
+
+517
+01:10:17.520 --> 01:10:20.640
+Miles E Jones: Now, in just that one operation.
+
+518
+01:10:21.690 --> 01:10:33.720
+Miles E Jones: We have eliminated all of these numbers, this is why it's so fast is because every iteration you are throwing away half of your list.
+
+519
+01:10:37.320 --> 01:10:39.540
+Miles E Jones: Okay, so, then we find a new midpoint.
+
+520
+01:10:41.040 --> 01:10:47.850
+Miles E Jones: And do it again is 21 bigger or less than eight bigger than okay watch this because it comes fast ready.
+
+521
+01:10:49.470 --> 01:10:53.460
+Miles E Jones: Alright, bigger than so now do we move I or Jay we move I.
+
+522
+01:10:56.670 --> 01:10:56.910
+Right.
+
+523
+01:10:59.430 --> 01:11:06.720
+Miles E Jones: Now we move the midpoint and we move the number and now we are equal sore done.
+
+524
+01:11:11.010 --> 01:11:22.680
+Miles E Jones: Okay, so how many comparisons does it do in the worst case, and how many times do we have to split the list so if n is equal to one you do one comparison and you split the list zero times.
+
+525
+01:11:23.790 --> 01:11:24.180
+Miles E Jones: Right.
+
+526
+01:11:27.000 --> 01:11:31.740
+Miles E Jones: When is equal to three think about it, you are going to.
+
+527
+01:11:33.330 --> 01:11:46.920
+Miles E Jones: you're going to do you're going to split it once and you're going to do to comparisons right the first comparison in the worst case, the first comparison is with the middle element in the second comparison is either with the smaller one or the bigger one.
+
+528
+01:11:48.750 --> 01:11:49.080
+Right.
+
+529
+01:11:51.960 --> 01:12:05.400
+Miles E Jones: You have like I am and Jay you really want to do two comparisons Okay, and is equal to seven right, we have to do two splits and how many comparisons, do we need we need.
+
+530
+01:12:06.960 --> 01:12:10.260
+Miles E Jones: Three right, because if I will do seven.
+
+531
+01:12:13.860 --> 01:12:24.240
+Miles E Jones: The first thing you do is you compare it to the middle one right and then you're back to the case of three in the case of three We only need to comparison, so one plus two is three comparisons.
+
+532
+01:12:26.190 --> 01:12:43.710
+Miles E Jones: Okay, how about 1515 234568 you find the middle element you do one comparison, then you you basically do the the.
+
+533
+01:12:45.750 --> 01:12:52.320
+Miles E Jones: The problem on a list of length seven which we already know takes three comparisons, so you get four.
+
+534
+01:12:53.490 --> 01:12:59.340
+Miles E Jones: and so on, so, in general, if n is equal to to the K minus one, then you need K comparisons.
+
+535
+01:13:05.580 --> 01:13:13.050
+Miles E Jones: Okay, so let's solve for K, because I want to know how many comparisons, I need in terms of n.
+
+536
+01:13:16.590 --> 01:13:30.900
+Miles E Jones: Okay, so and it would be to the K minus one so n plus one is equal to two to the K, so that means that K is equal to log base to have n plus one.
+
+537
+01:13:33.240 --> 01:13:35.190
+Miles E Jones: But since we're talking about.
+
+538
+01:13:37.020 --> 01:13:42.120
+Miles E Jones: Comparisons, this is a whole number so we're gonna have to take the ceiling.
+
+539
+01:13:53.280 --> 01:13:59.280
+Miles E Jones: Okay, so this is what the ceiling of log base to have n plus one looks like is these green dots here.
+
+540
+01:14:07.680 --> 01:14:16.380
+Miles E Jones: Just like we saw before right these kind of jumps occur at three 715 and so on.
+
+541
+01:14:24.090 --> 01:14:36.330
+Miles E Jones: So if we graph both of these we get linear searches this line we have binary search is a log function and it turns out that a log function is a lot lot.
+
+542
+01:14:37.380 --> 01:14:55.200
+Miles E Jones: slower growing, then a line, but if the time of the function of time is growing slower, that means that the algorithm is actually faster so binary search is actually faster than linear search.
+
+543
+01:14:57.480 --> 01:14:58.860
+Miles E Jones: I think I say it in the next slide.
+
+544
+01:15:00.030 --> 01:15:07.740
+Miles E Jones: it's clear from the grass that not only is binary search faster than linear search, but the runtime of binary search.
+
+545
+01:15:08.220 --> 01:15:20.580
+Miles E Jones: Is a smaller and smaller and smaller fraction of the runtime of linear search as the input size grows, or they kind of get like farther and farther away from each other, as you go out to infinity.
+
+546
+01:15:21.960 --> 01:15:24.300
+Miles E Jones: How do we state this mathematically we say.
+
+547
+01:15:25.470 --> 01:15:30.180
+Miles E Jones: binary search is ask them topically faster than linear search.
+
+548
+01:15:32.070 --> 01:15:34.800
+Miles E Jones: On the other hand, we could say that the time.
+
+549
+01:15:36.600 --> 01:15:38.580
+Miles E Jones: For binary search.
+
+550
+01:15:40.050 --> 01:15:44.100
+Miles E Jones: Is a slower growing.
+
+551
+01:15:45.600 --> 01:15:46.440
+function.
+
+552
+01:15:48.630 --> 01:15:50.520
+Miles E Jones: Then the time.
+
+553
+01:15:51.630 --> 01:16:01.590
+Miles E Jones: For your search Okay, so I don't really want you to get super confused on this, but it is a little confusing right because we're talking about time and you're talking about.
+
+554
+01:16:03.240 --> 01:16:10.410
+Miles E Jones: speed and time and speed, as you know, are inversely related so just be.
+
+555
+01:16:12.030 --> 01:16:16.230
+Miles E Jones: be aware of what we're talking about are we were talking about time or speed.
+
+556
+01:16:20.070 --> 01:16:31.380
+Miles E Jones: Okay, so I think that's about it for today yeah we will talk about all these big O notation stuff maybe next time but yeah I think next time.
+
+557
+01:16:32.640 --> 01:16:34.290
+Miles E Jones: So will will.
+
+558
+01:16:35.340 --> 01:16:36.750
+Miles E Jones: will define all of these things.
+
+559
+01:16:38.760 --> 01:16:45.420
+Miles E Jones: Okay, but really what it's what it's saying is that the time for binary search is little oh.
+
+560
+01:16:51.330 --> 01:16:59.700
+Miles E Jones: Of the time for linear search, meaning that that function grows ask them topically slower than the other function.
+
+561
+01:17:00.900 --> 01:17:07.410
+Miles E Jones: Okay, so let's end there and i'll stick around for 10 minutes or so, to answer any questions.
+
+562
+01:17:14.610 --> 01:17:17.010
+NAYELI GUZMAN: Professor can you go back up to slide 44.
+
+563
+01:17:17.490 --> 01:17:18.000
+Yes.
+
+564
+01:17:19.410 --> 01:17:21.360
+Miles E Jones: Which one is that sorry I don't have the slide.
+
+565
+01:17:21.900 --> 01:17:23.370
+NAYELI GUZMAN: yeah the one right after that.
+
+566
+01:17:24.840 --> 01:17:25.350
+Miles E Jones: This one.
+
+567
+01:17:25.830 --> 01:17:31.020
+NAYELI GUZMAN: um no it's the one it's the one right yeah that one I just need to write this down real quick.
+
+568
+01:17:31.380 --> 01:17:31.710
+Okay.
+
+569
+01:17:34.860 --> 01:17:35.730
+Miles E Jones: I guess I should write.
+
+570
+01:17:37.020 --> 01:17:37.710
+Miles E Jones: Since.
+
+571
+01:17:39.300 --> 01:17:39.750
+Aliya Paracha: Okay.
+
+572
+01:17:43.710 --> 01:17:45.120
+Miles E Jones: that's why we need the ceiling.
+
+573
+01:17:59.790 --> 01:18:00.180
+NAYELI GUZMAN: Thank you.
+
+574
+01:18:07.020 --> 01:18:07.770
+Miles E Jones: Anything else.
+
+575
+01:18:34.200 --> 01:18:36.330
+Miles E Jones: How, you came up with the cycles yeah.
+
+576
+01:18:47.820 --> 01:18:49.050
+Miles E Jones: Just do this example again.
+
+577
+01:18:56.280 --> 01:18:57.300
+Miles E Jones: Okay, so.
+
+578
+01:18:59.400 --> 01:19:02.970
+Miles E Jones: you write the presentation in to line notation like we have here.
+
+579
+01:19:04.650 --> 01:19:05.700
+Miles E Jones: is to line.
+
+580
+01:19:09.150 --> 01:19:09.870
+notation.
+
+581
+01:19:11.790 --> 01:19:15.390
+Miles E Jones: Okay start with one I always start with one.
+
+582
+01:19:18.240 --> 01:19:22.440
+Miles E Jones: And follow one until.
+
+583
+01:19:24.000 --> 01:19:25.170
+Miles E Jones: You get back.
+
+584
+01:19:27.330 --> 01:19:32.670
+Miles E Jones: To one okay So what does that mean we follow one we start at one.
+
+585
+01:19:34.680 --> 01:19:36.930
+Miles E Jones: One goes to eight okay.
+
+586
+01:19:38.490 --> 01:19:42.000
+Miles E Jones: Okay, so who does eight go to eight goes to nine.
+
+587
+01:19:45.360 --> 01:19:47.160
+Miles E Jones: where's nine go nine goes to seven.
+
+588
+01:19:50.610 --> 01:19:52.260
+Miles E Jones: And seven goes back to one.
+
+589
+01:19:55.710 --> 01:19:57.390
+Miles E Jones: So that is one cycle.
+
+590
+01:19:58.440 --> 01:20:06.270
+Miles E Jones: And then to find the next cycle just look at the next number that you haven't seen yet so the next number that you haven't seen yet is to.
+
+591
+01:20:10.110 --> 01:20:11.700
+Miles E Jones: So two goes to six.
+
+592
+01:20:16.500 --> 01:20:17.730
+Miles E Jones: Six goes to 12.
+
+593
+01:20:21.090 --> 01:20:29.880
+Miles E Jones: And 12 goes back to two so we've close that loop right and then go to the next one that we haven't seen yet three.
+
+594
+01:20:31.440 --> 01:20:37.800
+Miles E Jones: Well, three just goes to three so you're done with that now pick the next one, we haven't seen yet which is for.
+
+595
+01:20:39.240 --> 01:20:40.560
+Miles E Jones: For goes to five.
+
+596
+01:20:43.560 --> 01:20:49.890
+Miles E Jones: Five goes to 1111 goes to 10.
+
+597
+01:20:53.430 --> 01:20:55.200
+Miles E Jones: And 10 goes back to four.
+
+598
+01:20:59.580 --> 01:20:59.910
+Miles E Jones: yeah.
+
+599
+01:21:01.260 --> 01:21:12.750
+Miles E Jones: Since it's a permutation we're able to do this if you're just giving a random list then finding the cycles is not as easy right because the nice thing about a permutation is that each element.
+
+600
+01:21:14.490 --> 01:21:18.870
+Miles E Jones: is one of the positions right, so you know exactly where it should go.
+
+601
+01:21:21.450 --> 01:21:22.470
+Miles E Jones: That makes it easier.
+
+602
+01:21:38.850 --> 01:21:39.900
+Miles E Jones: Okay anybody else.
+
+603
+01:22:27.000 --> 01:22:31.080
+Miles E Jones: Okay, then well if that's all then see you all on Thursday.
+
