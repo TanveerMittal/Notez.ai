@@ -1,2 +1,3 @@
 notebooks/.ipynb_checkpoints/*
 .vscode/*
+src/backend/question_generation/__pycache__/*
