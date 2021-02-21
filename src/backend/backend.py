@@ -2,6 +2,7 @@ from flask import Flask, request
 import re
 from Transcript_Filter import filter_vtt, filter_txt
 from waitress import serve
+from flask_cors import CORS, cross_origin
 
 backend = Flask(__name__)
 backend.config.from_object("config")
@@ -9,12 +10,10 @@ backend.config.from_object("config")
 # For Rudy: should be translated to localhost:5000/receive-transcript
 # can be tested on windows cmd with command:
 # curl -X POST -H "Content-Type:application/json" -d "{\"transcript_data\":\"Hello\",\"file_extension\":\"World\"}" 47.155.248.89:8080/receive-transcript
-@backend.route('/receive-transcript',methods=['POST'])
+@backend.route('/receive-transcript/')
+@cross_origin(supports_credentials=True, origin='*')
 def get_transcript():
-    print(request.json["transcript_data"])
-    print("\n\n\n")
-    print(request.json["file_extension"])
-    filter_transcript(request.json["transcript_data"],request.json["file_extension"])
+    print(request.headers["file_extension"])
     return "Success"
 
 def filter_transcript(transcript_data, file_extension):
