@@ -146,7 +146,7 @@ def get_most_coherent_qa(qa):
     if len(qa) == 1:
         return qa[0]
     scores = [score(pair["question"] + " " + pair["answer"]) for pair in qa]
-    idx = np.argmin(scores)
+    idx = np.argmax(scores)
     return qa[idx]
 
 def score(sentence):
