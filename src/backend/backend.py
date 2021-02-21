@@ -1,9 +1,8 @@
 from flask import Flask, request
 import re
-from Transcript_Filter import filter_vtt
 from waitress import serve
 from firebase_communicator import get_transcript, put_transcript
-from nlp import run_pipeline, get_teacher_text
+from nlp import run_pipeline, get_teacher_text, filter_vtt
 
 backend = Flask(__name__)
 backend.config.from_object("config")

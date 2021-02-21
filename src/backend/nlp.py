@@ -3,8 +3,6 @@ import gensim
 import pandas as pd
 import numpy as np
 import nltk
-nltk.download('stopwords')
-nltk.download('wordnet')
 from nltk.tokenize import word_tokenize, sent_tokenize
 from nltk.corpus import stopwords
 from gensim import corpora, models
@@ -15,22 +13,35 @@ import math
 import torch
 from pytorch_pretrained_bert import OpenAIGPTTokenizer, OpenAIGPTModel, OpenAIGPTLMHeadModel
 from question_generation.pipelines import pipeline as qg_pipeline
+import streamlit as st
+model = None
+tokenizer = None
+qg = None
+summarizer = None
+stop_words = None
 
-# Load pre-trained model (weights)
-model = OpenAIGPTLMHeadModel.from_pretrained('openai-gpt')
-model.eval()
+@st.cache
+def init_models():
+    global model, tokenizer, qg, summarizer, stop_words
+    # Download NLTK modules
+    nltk.download('stopwords')
+    nltk.download('wordnet')
+    
+    # Load pre-trained model (weights)
+    model = OpenAIGPTLMHeadModel.from_pretrained('openai-gpt')
+    model.eval()
 
-# Load pre-trained model tokenizer (vocabulary)
-tokenizer = OpenAIGPTTokenizer.from_pretrained('openai-gpt')
+    # Load pre-trained model tokenizer (vocabulary)
+    tokenizer = OpenAIGPTTokenizer.from_pretrained('openai-gpt')
 
-# Load question generation model
-qg = qg_pipeline("question-generation", use_cuda=True)
+    # Load question generation model
+    qg = qg_pipeline("question-generation", use_cuda=True)
 
-# Load HuggingFace Summarizer
-summarizer = pipeline("summarization")
+    # Load HuggingFace Summarizer
+    summarizer = pipeline("summarization")
 
-# Load stop words
-stop_words = stopwords.words('english')
+    # Load stop words
+    stop_words = stopwords.words('english')
 
 def run_pipeline(doc, n_topics, n_questions):
     '''Run entire NLP pipeline on zoom transcript'''
@@ -139,6 +150,57 @@ def score(sentence):
     loss=model(tensor_input, lm_labels=tensor_input)
     return math.exp(loss)
 
+def filter_vtt(data):
+    names_count = dict()
+    names_lines = dict()
+    data = data.split("\n")
+    data.pop(0)
+    data.pop(0)
+    try:
+        while True:
+            data.remove("")
+    except:
+        pass
+    count=0
+    for i in range(len(data)):
+        if count%3==0 or count%3==1:
+            data.pop(count//3)
+        if count%3==2:
+            data[count//3]=data[count//3].split(":")
+            if len(data[count//3]) == 1:
+                data[count//3]=""
+            else:
+                if data[count//3][0] not in names_count:
+                    names_count[data[count//3][0]] = 0
+                    names_lines[data[count//3][0]] = list()
+                names_count[data[count//3][0]] += 1
+                names_lines[data[count//3][0]].append(count//3)
+                data[count//3]=data[count//3][1][1:]
+        count+=1
+    lecturer = None
+    max = 0
+    for n,c in names_count.items():
+        if c > max:
+            lecturer=n
+            max=c
+
+    to_remove=list()
+    for n,l in names_lines.items():
+        if n != lecturer:
+            to_remove.extend(l)
+    to_remove.sort(reverse=True)
+
+    for i in to_remove:
+        data.pop(i)
+
+    try:
+        while True:
+            data.remove("")
+    except:
+        pass
+
+    return " ".join(data)
+    
 if __name__ == "__main__":
     with open("econ3_1.txt") as f:
         doc1 = f.read().strip()
