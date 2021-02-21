@@ -8,6 +8,7 @@ def dummy():
    return eval(open('example_output.txt', "r").read())
 
 def parse(model_dict):
+   global toggle
    #model_dict = dummy()
    for i, key in enumerate(model_dict.keys()):
       st.markdown("# Section %d:" % (i+1))
@@ -22,16 +23,18 @@ def parse(model_dict):
       for j, qa in enumerate(questions):
          question = qa['question']
          ans = qa['answer']
-         qa_markdown = """
-         * **Question %d**: %s
-            * **Answer:** %s"""
-
-         st.markdown(qa_markdown % (j+1, question, ans))
+         a_markdown = """Answer: %s"""
+         q_markdown = """
+         Question %d: %s"""
+         with st.beta_expander(q_markdown % (j+1, question), toggle):
+            #st.markdown(a_markdown % (ans))
+            st.write(a_markdown %(ans))
 
 
 
 
 def main():
+   global toggle
    st.title("Working Title")
 
    #menu = ["Upload", "Data", "About"]
@@ -67,6 +70,7 @@ def main():
          if doc is not None:
             model_output = nlp_pipeline(doc, n_topics, n_questions)
             parse(model_output)
+   toggle = st.checkbox('Show Answers')
 
 
 if __name__ == '__main__':
