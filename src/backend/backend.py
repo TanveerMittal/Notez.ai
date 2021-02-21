@@ -2,7 +2,7 @@ from flask import Flask, request
 import re
 from waitress import serve
 from firebase_communicator import get_transcript, put_transcript
-from nlp import run_pipeline, get_teacher_text, filter_vtt
+from nlp import nlp_pipeline, get_teacher_text, filter_vtt
 
 backend = Flask(__name__)
 backend.config.from_object("config")
@@ -23,7 +23,7 @@ def generate_questions():
     data = ''
     with open("temp.txt",'r') as file:
         data=file.read()
-    return run_pipeline(filter_transcript(data,request.headers["file_extension"]),int(request.headers["topics"]),int(request.headers["questions"]))
+    return nlp_pipeline(filter_transcript(data,request.headers["file_extension"]),int(request.headers["topics"]),int(request.headers["questions"]))
 
 def filter_transcript(transcript_data, file_extension):
     if file_extension == "vtt":

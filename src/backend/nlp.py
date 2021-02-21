@@ -3,6 +3,9 @@ import gensim
 import pandas as pd
 import numpy as np
 import nltk
+# Download NLTK modules
+nltk.download('stopwords')
+nltk.download('wordnet')
 from nltk.tokenize import word_tokenize, sent_tokenize
 from nltk.corpus import stopwords
 from gensim import corpora, models
@@ -14,22 +17,21 @@ import torch
 from pytorch_pretrained_bert import OpenAIGPTTokenizer, OpenAIGPTModel, OpenAIGPTLMHeadModel
 from question_generation.pipelines import pipeline as qg_pipeline
 import streamlit as st
+
+# Load stop words
+stop_words = stopwords.words('english')
+
 model = None
 tokenizer = None
 qg = None
 summarizer = None
-stop_words = None
 
-@st.cache
+
+#@st.cache(hash_funcs={OpenAIGPTModel: id, OpenAIGPTTokenizer: id, qg_pipeline: id, pipeline:id})
 def init_models():
-    global model, tokenizer, qg, summarizer, stop_words
-    # Download NLTK modules
-    nltk.download('stopwords')
-    nltk.download('wordnet')
-    
+    global model, tokenizer, qg, summarizer, stop_words    
     # Load pre-trained model (weights)
-    model = OpenAIGPTLMHeadModel.from_pretrained('openai-gpt')
-    model.eval()
+    model = OpenAIGPTLMHeadModel.from_pretrained('openai-gpt').eval()
 
     # Load pre-trained model tokenizer (vocabulary)
     tokenizer = OpenAIGPTTokenizer.from_pretrained('openai-gpt')
@@ -40,12 +42,16 @@ def init_models():
     # Load HuggingFace Summarizer
     summarizer = pipeline("summarization")
 
-    # Load stop words
-    stop_words = stopwords.words('english')
+    return True
 
-def run_pipeline(doc, n_topics, n_questions):
+
+def nlp_pipeline(doc, n_topics, n_questions):
     '''Run entire NLP pipeline on zoom transcript'''
-    # TODO: Determine transcript type and preprocess accordingly
+    #Initialize models
+    if model is None or tokenizer is None or qg is None or summarizer is None:
+        init_models()
+
+    # Filter sentences 
     filtered_sents = get_filtered_sents(clean(doc))
 
     # Convert sentences to lists of words
@@ -86,7 +92,7 @@ def run_pipeline(doc, n_topics, n_questions):
 
     # Build dataframe to get questions for top k sentences for each topic
     df = pd.DataFrame().assign(topic=labels, confidence=confidences, sentences=filtered_sents)
-    top_sentences = df.groupby("topic").apply(lambda grp: df.loc[grp['confidence'].nlargest(5).index])
+    top_sentences = df.groupby("topic").apply(lambda grp: df.loc[grp['confidence'].nlargest(n_questions).index])
     top_sentences = top_sentences.assign(questions=top_sentences["sentences"].apply(lambda sent: get_most_coherent_qa(qg(sent))))
     top_sentences.index = top_sentences.index.droplevel(0)
     top_sentences = top_sentences.reset_index(drop=True)
@@ -140,7 +146,7 @@ def get_most_coherent_qa(qa):
     if len(qa) == 1:
         return qa[0]
     scores = [score(pair["question"] + " " + pair["answer"]) for pair in qa]
-    idx = np.argmax(scores)
+    idx = np.argmin(scores)
     return qa[idx]
 
 def score(sentence):

@@ -2,7 +2,7 @@ import re
 import streamlit as st
 import streamlit.components.v1 as stc
 import pandas as pd
-from nlp import run_pipeline, get_teacher_text, filter_vtt, init_models
+from nlp import nlp_pipeline, get_teacher_text, filter_vtt, init_models
 
 def dummy():
    return eval(open('example_output.txt', "r").read())
@@ -47,30 +47,28 @@ def main():
    #st.markdown('cringe')
    if st.button("Process"):
       if file is not None:
-         file_details = {"Filename": file.name, "FileType": file.type, "FileSize": file.size}
-         st.write(file_details)
+         #file_details = {"Filename": file.name, "FileType": file.type, "FileSize": file.size}
+         #st.write(file_details)
 
          doc = None
          # Check File Type
          if file.type == "text/plain":
-            st.text(str(file.read(), "utf-8"))
             raw_text = str(file.read(), "utf-8")  
-            st.write(raw_text)
             if len(re.findall(r"[a-zA-Z]:", raw_text)) > 0:
                doc = get_teacher_text(raw_text)
 
          elif file.type == "text/vtt":
-            st.text(str(file.read(), "utf-8")) 
             raw_text = str(file.read(), "utf-8") 
             doc = filter_vtt(raw_text)
 
          else:
             st.text("ERROR: INVALID FILE FORMAT")
       
-         print(raw_text)
-         parse(dummy())
+         if doc is not None:
+            model_output = nlp_pipeline(doc, n_topics, n_questions)
+            parse(model_output)
 
 
 if __name__ == '__main__':
-   init_models()
+   #init_models()
    main()
