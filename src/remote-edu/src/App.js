@@ -14,11 +14,8 @@ class App extends Component {
       inputBlock: '0',
     };
     this.handleClick = this.handleClick.bind(this);
-<<<<<<< HEAD
     this.auth = this.auth.bind(this);
-=======
     this.getTranscript = this.getTranscript.bind(this);
->>>>>>> da2242774ae6b25b83e157ee8ba3b3df5b04a62a
   }
   
   componentDidMount() {
@@ -29,25 +26,25 @@ class App extends Component {
     console.log('unmount');
   }
 
-<<<<<<< HEAD
-  // ProcessText button event
-=======
-  getTranscript(name) {
+  getTranscript(txt, typ, usr) {
     // TODO: Fix "Cross-Origin Request Blocked: The Same Origin Policy disallows reading the remote resource at http://127.0.0.1:5000/receive-transcript."
     var API = "http://localhost:5000";
-    return fetch(API + '/receive-transcript/' + name + '/' + 'txt')
-    // var body = {
-    //   transcript_data: name,
-    //   file_extension: "txt",
-    // }
-    // console.log(JSON.stringify(body));
-    // return fetch(API + "/receive-transcript", {
-    //   method: 'POST',
-    //   body: JSON.stringify(body)
-    // })
+
+    fetch(API + '/receive-transcript/', {headers: {
+      'transcript_data': txt,
+      'file_extension': typ,
+      'user': usr,
+      'Content-type': "application/json;charset=UTF-8"
+     }})
+    .then(function (response) {
+        return response.text();
+    }).then(function (text) {
+        console.log('GET response text:');
+        console.log(text); // Print the greeting as text
+    });
   }
 
->>>>>>> da2242774ae6b25b83e157ee8ba3b3df5b04a62a
+  // ProcessText button event
   handleClick() {
     console.log('Click happened');
     // send transcript data to backend
@@ -55,8 +52,10 @@ class App extends Component {
     console.log(this.state)
     if (this.state.stage == '1') {
       this.setState({stage: '2'});
-      var sampleText = "hello word";
-      console.log(this.getTranscript(sampleText));
+      var txt = this.state.text;
+      var typ = this.state.type;
+      var usr = this.state.user;
+      this.getTranscript(txt,typ,usr);
     } else {
       this.setState({stage: '1'});
     }
@@ -70,8 +69,9 @@ class App extends Component {
     reader.onload = async (e) => { 
       const text = (e.target.result)
       this.setState({text: text})
+      
     };
-    reader.readAsText(e.target.files[0])
+    reader.readAsText(e.target.files[0], 'UTF-8')
     var type = e.target.files[0].type
     this.setState({type: type})
     console.log(type)
