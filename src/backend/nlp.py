@@ -140,6 +140,6 @@ def score(sentence):
     return math.exp(loss)
 
 if __name__ == "__main__":
-    with open("../../data/econ3_8.txt") as f:
+    with open("econ3_1.txt") as f:
         doc1 = f.read().strip()
-    print(run_pipeline(get_teacher_text(doc1), 5, 5))
+    print(get_teacher_text(doc1))

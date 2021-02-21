@@ -43,23 +43,19 @@ def filter_vtt(data):
     for i in to_remove:
         data.pop(i)
 
-    temp=[]
-    for line in data:
-        temp.extend(line.split("."))
     try:
         while True:
-            temp.remove("")
+            data.remove("")
     except:
         pass
 
-    return temp
+    return " ".join(data)
 
 
 
 
 
-def filter_txt(data):
-    pass
+
 
 
 
