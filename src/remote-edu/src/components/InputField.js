@@ -13,9 +13,12 @@ class InputField extends React.Component {
     };
   }
 
-  changeValue(event) {
+  changeValue = (event) => {
     const value = event.target.value;
     this.setState({ value, error: "" });
+    if (this.props.onchange) {
+      this.props.onchange(value);
+    }
   }
 
   handleKeyPress(event) {
