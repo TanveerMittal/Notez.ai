@@ -12,22 +12,20 @@ def update_Users(user):
     db = firebase.database()
     db.child("Users").update({user: 0})
 
-def get_model(user):
+def get_transcript(user,model_local_path):
     if user in get_Users():
         firebase=pyrebase.initialize_app(config.FIREBASE)
         storage=firebase.storage()
-        model_path="Users/"+user+"_model"
-        local_path=""
-        storage.child(model_path).download(local_path)
-        return local_path
+        model_path="Users/"+user+"_transcript"
+        storage.child(model_path).download(model_local_path)
 
-def put_model(user,model_local_path):
+def put_transcript(user,model_local_path):
+    update_Users(user)
     firebase = pyrebase.initialize_app(config.FIREBASE)
     storage = firebase.storage()
-    model_path="Users/"+user+"_model"
+    model_path="Users/"+user+"_transcript"
     storage.child(model_path).put(model_local_path)
 
-put_model("Rudy")
 
 
 
