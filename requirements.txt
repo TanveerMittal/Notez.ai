@@ -160,3 +160,6 @@ Werkzeug==1.0.1
 Whoosh==2.7.4
 widgetsnbextension==3.5.1
 wrapt==1.12.1
+pyrebase==3.0.27
+waitress=1.4.4
+Flask==1.1.2
