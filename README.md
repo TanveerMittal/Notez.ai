@@ -3,6 +3,7 @@
 **Team Members:** Tanveer Mittal, George Pu, Rudy Thurston, and Jonathan Xiong
 
 [**App Demo**](https://youtu.be/bXeEiYyqSSU)
+
 [**Elevator Pitch**](https://youtu.be/sqAoBTxJLAM)
 
 ## Inspiration
