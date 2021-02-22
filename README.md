@@ -2,9 +2,10 @@
 ## SDHacks 2021 Notable Hack Award Winner
 **Team Members:** Tanveer Mittal, George Pu, Rudy Thurston, and Jonathan Xiong
 
-[**App Demo**](https://youtu.be/bXeEiYyqSSU)
+### Videos: 
+- [**App Demo**](https://youtu.be/bXeEiYyqSSU)
 
-[**Elevator Pitch**](https://youtu.be/sqAoBTxJLAM)
+- [**Elevator Pitch**](https://youtu.be/sqAoBTxJLAM)
 
 ## Inspiration
 The transition to online classes has, contrary to expectations, increased the average time spent for classes. Professors tend to increase course material since it’s easier to create and upload everything online. To improve studying efficiency, we decided to tackle a major part of our long study times and comprehension ability: Zoom lectures. We thought it’d be nice if we could somehow condense lecture material without losing comprehension and possibly even increasing our understanding. Thus, we decided to create an AI that can precisely condense our lectures and generate supplementary content.
