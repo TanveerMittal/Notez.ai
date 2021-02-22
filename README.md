@@ -2,7 +2,9 @@
 ## SDHacks 2021 Notable Hack Award Winner
 **Team Members:** Tanveer Mittal, George Pu, Rudy Thurston, and Jonathan Xiong
 
-### Videos: 
+### Links: 
+- [**Devpost**](https://devpost.com/software/notez-ai)
+
 - [**App Demo**](https://youtu.be/bXeEiYyqSSU)
 
 - [**Elevator Pitch**](https://youtu.be/sqAoBTxJLAM)
